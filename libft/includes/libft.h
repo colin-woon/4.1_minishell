@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:38:46 by cwoon             #+#    #+#             */
-/*   Updated: 2024/11/12 20:48:15 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/09 15:45:20 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdbool.h>
 # include <errno.h>
 # include <stdint.h>
-// # include <stdio.h>
+# include <stdio.h>
 # include "ft_printf.h"
 # include "get_next_line.h"
 

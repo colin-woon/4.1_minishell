@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   A_readline_from_input.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 17:30:18 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/09 15:44:16 by cwoon            ###   ########.fr       */
+/*   Created: 2024/12/09 15:49:37 by cwoon             #+#    #+#             */
+/*   Updated: 2024/12/09 17:13:43 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 int main()
 {
@@ -18,8 +21,16 @@ int main()
 
 	while (1)
 	{
-		// ft_putstr_fd("minishell > ", 1);
-		// line = get_next_line(0);
 		line = readline("minishell > ");
+		printf("%s\n", line);
+		free(line);
 	}
 }
+
+/*
+https://www.man7.org/linux/man-pages/man3/readline.3.html
+
+RUN:
+gcc A_readline_from_input.c -lreadline
+./a.out
+ */

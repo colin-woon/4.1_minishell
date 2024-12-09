@@ -11,7 +11,8 @@
 
 # Compiler and flags
 CC			=	gcc
-CFLAGS		=	-Wall -Werror -Wextra $(INCLUDES)
+CFLAGS		=	$(INCLUDES)
+TEMP		=	-Wall -Werror -Wextra
 INCLUDES	=	-I$(INC_LIBFT) -I$(INC_DIR)
 DEBUG		=	-g3
 FSAN_ADD	=	-fsanitize=address
@@ -28,7 +29,7 @@ INC_DIR			=	includes/
 SRCS_DIR		=	srcs/
 OBJS_DIR		=	bin/
 
-LIBFT_FLAGS		=	-L$(LIBFT_DIR) -lft
+LIB_FLAGS		=	-L$(LIBFT_DIR) -lft -lreadline
 
 SRCS_FILES		=	srcs/main.c \
 
@@ -46,7 +47,7 @@ bonus: all
 $(NAME): $(OBJS_FILES)
 	make -C $(LIBFT_DIR)
 	make clean -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(OBJS_FILES) -o $(NAME) $(LIBFT_FLAGS)
+	$(CC) $(CFLAGS) $(OBJS_FILES) -o $(NAME) $(LIB_FLAGS)
 
 # Rule to compile the mandatory object files
 $(OBJS_DIR)%.o: %.c | $(OBJS_DIR)
