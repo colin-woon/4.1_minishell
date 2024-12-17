@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/17 17:21:52 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/18 01:01:58 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ typedef struct s_command {
 }	t_command;
 
 typedef struct s_data {
-	char	**strings;
-	char	*readline;
-	int		total_tokens;
-	t_token	*tokens;
+	char	**envp_array;
+	char	**envp_origin;
+	int		std_fds[3];
+	// char	*readline;
+	// t_token	*tokens;
 }	t_data;
