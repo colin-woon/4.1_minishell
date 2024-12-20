@@ -32,6 +32,7 @@ OBJS_DIR		=	bin/
 LIB_FLAGS		=	-L$(LIBFT_DIR) -lft -lreadline
 
 SRCS_FILES		=	srcs/main.c \
+					srcs/init.c \
 
 OBJS_FILES		=	$(patsubst %.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 

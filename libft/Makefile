@@ -6,7 +6,7 @@
 #    By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 14:26:32 by cwoon             #+#    #+#              #
-#    Updated: 2024/11/12 20:47:50 by cwoon            ###   ########.fr        #
+#    Updated: 2024/12/20 17:51:38 by cwoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ FTIS_DIR		=	$(SRC_DIR)ft_is/ft_isalnum.c \
 					$(SRC_DIR)ft_is/ft_isalpha.c \
 					$(SRC_DIR)ft_is/ft_isascii.c \
 					$(SRC_DIR)ft_is/ft_isdigit.c \
-					$(SRC_DIR)ft_is/ft_isprint.c
+					$(SRC_DIR)ft_is/ft_isprint.c \
+					$(SRC_DIR)ft_is/ft_isspace.c
 
 FTMEM_DIR		=	$(SRC_DIR)ft_mem/ft_bzero.c \
 					$(SRC_DIR)ft_mem/ft_calloc.c \
