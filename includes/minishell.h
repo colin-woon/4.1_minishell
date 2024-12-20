@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/20 18:07:09 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/21 00:26:26 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ enum e_quote_status {
 
 typedef struct s_token {
 	char			*value;
-	// t_token_type	*type;
-	// t_token	*prev;
-	// t_token	*next;
+	int				type;
+	struct s_token	*prev;
+	struct s_token	*next;
 }	t_token;
 
 typedef struct s_command {
@@ -65,11 +65,31 @@ typedef struct s_data {
 	char	**envp_array;
 	char	**envp_origin;
 	int		std_fds[3];
-	// char	*readline;
-	// t_token	*tokens;
+	t_token	*tokens;
 }	t_data;
 
-// INIT
+// Utils Free
+
+void	free_ptr(void *ptr);
+
+
+// Init
+
 void	init_shell_data(t_data *data, char **envp);
 void	init_env(t_data *data, char **envp);
 void	init_stdfds(t_data *data);
+
+// Tokenization
+
+int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
+int	get_seperator(char *input, int i_current);
+int	tokenization(t_data *data, char *input);
+int	check_quote(int	is_quote, char *input, int i);
+
+// Tokenization - Utils for t_token doubly linked list
+
+t_token	*create_token(char *value, int type);
+void	clear_tokens(t_token **head);
+void	insert_token_node(t_token *prev_node, t_token *new_node);
+void	delete_token(t_token **head, t_token *node_to_delete);
+void	append_token(t_token **head, t_token *new_node);

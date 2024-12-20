@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 17:30:18 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/21 00:02:20 by cwoon            ###   ########.fr       */
+/*   Created: 2024/12/21 00:17:52 by cwoon             #+#    #+#             */
+/*   Updated: 2024/12/21 00:20:38 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	free_ptr(void *ptr);
 
-int	main(int ac, char **av, char **envp)
+// Helps to avoid double frees
+void	free_ptr(void *ptr)
 {
-	t_data	data;
-	char	*input;
-
-	((void)ac, (void)av);
-	ft_memset(&data, 0, sizeof(t_data));
-	init_shell_data(&data, envp);
-	while (1)
+	if (ptr != NULL)
 	{
-		input = readline("minishell > ");
-		add_history(input);
-		tokenization(&data, input);
-		// printf("%s\n", readline);
-		free(input);
+		free(ptr);
+		ptr = NULL;
 	}
 }
