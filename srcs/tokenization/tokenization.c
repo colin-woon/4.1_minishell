@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 23:59:17 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/21 00:45:27 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/25 17:40:55 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
 int	get_seperator(char *input, int i_current);
 int	tokenization(t_data *data, char *input);
 int	check_quote(int	is_quote, char *input, int i);
+int	save_word(int from, char *input, int i_current, t_token **tokens);
 
 int	tokenization(t_data *data, char *input)
 {
@@ -59,16 +60,17 @@ int	check_quote(int	is_quote, char *input, int i_current)
 	return (is_quote);
 }
 
+// includes the quotes when saving a word
 int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data)
 {
 	int	type;
 
 	type = get_seperator(input, (*i_current));
-	// if (type)
-	// {
-	// 	if ((*i_current) != 0 && !get_seperator(input, (*i_current) - 1))
-	// 		save_word(from, input, (*i_current), &data->tokens);
-	// }
+	if (type)
+	{
+		if ((*i_current) != 0 && !get_seperator(input, (*i_current) - 1))
+			save_word(from, input, (*i_current), &data->tokens);
+	}
 }
 
 int	get_seperator(char *input, int i_current)
@@ -89,4 +91,20 @@ int	get_seperator(char *input, int i_current)
 		return (END_OF_FILE);
 	else
 		return (NONE);
+}
+
+int	save_word(int from, char *input, int i_current, t_token **tokens)
+{
+	int		i;
+	char 	*word;
+
+	i = 0;
+	word = malloc(sizeof(char) * (i_current - from + 1));
+	if (!word)
+		return (MALLOC_ERROR);
+	while (from < i_current)
+		word[i++] = input[from++];
+	word[i] = '\0';
+	append_token(tokens, create_token(word, WORD));
+	return (0);
 }

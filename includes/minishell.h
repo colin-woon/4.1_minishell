@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/21 00:26:26 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/25 17:39:27 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ enum e_token_type
 	END_OF_FILE = -1,
 	NONE,
 	SPACES,
+	WORD,
 	PIPE,
 	REDIRECT_IN,
 	HEREDOC,
@@ -41,7 +42,8 @@ enum e_error_codes
 	FAILURE,
 	UNCLOSED_SINGLE_QUOTE,
 	UNCLOSED_DOUBLE_QUOTE,
-	SYNTAX_ERROR
+	SYNTAX_ERROR,
+	MALLOC_ERROR
 };
 
 enum e_quote_status {
@@ -67,6 +69,11 @@ typedef struct s_data {
 	int		std_fds[3];
 	t_token	*tokens;
 }	t_data;
+
+// Print Debug
+
+void	print_tokens(t_token *tokens);
+void	print_envp_array(t_data *data);
 
 // Utils Free
 
