@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 23:59:17 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/25 17:40:55 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/25 18:05:45 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	get_seperator(char *input, int i_current);
 int	tokenization(t_data *data, char *input);
 int	check_quote(int	is_quote, char *input, int i);
 int	save_word(int from, char *input, int i_current, t_token **tokens);
+int	save_seperator(int i_current, int type, char *input, t_token **tokens);
 
 int	tokenization(t_data *data, char *input)
 {
@@ -44,6 +45,7 @@ int	tokenization(t_data *data, char *input)
 			return (UNCLOSED_DOUBLE_QUOTE);
 		return (SYNTAX_ERROR);
 	}
+	print_tokens(data->tokens);
 	return (SUCCESS);
 }
 
@@ -61,6 +63,8 @@ int	check_quote(int	is_quote, char *input, int i_current)
 }
 
 // includes the quotes when saving a word
+// for type > WORD, its referring to all seperators, can refer to e_token_type
+// in header file,
 int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data)
 {
 	int	type;
@@ -70,7 +74,15 @@ int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data)
 	{
 		if ((*i_current) != 0 && !get_seperator(input, (*i_current) - 1))
 			save_word(from, input, (*i_current), &data->tokens);
+		if (type > WORD || type == END_OF_FILE)
+		{
+			save_seperator((*i_current), type, input, &data->tokens);
+			if (type == APPEND || type == HEREDOC)
+				(*i_current)++;
+		}
+		from = (*i_current) + 1;
 	}
+	return (from);
 }
 
 int	get_seperator(char *input, int i_current)
@@ -106,5 +118,26 @@ int	save_word(int from, char *input, int i_current, t_token **tokens)
 		word[i++] = input[from++];
 	word[i] = '\0';
 	append_token(tokens, create_token(word, WORD));
+	return (0);
+}
+
+int	save_seperator(int i_current, int type, char *input, t_token **tokens)
+{
+	int		i;
+	char	*sep;
+	int		sep_length;
+
+	i = 0;
+	if (type == APPEND || type == HEREDOC)
+		sep_length = 2;
+	else
+		sep_length = 1;
+	sep = malloc(sizeof(char) * (sep_length + 1));
+	if (!sep)
+		return (MALLOC_ERROR);
+	while (i < sep_length)
+		sep[i++] = input[i_current++];
+	sep[i] == '\0';
+	append_token(tokens, create_token(sep, type));
 	return (0);
 }
