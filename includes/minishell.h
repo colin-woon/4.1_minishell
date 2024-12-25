@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/25 17:39:27 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/25 18:35:07 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ enum e_error_codes
 	MALLOC_ERROR
 };
 
+ # define MSG_FAILURE "error"
+ # define MSG_UNCLOSED_SINGLE_QUOTE "unexpected EOF while looking for matching '"
+ # define MSG_UNCLOSED_DOUBLE_QUOTE "unexpected EOF while looking for matching \""
+ # define MSG_SYNTAX_ERROR "syntax error: unexpected end of file"
+ # define MSG_MALLOC_ERROR "malloc error"
+
 enum e_quote_status {
 	NO_QUOTE,
 	SINGLE_QUOTE,
@@ -79,6 +85,9 @@ void	print_envp_array(t_data *data);
 
 void	free_ptr(void *ptr);
 
+// Error
+
+void	print_error(int error_code);
 
 // Init
 

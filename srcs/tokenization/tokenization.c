@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 23:59:17 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/25 18:05:45 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/25 19:07:36 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
 int	get_seperator(char *input, int i_current);
 int	tokenization(t_data *data, char *input);
 int	check_quote(int	is_quote, char *input, int i);
-int	save_word(int from, char *input, int i_current, t_token **tokens);
-int	save_seperator(int i_current, int type, char *input, t_token **tokens);
+void	save_word(int from, char *input, int i_current, t_token **tokens);
+void	save_seperator(int i_current, int type, char *input, t_token **tokens);
 
 int	tokenization(t_data *data, char *input)
 {
@@ -40,10 +40,10 @@ int	tokenization(t_data *data, char *input)
 	if (is_quote != NO_QUOTE)
 	{
 		if (is_quote == SINGLE_QUOTE)
-			return (UNCLOSED_SINGLE_QUOTE);
+			print_error(UNCLOSED_SINGLE_QUOTE);
 		else if (is_quote == DOUBLE_QUOTE)
-			return (UNCLOSED_DOUBLE_QUOTE);
-		return (SYNTAX_ERROR);
+			print_error(UNCLOSED_DOUBLE_QUOTE);
+		print_error(SYNTAX_ERROR);
 	}
 	print_tokens(data->tokens);
 	return (SUCCESS);
@@ -105,7 +105,7 @@ int	get_seperator(char *input, int i_current)
 		return (NONE);
 }
 
-int	save_word(int from, char *input, int i_current, t_token **tokens)
+void	save_word(int from, char *input, int i_current, t_token **tokens)
 {
 	int		i;
 	char 	*word;
@@ -113,15 +113,14 @@ int	save_word(int from, char *input, int i_current, t_token **tokens)
 	i = 0;
 	word = malloc(sizeof(char) * (i_current - from + 1));
 	if (!word)
-		return (MALLOC_ERROR);
+		return (print_error(MALLOC_ERROR));
 	while (from < i_current)
 		word[i++] = input[from++];
 	word[i] = '\0';
 	append_token(tokens, create_token(word, WORD));
-	return (0);
 }
 
-int	save_seperator(int i_current, int type, char *input, t_token **tokens)
+void	save_seperator(int i_current, int type, char *input, t_token **tokens)
 {
 	int		i;
 	char	*sep;
@@ -134,10 +133,9 @@ int	save_seperator(int i_current, int type, char *input, t_token **tokens)
 		sep_length = 1;
 	sep = malloc(sizeof(char) * (sep_length + 1));
 	if (!sep)
-		return (MALLOC_ERROR);
+		return (print_error(MALLOC_ERROR));
 	while (i < sep_length)
 		sep[i++] = input[i_current++];
 	sep[i] == '\0';
 	append_token(tokens, create_token(sep, type));
-	return (0);
 }
