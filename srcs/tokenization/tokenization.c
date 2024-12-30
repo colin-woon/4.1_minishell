@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 23:59:17 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/30 18:17:57 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/30 19:05:44 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,6 @@ void	save_seperator(int i_current, int type, char *input, t_token **tokens)
 		return (print_error(MALLOC_ERROR));
 	while (i < sep_length)
 		sep[i++] = input[i_current++];
-	sep[i] == '\0';
+	sep[i] = '\0';
 	append_token(tokens, create_token(sep, type));
 }

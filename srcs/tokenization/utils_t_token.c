@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 00:04:41 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/21 00:25:36 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/30 18:59:08 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	clear_tokens(t_token **head)
 		*head = (*head)->next;
 		free(temp->value);
 		free(temp);
+		if (*head)
+			(*head)->prev = NULL;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/30 18:19:51 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/30 19:01:38 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	print_envp_array(t_data *data);
 // Utils Free
 
 void	free_ptr(void *ptr);
+void	garbage_collector(t_data *data, char *input);
 
 // Error
 
