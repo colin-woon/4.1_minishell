@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/25 18:35:07 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/30 18:19:51 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-extern int	g_exit_code;
+extern int	g_last_exit_code;
 
 // # define SPACES " \t\n"
 // # define PIPE "|"
@@ -95,12 +95,18 @@ void	init_shell_data(t_data *data, char **envp);
 void	init_env(t_data *data, char **envp);
 void	init_stdfds(t_data *data);
 
+// Parse Input
+
+int	parse_input(t_data *data, char *input);
+
 // Tokenization
 
-int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
-int	get_seperator(char *input, int i_current);
-int	tokenization(t_data *data, char *input);
-int	check_quote(int	is_quote, char *input, int i);
+int		save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
+int		get_seperator(char *input, int i_current);
+int		tokenization(t_data *data, char *input);
+int		check_quote(int	is_quote, char *input, int i);
+void	save_word(int from, char *input, int i_current, t_token **tokens);
+void	save_seperator(int i_current, int type, char *input, t_token **tokens);
 
 // Tokenization - Utils for t_token doubly linked list
 

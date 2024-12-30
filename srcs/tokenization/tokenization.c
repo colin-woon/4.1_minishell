@@ -6,16 +6,16 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 23:59:17 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/25 19:07:36 by cwoon            ###   ########.fr       */
+/*   Updated: 2024/12/30 18:17:57 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
-int	get_seperator(char *input, int i_current);
-int	tokenization(t_data *data, char *input);
-int	check_quote(int	is_quote, char *input, int i);
+int		save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
+int		get_seperator(char *input, int i_current);
+int		tokenization(t_data *data, char *input);
+int		check_quote(int	is_quote, char *input, int i);
 void	save_word(int from, char *input, int i_current, t_token **tokens);
 void	save_seperator(int i_current, int type, char *input, t_token **tokens);
 
@@ -26,16 +26,15 @@ int	tokenization(t_data *data, char *input)
 	int	from;
 	int	is_quote;
 
-	i_current = 0;
+	i_current = -1;
 	from = 0;
 	end = ft_strlen(input);
 	is_quote = NO_QUOTE;
-	while(i_current <= end)
+	while(++i_current <= end)
 	{
 		is_quote = check_quote(is_quote, input, i_current);
 		if (is_quote == NO_QUOTE)
 			from = save_word_or_seperator(&i_current, input, from, data);
-		i_current++;
 	}
 	if (is_quote != NO_QUOTE)
 	{
@@ -44,8 +43,8 @@ int	tokenization(t_data *data, char *input)
 		else if (is_quote == DOUBLE_QUOTE)
 			print_error(UNCLOSED_DOUBLE_QUOTE);
 		print_error(SYNTAX_ERROR);
+		return (FAILURE);
 	}
-	print_tokens(data->tokens);
 	return (SUCCESS);
 }
 
