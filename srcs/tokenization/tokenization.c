@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 23:59:17 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/30 19:05:44 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/06 16:54:36 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	tokenization(t_data *data, char *input)
 			print_error(UNCLOSED_SINGLE_QUOTE);
 		else if (is_quote == DOUBLE_QUOTE)
 			print_error(UNCLOSED_DOUBLE_QUOTE);
-		print_error(SYNTAX_ERROR);
+		print_error(QUOTE_ERROR);
 		return (FAILURE);
 	}
 	return (SUCCESS);

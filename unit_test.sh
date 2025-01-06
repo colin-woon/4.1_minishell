@@ -11,23 +11,29 @@ END='\033[0m'
 
 make
 echo
+
+
 # TOKENIZATION
-echo "${YELLOW}NORMAL COMMAND${END}"
-./minishell -debug "echo \"hello world\""
-echo
+# PRINT TOKENS
+# echo "${GREEN}USE PRINT TOKENS TO CHECK${END}"
+# echo "${YELLOW}NORMAL COMMAND${END}"
+# ./minishell -debug "echo \"hello world\""
+# echo
 
-echo "${YELLOW}DETECTING SEPARATORS${END}"
-./minishell -debug "hi | < << > >>"
-echo
+# echo "${BLUE}DISABLE PARSE TOKENS OR ELSE WILL ERROR${END}"
+# echo "${YELLOW}DETECTING SEPARATORS${END}"
+# ./minishell -debug "hi | < << > >>"
+# echo
 
-echo "${YELLOW}MULTIPLE DOUBLE QUOTES${END}"
-./minishell -debug "\"hi | <\" << > >>\"\""
-echo
+# echo "${YELLOW}MULTIPLE DOUBLE QUOTES${END}"
+# ./minishell -debug "\"hi | <\" << > >>\"\""
+# echo
 
-echo "${YELLOW}MULTIPLE SINGLE QUOTES${END}"
-./minishell -debug "''''"
-echo
+# echo "${YELLOW}MULTIPLE SINGLE QUOTES${END}"
+# ./minishell -debug "''''"
+# echo
 
+# # ERROR
 echo "${RED}SHOULD BE ERRORS${END}"
 echo "${ORANGE}UNCLOSED DOUBLE QUOTE${END}"
 ./minishell -debug "\"hi | < << > >>\"\""
@@ -38,8 +44,27 @@ echo "${ORANGE}UNCLOSED SINGLE QUOTE${END}"
 echo
 
 # ASSIGNING EXPANDABLE VARIABLE TYPE
-echo "${YELLOW}DETECTING VAR TYPE${END}"
-./minishell -debug "hello \$PAR"
+# PRINT TOKENS
+# echo "${GREEN}USE PRINT TOKENS TO CHECK${END}"
+# echo "${YELLOW}DETECTING VAR TYPE${END}"
+# ./minishell -debug "hello \$PAR"
+# echo
+
+# ERROR
+echo "${RED}SHOULD BE ERRORS${END}"
+./minishell -debug "|"
+./minishell -debug "<"
+./minishell -debug "<<"
+./minishell -debug ">"
+./minishell -debug ">>"
+./minishell -debug "asd |"
+./minishell -debug "asd <"
+./minishell -debug "asd <<"
+./minishell -debug "asd >"
+./minishell -debug "asd >>"
+
+# silences the command
+make fclean > /dev/null 2>&1
 
 # 4.1_minishell [main●] echo $PAGER
 # less

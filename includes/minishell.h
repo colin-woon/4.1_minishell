@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/06 15:41:47 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/06 18:59:47 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,22 @@ enum e_error_codes
 	FAILURE,
 	UNCLOSED_SINGLE_QUOTE,
 	UNCLOSED_DOUBLE_QUOTE,
-	SYNTAX_ERROR,
+	QUOTE_ERROR,
 	MALLOC_ERROR
 };
 
+enum e_syntax_errors
+{
+	UNDEFINED,
+	PIPE_ERR_SYNTAX,
+	NEWLINE_ERR_SYNTAX
+};
+
  # define MSG_FAILURE "error"
- # define MSG_UNCLOSED_SINGLE_QUOTE "unexpected EOF while looking for matching '"
- # define MSG_UNCLOSED_DOUBLE_QUOTE "unexpected EOF while looking for matching \""
- # define MSG_SYNTAX_ERROR "syntax error: unexpected end of file"
+ # define MSG_UNCLOSED_SINGLE_QUOTE "minishell: unexpected EOF while looking for matching '"
+ # define MSG_UNCLOSED_DOUBLE_QUOTE "minishell: unexpected EOF while looking for matching \""
+ # define MSG_EOF_ERROR "minishell: unexpected end of file"
+ # define MSG_SYNTAX_ERROR "minishell: syntax error near unexpected token "
  # define MSG_MALLOC_ERROR "malloc error"
 
 enum e_quote_status {
@@ -90,6 +98,8 @@ void	garbage_collector(t_data *data, char *input);
 // Error
 
 void	print_error(int error_code);
+void	print_syntax_error(int syntax_error, char *value);
+void	ft_quoted_putendl_fd(char *value, int fd);
 
 // Init
 
