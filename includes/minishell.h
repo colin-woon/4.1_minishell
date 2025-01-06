@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/06 18:59:47 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/06 19:14:39 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,11 @@ void	init_stdfds(t_data *data);
 // Parse Input
 
 int	parse_input(t_data *data, char *input);
+
+// Utils Parse Token
+
+void	detect_expandable_variable(t_token *token_node);
+int		is_consecutive_operator(t_token *token_node);
 
 // Tokenization
 
