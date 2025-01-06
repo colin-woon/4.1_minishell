@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/30 19:01:38 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/06 15:41:47 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ enum e_token_type
 	NONE,
 	SPACES,
 	WORD,
+	VARIABLE,
 	PIPE,
 	REDIRECT_IN,
 	HEREDOC,
