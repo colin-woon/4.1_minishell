@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/06 19:14:39 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/06 19:22:13 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,47 +85,50 @@ typedef struct s_data {
 	t_token	*tokens;
 }	t_data;
 
-// Print Debug
+// DEBUG - Printing
 
 void	print_tokens(t_token *tokens);
 void	print_envp_array(t_data *data);
 
-// Utils Free
+// MEMORY - Utils Free
 
 void	free_ptr(void *ptr);
 void	garbage_collector(t_data *data, char *input);
 
-// Error
+// ERROR HANDLING
 
 void	print_error(int error_code);
 void	print_syntax_error(int syntax_error, char *value);
 void	ft_quoted_putendl_fd(char *value, int fd);
 
-// Init
+// INITIALIZATION
 
 void	init_shell_data(t_data *data, char **envp);
 void	init_env(t_data *data, char **envp);
 void	init_stdfds(t_data *data);
 
-// Parse Input
+// PARSE INPUT
 
 int	parse_input(t_data *data, char *input);
 
-// Utils Parse Token
+// PARSE INPUT - Utils Parse Token
 
 void	detect_expandable_variable(t_token *token_node);
 int		is_consecutive_operator(t_token *token_node);
 
-// Tokenization
+// TOKENIZATION
 
-int		save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
-int		get_seperator(char *input, int i_current);
 int		tokenization(t_data *data, char *input);
-int		check_quote(int	is_quote, char *input, int i);
+int		save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
 void	save_word(int from, char *input, int i_current, t_token **tokens);
 void	save_seperator(int i_current, int type, char *input, t_token **tokens);
 
-// Tokenization - Utils for t_token doubly linked list
+// TOKENIZATION - Utils Tokenization
+
+int	get_seperator(char *input, int i_current);
+int	check_quote(int	is_quote, char *input, int i);
+
+// TOKENIZATION - Utils for t_token doubly linked list
 
 t_token	*create_token(char *value, int type);
 void	clear_tokens(t_token **head);

@@ -39,7 +39,8 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/debug/print_struct.c\
 					srcs/error.c\
 					srcs/parser/lexer/parse_input.c\
-					srcs/parser/lexer/utils_parse_token.c
+					srcs/parser/lexer/utils_parse_token.c\
+					srcs/tokenization/utils_tokenization.c
 
 OBJS_FILES		=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 

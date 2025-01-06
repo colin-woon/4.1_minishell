@@ -6,16 +6,14 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 23:59:17 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/06 16:54:36 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/06 19:19:41 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
-int		get_seperator(char *input, int i_current);
 int		tokenization(t_data *data, char *input);
-int		check_quote(int	is_quote, char *input, int i);
+int		save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
 void	save_word(int from, char *input, int i_current, t_token **tokens);
 void	save_seperator(int i_current, int type, char *input, t_token **tokens);
 
@@ -48,19 +46,6 @@ int	tokenization(t_data *data, char *input)
 	return (SUCCESS);
 }
 
-int	check_quote(int	is_quote, char *input, int i_current)
-{
-	if (input[i_current] == '\'' && is_quote == NO_QUOTE)
-		is_quote = SINGLE_QUOTE;
-	else if (input[i_current] == '\'' && is_quote == SINGLE_QUOTE)
-		is_quote = NO_QUOTE;
-	else if (input[i_current] == '\"' && is_quote == NO_QUOTE)
-		is_quote = DOUBLE_QUOTE;
-	else if (input[i_current] == '\"' && is_quote == DOUBLE_QUOTE)
-		is_quote = NO_QUOTE;
-	return (is_quote);
-}
-
 // includes the quotes when saving a word
 // for type > WORD, its referring to all seperators, can refer to e_token_type
 // in header file,
@@ -82,26 +67,6 @@ int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data)
 		from = (*i_current) + 1;
 	}
 	return (from);
-}
-
-int	get_seperator(char *input, int i_current)
-{
-	if (ft_isspace(input[i_current]))
-		return (SPACES);
-	else if (input[i_current] == '|')
-		return (PIPE);
-	else if (input[i_current] == '<' && input[i_current + 1] == '<')
-		return (HEREDOC);
-	else if (input[i_current] == '<')
-		return (REDIRECT_IN);
-	else if (input[i_current] == '>' && input[i_current + 1] == '>')
-		return (APPEND);
-	else if (input[i_current] == '>')
-		return (REDIRECT_OUT);
-	else if (input[i_current] == '\0')
-		return (END_OF_FILE);
-	else
-		return (NONE);
 }
 
 void	save_word(int from, char *input, int i_current, t_token **tokens)
