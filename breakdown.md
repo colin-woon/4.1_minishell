@@ -31,6 +31,8 @@ Expand variable
 			- substitute_variable
 				- if get_variable is NULL, remove the variable substring from the string itself
 					- eg ("hello $fake world") > ("hello  world")
+				-- ELSE
+					- eg $real=123 ("hello $real world") > ("hello 123 world")
 
 	-- ELSE
 		- next char

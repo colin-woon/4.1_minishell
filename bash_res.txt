@@ -1,0 +1,24 @@
+
+hello '' world
+hello 'less' world
+hello  world
+hello  world
+hello less world
+hello  world
+hello  world
+hello less world
+hello  world
+hello less world
+hello world
+hello less world
+
+
+hello '$' world
+hello "$" world
+hello "$fake" world
+hello "$PAGER" world
+hello $ world
+hello $ world
+hello $fake world
+hello $PAGER world
+hello $ world

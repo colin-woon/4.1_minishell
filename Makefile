@@ -87,6 +87,6 @@ test:
 	$(CC) $(CFLAGS) test.c $(LIB_FLAGS)
 	./a.out
 
-clean_test:
+test_clean:
 	rm -rf a.out
 	make fclean

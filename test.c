@@ -27,13 +27,13 @@
 // Function to replace the first occurrence of a substring with another substring
 void replace_substring(char *str, const char *substr, const char *replacement) {
     char buffer[1024]; // Temporary buffer to hold the modified string
-    char *pos = strstr(str, substr); // Find the first occurrence of substr in str
+    char *pos = ft_strnstr(str, substr, ft_strlen(str)); // Find the first occurrence of substr in str
 
     if (pos != NULL) {
         // Calculate the lengths
         size_t len_before = pos - str; // Length of the part before the substring
-        size_t len_substr = strlen(substr);
-        size_t len_replacement = strlen(replacement);
+        size_t len_substr = ft_strlen(substr);
+        size_t len_replacement = ft_strlen(replacement);
 
         // Build the new string in the buffer using strlcpy and strlcat
         ft_strlcpy(buffer, str, len_before + 1);         // Copy the part before the substring

@@ -13,25 +13,25 @@ make
 echo
 
 
-# TOKENIZATION
-# PRINT TOKENS
-echo "${GREEN}USE PRINT TOKENS TO CHECK${END}"
-echo "${YELLOW}NORMAL COMMAND${END}"
-./minishell -debug "echo \"hello world\""
-echo
+# # TOKENIZATION
+# # PRINT TOKENS
+# echo "${GREEN}USE PRINT TOKENS TO CHECK${END}"
+# echo "${YELLOW}NORMAL COMMAND${END}"
+# ./minishell -debug "echo \"hello world\""
+# echo
 
-echo "${BLUE}DISABLE parse_tokens IN parse_input.c OR ELSE WILL ERROR${END}"
-echo "${YELLOW}DETECTING SEPARATORS${END}"
-./minishell -debug "hi | < << > >>"
-echo
+# echo "${BLUE}DISABLE parse_tokens IN parse_input.c OR ELSE WILL ERROR${END}"
+# echo "${YELLOW}DETECTING SEPARATORS${END}"
+# ./minishell -debug "hi | < << > >>"
+# echo
 
-echo "${YELLOW}MULTIPLE DOUBLE QUOTES${END}"
-./minishell -debug "\"hi | <\" << > >>\"\""
-echo
+# echo "${YELLOW}MULTIPLE DOUBLE QUOTES${END}"
+# ./minishell -debug "\"hi | <\" << > >>\"\""
+# echo
 
-echo "${YELLOW}MULTIPLE SINGLE QUOTES${END}"
-./minishell -debug "''''"
-echo
+# echo "${YELLOW}MULTIPLE SINGLE QUOTES${END}"
+# ./minishell -debug "''''"
+# echo
 
 # # ERROR
 # echo "${RED}SHOULD BE ERRORS${END}"
@@ -43,12 +43,12 @@ echo
 # ./minishell -debug "'''"
 # echo
 
-# ASSIGNING EXPANDABLE VARIABLE TYPE
-# PRINT TOKENS
-echo "${GREEN}USE PRINT TOKENS TO CHECK${END}"
-echo "${YELLOW}DETECTING VAR TYPE${END}"
-./minishell -debug "hello \$PAR"
-echo
+# # ASSIGNING EXPANDABLE VARIABLE TYPE
+# # PRINT TOKENS
+# echo "${GREEN}USE PRINT TOKENS TO CHECK${END}"
+# echo "${YELLOW}DETECTING VAR TYPE${END}"
+# ./minishell -debug "hello \$PAR"
+# echo
 
 # # ERROR
 # echo "${RED}SHOULD BE ERRORS${END}"
@@ -62,6 +62,17 @@ echo
 # ./minishell -debug "asd <<"
 # ./minishell -debug "asd >"
 # ./minishell -debug "asd >>"
+
+echo "${RED}SHOULDNT SUBSTITUTE${END}"
+./minishell -debug "echo 'hello '$' world'"
+echo
+
+echo "${GREEN}SHOULD SUBSTITUTE${END}"
+echo "${BLUE}First${END}"
+./minishell -debug "echo hello \"\$fake\" world"
+echo "${BLUE}Second${END}"
+./minishell -debug "echo hello \"\$\" world"
+echo
 
 # silences the command
 make fclean > /dev/null 2>&1

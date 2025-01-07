@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/07 15:26:10 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/07 17:07:36 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	save_seperator(int i_current, int type, char *input, t_token **tokens);
 // TOKENIZATION - Utils Tokenization
 
 int	get_seperator(char *input, int i_current);
-int	check_quote(int	is_quote, char *input, int i);
+int	check_quote(int	is_quote, char *input, int i_current);
 
 // TOKENIZATION - Utils for t_token doubly linked list
 
