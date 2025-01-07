@@ -81,3 +81,12 @@ fclean: clean
 
 # Removes objects and executables and remakes
 re: fclean $(OBJS_DIR) all
+
+test:
+	make remake_libft
+	$(CC) $(CFLAGS) test.c $(LIB_FLAGS)
+	./a.out
+
+clean_test:
+	rm -rf a.out
+	make fclean

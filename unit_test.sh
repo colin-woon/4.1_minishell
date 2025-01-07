@@ -80,3 +80,8 @@ make fclean > /dev/null 2>&1
 # hello less
 # 4.1_minishell [main●] echo "hello" "$PAGER"
 # hello less
+
+# ~/42_core_program/4.1_minishell (main)*$ cat << abc
+# > echo $PAGER
+# > abc
+# echo less
