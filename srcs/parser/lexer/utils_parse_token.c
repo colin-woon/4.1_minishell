@@ -6,14 +6,35 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:45:06 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/06 19:14:50 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/07 15:25:58 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int		validate_syntax(t_token **token);
 void	detect_expandable_variable(t_token *token_node);
 int		is_consecutive_operator(t_token *token_node);
+
+int	validate_syntax(t_token **token)
+{
+	t_token	*temp;
+
+	temp = *token;
+	if (temp->type == PIPE)
+	{
+		print_syntax_error(PIPE_ERR_SYNTAX, NULL);
+		return (FAILURE);
+	}
+	while (temp)
+	{
+		detect_expandable_variable(temp);
+		if (is_consecutive_operator(temp))
+			return (FAILURE);
+		temp = temp->next;
+	}
+	return (SUCCESS);
+}
 
 void	detect_expandable_variable(t_token *token_node)
 {

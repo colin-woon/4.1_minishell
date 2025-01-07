@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/06 19:22:13 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/07 15:26:10 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	parse_input(t_data *data, char *input);
 
 // PARSE INPUT - Utils Parse Token
 
+int		validate_syntax(t_token **token);
 void	detect_expandable_variable(t_token *token_node);
 int		is_consecutive_operator(t_token *token_node);
 

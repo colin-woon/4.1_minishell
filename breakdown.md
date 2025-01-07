@@ -1,18 +1,18 @@
 ```sh
-Tokenization
+Tokenization (DONE)
 - parse into tokens including quotes (" ", ' ')
 
-Check syntax or grammar
+Check syntax or grammar (DONE)
 - pipe (|) is not first
 - any expandable variables ($)
 	- YES
-		-- IF previous is (<<), ignore to use as limiter for HEREDOC
+		-- IF previous is ("<<"), ignore to use as limiter for HEREDOC
 		-- ELSE
 			- assign token type VAR
 - check for consecutive operators (if yes, its a syntax error)
-	- double pipe (||) (can be removed if doing bonus)
-	- >>  <<<<  << >>>>
-	- '0/'(EOF) with any of these: |  >  <<  >>  <
+	- double pipe ("||") (can be removed if doing bonus)
+	- ">>  <<<<  << >>>>"
+	- '0/'(EOF) with any of these: "|  >  <<  >>  <"
 
 Expand variable
 - Loops through token nodes for VAR type
