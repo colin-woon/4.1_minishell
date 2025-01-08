@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/07 17:07:36 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/08 13:05:03 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 #include <readline/history.h>
 
 extern int	g_last_exit_code;
-
-// # define SPACES " \t\n"
-// # define PIPE "|"
-// # define HEREDOC "<<"
-// # define APPEND ">>"
-// # define REDIRECT_IN "<"
-// # define REDIRECT_OUT ">"
 
 enum e_token_type
 {
@@ -111,11 +104,18 @@ void	init_stdfds(t_data *data);
 
 int	parse_input(t_data *data, char *input);
 
-// PARSE INPUT - Utils Parse Token
+// PARSE INPUT - Utils Parse Token 1 - Validate Syntax
 
 int		validate_syntax(t_token **token);
 void	detect_expandable_variable(t_token *token_node);
 int		is_consecutive_operator(t_token *token_node);
+
+// PARSE INPUT - Utils Parse Token 2 - Substitute Variable
+
+int	substitute_variable(t_data *data, t_token **token_list);
+int	is_next_invalid(char next_token_char);
+int	is_symbol_only_in_single_quotes(char *token_value, int i_current);
+
 
 // TOKENIZATION
 

@@ -34,13 +34,14 @@ LIB_FLAGS		=	-L$(LIBFT_DIR) -lft -lreadline
 SRCS_FILES		=	srcs/main.c \
 					srcs/init.c \
 					srcs/utils/utils_free.c \
-					srcs/tokenization/lexer.c \
-					srcs/tokenization/utils_t_token.c \
 					srcs/debug/print_struct.c \
 					srcs/error.c \
 					srcs/parser/parse_input.c \
-					srcs/parser/utils_parse_token.c \
-					srcs/tokenization/utils_lexer.c \
+					srcs/parser/utils_parse_token_1.c \
+					srcs/parser/utils_parse_token_2.c \
+					srcs/parser/tokenization/lexer.c \
+					srcs/parser/tokenization/utils_lexer.c \
+					srcs/parser/tokenization/utils_t_token.c
 
 OBJS_FILES		=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 
