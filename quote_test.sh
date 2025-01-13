@@ -69,3 +69,11 @@ echo hello $ world
 # hello $ world
 # hello world
 # hello less world
+
+
+$ echo $PAGERhello
+
+$ echo $PAGER$ hello
+less$ hello
+$ echo $PAGER$hello
+less

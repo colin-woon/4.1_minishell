@@ -24,7 +24,7 @@ Expand variable
 		- quote status is NO_QUOTE or DOUBLE_QUOTE
 		-- THEN expand VAR (NEEDS FURTHER BREAKDOWN)
 			- get_variable
-				- identify the variable name
+				- identify the variable name (get the start and end of the variable, end should be before any seperators)
 				- compare with the env
 				- if found, skip the equal, then extract the value
 				- if not found, check if its ?, handle by getting exit code of last command.
