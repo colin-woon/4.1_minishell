@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/13 20:57:11 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/13 21:43:49 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int			substitute_variable(t_data *data, t_token **token_list);
 char		*get_variable(t_token *token, char *var_str, t_data *data);
-void		replace_variable(t_token *token_node, char *variable_name, char *variable_result);
+void		replace_variable(t_token *token_node, char *variable_name, \
+char *variable_result);
 static void	clean_up(char *extracted_var, char *var_w_equal_sign);
 int			is_valid_variable(char *value, int i, int is_quote);
 
@@ -28,18 +29,19 @@ int	substitute_variable(t_data *data, t_token **token_list)
 	temp = *token_list;
 	while (temp)
 	{
-		i_var = 0;
+		i_var = 1;
 		is_quote = NO_QUOTE;
 		if (temp->type == VARIABLE)
 		{
-			i = -1;
-			while (temp->value[++i])
+			i = 0;
+			while (temp->value[i])
 			{
 				is_quote = check_quote(is_quote, temp->value, i);
 				if (is_valid_variable(temp->value, i, is_quote))
-					replace_variable(temp, \
-						extract_var_without_symbol(temp->value + i, &i_var), \
-						get_variable(temp, temp->value + i + 1, data));
+					replace_variable(temp, extract_var_without_symbol\
+	(temp->value + i, &i_var), get_variable(temp, temp->value + i + 1, data));
+				else
+					i++;
 			}
 		}
 		temp = temp->next;
@@ -56,10 +58,14 @@ int	is_valid_variable(char *value, int i, int is_quote)
 	return (0);
 }
 
-void	replace_variable(t_token *token_node, char *variable_name, char *variable_result)
+void	replace_variable(t_token *token_node, char *variable_name, \
+char *variable_result)
 {
+	print_value_str("NAME IS", variable_name);
+	print_value_str("RESULT IS", variable_result);
 	if (variable_result)
-		token_node->value = replace_substring(token_node->value, variable_name, variable_result);
+		token_node->value = replace_substring(token_node->value, \
+			variable_name, variable_result);
 	else
 		remove_substring(token_node->value, variable_name);
 	free_ptr(variable_name);
@@ -82,7 +88,7 @@ char	*get_variable(t_token *token, char *var_str, t_data *data)
 	char	*var_result;
 
 	i_env = -1;
-	var_name_len = -1;
+	var_name_len = 0;
 	extracted_var = extract_var_without_symbol(var_str, &var_name_len);
 	var_w_equal_sign = ft_strjoin(extracted_var, "=");
 	var_result = NULL;

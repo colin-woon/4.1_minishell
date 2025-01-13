@@ -20,23 +20,26 @@ echo
 # ../minishell -debug "echo 'hello '$' world'"
 # echo
 
-# echo "${GREEN}SHOULD SUBSTITUTE${END}"
-# echo "${BLUE}First${END}"
-# ../minishell -debug "echo hello \"\$fake\" world"
-# echo "${BLUE}Second${END}"
-# ../minishell -debug "echo hello \"\$\" world"
-# echo
+echo "${GREEN}SHOULD SUBSTITUTE${END}"
+echo "${BLUE}First${END}"
+../minishell -debug "echo hello \"\$fake\" world"
+echo "${BLUE}Second${END}"
+../minishell -debug "echo hello \"\$\" world"
+echo "${BLUE}Third${END}"
+export EMPTY=
+../minishell -debug "echo hello \$EMPTY world"
+echo
 
-echo "${BLUE}SHOULD HAVE VALUE, memory leak is normal${END}"
+# echo "${BLUE}SHOULD HAVE VALUE, memory leak is normal${END}"
 # echo "${BLUE}INPUT: echo \"hello \$? asd\"${END}"
 # ../minishell -debug "echo \"hello \$? asd\""
 # echo
-# echo "${BLUE}INPUT: echo \"hello \$PAGER asd\"${END}"
-# ../minishell -debug "echo \"hello \$PAGER asd\""
-# echo
-echo "${BLUE}INPUT: echo \"hello \$WSLENV asd\"${END}"
-../minishell -debug "echo \"hello \$WSLENV asd\""
+echo "${BLUE}INPUT: echo \"hello \$PAGER asd\"${END}"
+../minishell -debug "echo \"hello \$PAGER asd\""
 echo
+# echo "${BLUE}INPUT: echo \"hello \$WSLENV asd\"${END}"
+# ../minishell -debug "echo \"hello \$WSLENV asd\""
+# echo
 
 
 # echo "${ORANGE}SHOULDNT HAVE VALUE${END}"

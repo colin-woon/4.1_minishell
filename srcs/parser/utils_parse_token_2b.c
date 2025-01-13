@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:56:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/13 20:53:18 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/13 21:39:27 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,13 @@ char	*replace_substring(char *str, char *substr, char *replacement)
 
 char	*extract_var_without_symbol(char *var_str, int *var_name_len)
 {
-	while (var_str[++(*var_name_len)])
+	while (var_str[(*var_name_len)])
 	{
 		if (is_next_invalid(var_str[(*var_name_len)]))
 			break;
+		(*var_name_len)++;
 	}
+	if (var_str[(*var_name_len) - 1] == '"')
+		(*var_name_len)--;
 	return(ft_substr(var_str, 0, (size_t)(*var_name_len)));
 }

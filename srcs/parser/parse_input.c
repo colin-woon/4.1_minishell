@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:16:11 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/13 19:28:26 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/13 21:35:49 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	parse_input(t_data *data, char *input)
 {
 	if (tokenization(data, input) == FAILURE)
 		return (FAILURE);
+	print_tokens(data->tokens);
 	if (parse_tokens(&data->tokens, data) == FAILURE)
 		return (FAILURE);
 	print_tokens(data->tokens);

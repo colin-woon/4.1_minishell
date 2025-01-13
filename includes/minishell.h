@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/13 20:45:41 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/13 21:10:52 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef struct s_data {
 
 void	print_tokens(t_token *tokens);
 void	print_envp_array(t_data *data);
+void	print_value_str(char *message, char *value);
+
 
 // MEMORY - Utils Free
 
