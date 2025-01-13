@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/13 19:10:44 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/13 20:45:41 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ enum e_syntax_errors
 	NEWLINE_ERR_SYNTAX
 };
 
+ # define TOKEN_BUFFER 4096
  # define MSG_FAILURE "error"
  # define MSG_UNCLOSED_SINGLE_QUOTE "minishell: unexpected EOF while looking for matching '"
  # define MSG_UNCLOSED_DOUBLE_QUOTE "minishell: unexpected EOF while looking for matching \""
@@ -102,7 +103,7 @@ void	init_stdfds(t_data *data);
 
 // PARSE INPUT
 
-int	parse_input(t_data *data, char *input);
+int		parse_input(t_data *data, char *input);
 
 // PARSE INPUT - Utils Parse Token 1 - Validate Syntax
 
@@ -122,7 +123,7 @@ static void	clean_up(char *extracted_var, char *var_w_equal_sign);
 int		is_next_invalid(char next_token_char);
 int		is_symbol_only_in_single_quotes(char *token_value, int i_current);
 void	remove_substring(char *str, char *substr);
-void	replace_substring(char *str, char *substr, char *replacement);
+char	*replace_substring(char *str, char *substr, char *replacement);
 char	*extract_var_without_symbol(char *var_str, int *var_name_len);
 
 // TOKENIZATION
@@ -134,8 +135,8 @@ void	save_seperator(int i_current, int type, char *input, t_token **tokens);
 
 // TOKENIZATION - Utils Tokenization
 
-int	get_seperator(char *input, int i_current);
-int	check_quote(int	is_quote, char *input, int i_current);
+int		get_seperator(char *input, int i_current);
+int		check_quote(int	is_quote, char *input, int i_current);
 
 // TOKENIZATION - Utils for t_token doubly linked list
 

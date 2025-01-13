@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/13 19:24:13 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/13 20:57:11 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,12 @@ int	is_valid_variable(char *value, int i, int is_quote)
 
 void	replace_variable(t_token *token_node, char *variable_name, char *variable_result)
 {
-	printf("RESULT is %s\n", variable_result);
-	printf("NAME is %s\n", variable_name);
 	if (variable_result)
-		replace_substring(token_node->value, variable_name, variable_result);
+		token_node->value = replace_substring(token_node->value, variable_name, variable_result);
 	else
 		remove_substring(token_node->value, variable_name);
-	printf("VALUE is now %s\n", token_node->value);
+	free_ptr(variable_name);
+	free_ptr(variable_result);
 }
 
 
