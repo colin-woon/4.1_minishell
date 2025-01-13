@@ -6,12 +6,13 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:30:18 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/30 19:03:43 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/13 17:06:32 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int g_last_exit_code;
 
 int	main(int ac, char **av, char **envp)
 {

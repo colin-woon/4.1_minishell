@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:52:30 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/20 15:53:30 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/13 16:53:31 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_shell_data(t_data *data, char **envp)
 	init_env(data, envp);
 	init_stdfds(data);
 	data->envp_origin = envp;
+	g_last_exit_code = 0;
 }
 
 void	init_env(t_data *data, char **envp)

@@ -15,6 +15,7 @@ MINISHELL_EXEC="../minishell"
 make -C "$MAKEFILE_DIR"
 echo
 
+# echo "${YELLOW}PRINT THE RESULT FROM FUNCTION GET_VARIABLE${END}"
 # echo "${RED}SHOULDNT SUBSTITUTE${END}"
 # ../minishell -debug "echo 'hello '$' world'"
 # echo
@@ -26,13 +27,20 @@ echo
 # ../minishell -debug "echo hello \"\$\" world"
 # echo
 
-../minishell -debug "echo \"hello \$world asd\""
-echo
-# ../minishell -debug "echo \"hello \$WSL asd\""
+# echo "${BLUE}SHOULD HAVE VALUE, memory leak is normal${END}"
+# ../minishell -debug "echo \"hello \$? asd\""
 # echo
 # ../minishell -debug "echo \"hello \$PAGER asd\""
 # echo
 # ../minishell -debug "echo \"hello \$WSLENV asd\""
+
+
+# echo "${ORANGE}SHOULDNT HAVE VALUE${END}"
+# ../minishell -debug "echo \"hello \$world asd\""
+# echo
+# ../minishell -debug "echo \"hello \$WSL asd\""
+# echo
+
 
 # silences the command
 make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1
