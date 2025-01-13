@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/08 13:05:03 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/13 19:10:44 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,20 @@ int		validate_syntax(t_token **token);
 void	detect_expandable_variable(t_token *token_node);
 int		is_consecutive_operator(t_token *token_node);
 
-// PARSE INPUT - Utils Parse Token 2 - Substitute Variable
+// PARSE INPUT - Utils Parse Token 2a - Substitute Variable
 
-int	substitute_variable(t_data *data, t_token **token_list);
-int	is_next_invalid(char next_token_char);
-int	is_symbol_only_in_single_quotes(char *token_value, int i_current);
+int			substitute_variable(t_data *data, t_token **token_list);
+char		*get_variable(t_token *token, char *var_str, t_data *data);
+void		replace_variable(t_token *token_node, char *variable_name, char *variable_result);
+static void	clean_up(char *extracted_var, char *var_w_equal_sign);
 
+// PARSE INPUT - Utils Parse Token 2b - Helper Functions
+
+int		is_next_invalid(char next_token_char);
+int		is_symbol_only_in_single_quotes(char *token_value, int i_current);
+void	remove_substring(char *str, char *substr);
+void	replace_substring(char *str, char *substr, char *replacement);
+char	*extract_var_without_symbol(char *var_str, int *var_name_len);
 
 // TOKENIZATION
 

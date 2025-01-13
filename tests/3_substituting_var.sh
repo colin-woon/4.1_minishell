@@ -27,17 +27,23 @@ echo
 # ../minishell -debug "echo hello \"\$\" world"
 # echo
 
-# echo "${BLUE}SHOULD HAVE VALUE, memory leak is normal${END}"
+echo "${BLUE}SHOULD HAVE VALUE, memory leak is normal${END}"
+# echo "${BLUE}INPUT: echo \"hello \$? asd\"${END}"
 # ../minishell -debug "echo \"hello \$? asd\""
 # echo
+# echo "${BLUE}INPUT: echo \"hello \$PAGER asd\"${END}"
 # ../minishell -debug "echo \"hello \$PAGER asd\""
 # echo
-# ../minishell -debug "echo \"hello \$WSLENV asd\""
+echo "${BLUE}INPUT: echo \"hello \$WSLENV asd\"${END}"
+../minishell -debug "echo \"hello \$WSLENV asd\""
+echo
 
 
 # echo "${ORANGE}SHOULDNT HAVE VALUE${END}"
+# echo "${ORANGE}INPUT: echo \"hello \$world asd\"${END}"
 # ../minishell -debug "echo \"hello \$world asd\""
 # echo
+# echo "${ORANGE}INPUT: echo \"hello \$WSL asd\"${END}"
 # ../minishell -debug "echo \"hello \$WSL asd\""
 # echo
 
