@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/11 15:07:52 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/13 16:16:22 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	substitute_variable(t_data *data, t_token **token_list);
 int	is_next_invalid(char next_token_char);
 int	is_symbol_only_in_single_quotes(char *token_value, int i_current);
-char	*get_variable(t_token *token, char *variable_name, t_data *data);
+char	*get_variable(t_token *token, char *var_str, t_data *data);
 
 int	substitute_variable(t_data *data, t_token **token_list)
 {
@@ -37,7 +37,11 @@ int	substitute_variable(t_data *data, t_token **token_list)
 				&& !is_next_invalid(temp->value[i + 1]) \
 				&& !is_symbol_only_in_single_quotes(temp->value, i) \
 				&& (!is_quote || is_quote == DOUBLE_QUOTE))
-					printf("getting variable %s", get_variable(temp, temp->value + i + 1, data));
+				{
+					printf("getting variable %s\n", get_variable(temp, temp->value + i + 1, data));
+					// printf("NOTHING\n");
+					// free(get_variable(temp, temp->value + i + 1, data));
+				}
 					// replace_variable();
 				i++;
 			}
@@ -71,37 +75,31 @@ int	is_symbol_only_in_single_quotes(char *token_value, int i_current)
 		return (0);
 }
 
-char *get_variable(t_token *token, char *variable_name, t_data *data)
+char *get_variable(t_token *token, char *var_str, t_data *data)
 {
-	int	variable_name_len;
-	int	i_env;
-	char	*extracted_var;
-	char	*to_compare_var;
+	int		var_name_len;
+	int		i_env;
+	char	*extract_var;
+	char	*var_w_equal_sign;
+	char	*real_var_value;
 
-	i_env = 0;
-	variable_name_len = 0;
-	while (variable_name[variable_name_len])
+	i_env = -1;
+	var_name_len = -1;
+	while (var_str[++var_name_len])
 	{
-		if (is_next_invalid(variable_name[variable_name_len]))
+		if (is_next_invalid(var_str[var_name_len]))
 			break;
-		else
-			variable_name_len++;
 	}
-	extracted_var = ft_substr(variable_name, 0, variable_name_len);
-	to_compare_var = ft_strjoin(extracted_var, "=");
-	printf("extracted %s\n", extracted_var);
-	printf("to_compare_var %s\n", to_compare_var);
-	while (data->envp_array[i_env])
+	extract_var = ft_substr(var_str, 0, var_name_len);
+	var_w_equal_sign = ft_strjoin(extract_var, "=");
+	while (data->envp_array[++i_env])
 	{
-		if (!ft_strncmp(to_compare_var, data->envp_array[i_env], variable_name_len + 1))
+		if (!ft_strncmp(var_w_equal_sign, data->envp_array[i_env], var_name_len + 1))
 		{
-			printf("FOUND, GETTING VARIABLE\n");
-
+			real_var_value = ft_strdup(data->envp_array[i_env] + var_name_len + 1);
+			printf("%s%s\n", var_w_equal_sign, real_var_value);
+			return (free_ptr(extract_var), free_ptr(var_w_equal_sign), real_var_value);
 		}
-		// printf("this is %s\n", data->envp_array[i_env]);
-		i_env++;
 	}
-
-	printf("result: %d\n", variable_name_len);
-	return (variable_name);
+	return (free_ptr(extract_var), free_ptr(var_w_equal_sign), free_ptr(real_var_value), NULL);
 }
