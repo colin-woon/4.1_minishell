@@ -23,8 +23,10 @@ echo
 echo "${GREEN}SHOULD SUBSTITUTE${END}"
 echo "${BLUE}First${END}"
 ../minishell -debug "echo hello \"\$fake\" world"
+echo
 echo "${BLUE}Second${END}"
 ../minishell -debug "echo hello \"\$\" world"
+echo
 echo "${BLUE}Third${END}"
 export EMPTY=
 ../minishell -debug "echo hello \$EMPTY world"

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/13 21:43:49 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/13 21:49:56 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ int	is_valid_variable(char *value, int i, int is_quote)
 void	replace_variable(t_token *token_node, char *variable_name, \
 char *variable_result)
 {
-	print_value_str("NAME IS", variable_name);
-	print_value_str("RESULT IS", variable_result);
 	if (variable_result)
 		token_node->value = replace_substring(token_node->value, \
 			variable_name, variable_result);
@@ -85,21 +83,18 @@ char	*get_variable(t_token *token, char *var_str, t_data *data)
 	int		i_env;
 	char	*extracted_var;
 	char	*var_w_equal_sign;
-	char	*var_result;
 
 	i_env = -1;
 	var_name_len = 0;
 	extracted_var = extract_var_without_symbol(var_str, &var_name_len);
 	var_w_equal_sign = ft_strjoin(extracted_var, "=");
-	var_result = NULL;
 	while (data->envp_array[++i_env])
 	{
 		if (!ft_strncmp(var_w_equal_sign, \
 		data->envp_array[i_env], var_name_len + 1))
 		{
-			var_result = ft_strdup(data->envp_array[i_env] + \
-			var_name_len + 1);
-			return (clean_up(extracted_var, var_w_equal_sign), var_result);
+			return (clean_up(extracted_var, var_w_equal_sign), \
+			ft_strdup(data->envp_array[i_env] + var_name_len + 1));
 		}
 	}
 	free_ptr(extracted_var);
