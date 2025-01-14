@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_parse_token.c                                :+:      :+:    :+:   */
+/*   utils_parse_token_1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:45:06 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/07 15:25:58 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/14 18:08:51 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ int		validate_syntax(t_token **token);
 void	detect_expandable_variable(t_token *token_node);
 int		is_consecutive_operator(t_token *token_node);
 
+/*
+Detects any syntax errors with operators such as < << > >> |
+Also checks for any expandable variables ($)
+ */
 int	validate_syntax(t_token **token)
 {
 	t_token	*temp;
