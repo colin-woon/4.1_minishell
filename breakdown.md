@@ -14,7 +14,7 @@ Check syntax or grammar (DONE)
 	- ">>  <<<<  << >>>>"
 	- '0/'(EOF) with any of these: "|  >  <<  >>  <"
 
-Expand variable
+Expand variable (DONE)
 - Loops through token nodes for VAR type
 -- IF FOUND, loops through token value
 	- updates quote status
@@ -41,6 +41,7 @@ Expand variable
 
 Handle quotes
 - finds quote in token value
+
 -- IF FOUND
 	-- THEN remove quotes (NEEDS FURTHER BREAKDOWN)
 -- ELSE

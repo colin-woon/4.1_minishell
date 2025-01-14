@@ -44,3 +44,6 @@ echo
 echo "${ORANGE}UNCLOSED SINGLE QUOTE${END}"
 ../minishell -debug "'''"
 echo
+
+
+make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1

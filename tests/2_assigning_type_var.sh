@@ -36,4 +36,4 @@ echo "${RED}SHOULD BE ERRORS -- SYNTAX ERRORS${END}"
 ../minishell -debug "asd >>"
 
 # silences the command
-make fclean > /dev/null 2>&1
+make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1

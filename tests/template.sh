@@ -85,7 +85,7 @@ echo
 ../minishell -debug "echo \"hello \$WSLENV asd\""
 
 # silences the command
-make fclean > /dev/null 2>&1
+make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1
 
 # 4.1_minishell [main●] echo $PAGER
 # less

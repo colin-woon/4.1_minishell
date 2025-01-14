@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/13 21:10:52 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/14 17:01:23 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ typedef struct s_data {
 void	print_tokens(t_token *tokens);
 void	print_envp_array(t_data *data);
 void	print_value_str(char *message, char *value);
+void	print_value_int(char *message, int value);
+void	print_value_char(char *message, char value);
 
 
 // MEMORY - Utils Free
@@ -115,7 +117,7 @@ int		is_consecutive_operator(t_token *token_node);
 
 // PARSE INPUT - Utils Parse Token 2a - Substitute Variable
 
-int			substitute_variable(t_data *data, t_token **token_list);
+void		substitute_variable(t_data *data, t_token **token_list);
 char		*get_variable(t_token *token, char *var_str, t_data *data);
 void		replace_variable(t_token *token_node, char *variable_name, char *variable_result);
 static void	clean_up(char *extracted_var, char *var_w_equal_sign);

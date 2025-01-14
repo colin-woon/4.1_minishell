@@ -6,20 +6,20 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/13 21:49:56 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/14 16:14:26 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			substitute_variable(t_data *data, t_token **token_list);
+void		substitute_variable(t_data *data, t_token **token_list);
 char		*get_variable(t_token *token, char *var_str, t_data *data);
 void		replace_variable(t_token *token_node, char *variable_name, \
 char *variable_result);
 static void	clean_up(char *extracted_var, char *var_w_equal_sign);
 int			is_valid_variable(char *value, int i, int is_quote);
 
-int	substitute_variable(t_data *data, t_token **token_list)
+void	substitute_variable(t_data *data, t_token **token_list)
 {
 	t_token	*temp;
 	int		i;
@@ -103,4 +103,3 @@ char	*get_variable(t_token *token, char *var_str, t_data *data)
 	else
 		return (free_ptr(var_w_equal_sign), NULL);
 }
-
