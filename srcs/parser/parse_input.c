@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:16:11 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/14 17:33:24 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/14 18:23:34 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	handle_quotes(t_token **token_list)
 				remove_substring(temp->value, "'");
 			else if (is_quote == DOUBLE_QUOTE)
 				remove_substring(temp->value, "\"");
+			if (temp->value[i] == '\0')
+				break ;
 		}
 		temp = temp->next;
 	}
