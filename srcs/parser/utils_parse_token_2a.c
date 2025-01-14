@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/14 17:55:44 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/14 18:05:04 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ char *variable_result);
 static void	clean_up(char *extracted_var, char *var_w_equal_sign);
 int			is_valid_variable(char *value, int i, int is_quote);
 
+/*
+Only $VARIABLES in DOUBLE quotes will get substituted (includes if $ is empty)
+IF only $ symbol in SINGLE quotes, it will not be substituted,
+as per subject requirement,
+the checking process is in FUNCTION - is_valid_variable
+
+Edge Case: $? -- returns last exit code, handled in FUNCTION - get_variable
+ */
 void	substitute_variable(t_data *data, t_token **token_list)
 {
 	t_token	*temp;
