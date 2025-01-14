@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:56:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/13 21:39:27 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/14 17:49:52 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ char	*extract_var_without_symbol(char *var_str, int *var_name_len)
 {
 	while (var_str[(*var_name_len)])
 	{
-		if (is_next_invalid(var_str[(*var_name_len)]))
+		if (is_next_invalid(var_str[(*var_name_len)]) \
+		|| var_str[(*var_name_len)] == '\'')
 			break;
 		(*var_name_len)++;
 	}
