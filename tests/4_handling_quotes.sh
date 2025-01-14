@@ -15,7 +15,7 @@ MINISHELL_EXEC="../minishell"
 make -C "$MAKEFILE_DIR"
 echo
 
-echo "${YELLOW}PRINT TOKEN TO SEE${END}"
+# echo "${YELLOW}PRINT TOKEN TO SEE${END}"
 # echo "${BLUE}Mixed Quotes${END}"
 # echo "${BLUE}INPUT: echo 'ab 'cd' ef'${END}"
 # ../minishell -debug "echo 'ab 'cd' ef'"
@@ -26,22 +26,22 @@ echo
 echo "${BLUE}DOUBLE Quotes${END}"
 ../minishell -debug "echo \"hello \$PAGER world\""
 echo
-# echo "${BLUE}DOUBLE Quote containing SINGLE quote${END}"
-# echo "${ORANGE}INPUT: \"hello '\$PAGER' world\"${END}"
-# echo "${GREEN}OUTPUT: hello 'less' world${END}"
-# ../minishell -debug "echo \"hello '\$PAGER' world\""
-# echo
-# echo "${RED}DOUBLE Quote containing DOUBLE quote${END}"
-# ../minishell -debug "echo \"hello \"\$PAGER\" world\""
-# echo
-# echo "${BLUE}SINGLE Quote containing SINGLE quote${END}"
-# echo "${ORANGE}INPUT: 'hello '\$PAGER' world'${END}"
-# echo "${GREEN}OUTPUT: hello less world${END}"
-# ../minishell -debug "echo 'hello '\$PAGER' world'"
-# echo
-# echo "${BLUE}SINGLE Quote containing DOUBLE quote${END}"
-# ../minishell -debug "echo 'hello \"\$PAGER\" world'"
-# echo
+echo "${BLUE}DOUBLE Quote containing SINGLE quote${END}"
+echo "${ORANGE}INPUT: \"hello '\$PAGER' world\"${END}"
+echo "${GREEN}OUTPUT: hello 'less' world${END}"
+../minishell -debug "echo \"hello '\$PAGER' world\""
+echo
+echo "${RED}DOUBLE Quote containing DOUBLE quote${END}"
+../minishell -debug "echo \"hello \"\$PAGER\" world\""
+echo
+echo "${BLUE}SINGLE Quote containing SINGLE quote${END}"
+echo "${ORANGE}INPUT: 'hello '\$PAGER' world'${END}"
+echo "${GREEN}OUTPUT: hello less world${END}"
+../minishell -debug "echo 'hello '\$PAGER' world'"
+echo
+echo "${BLUE}SINGLE Quote containing DOUBLE quote${END}"
+../minishell -debug "echo 'hello \"\$PAGER\" world'"
+echo
 
 # ~ echo 'hello 'hi' world'
 # hello hi world

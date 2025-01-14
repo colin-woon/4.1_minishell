@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/14 17:01:23 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/14 18:35:51 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,26 @@ void	init_stdfds(t_data *data);
 
 int		parse_input(t_data *data, char *input);
 
+// PARSE INPUT - TOKENIZATION
+
+int		tokenization(t_data *data, char *input);
+int		save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
+void	save_word(int from, char *input, int i_current, t_token **tokens);
+void	save_seperator(int i_current, int type, char *input, t_token **tokens);
+
+// PARSE INPUT - TOKENIZATION - Utils Tokenization
+
+int		get_seperator(char *input, int i_current);
+int		check_quote(int	is_quote, char *input, int i_current);
+
+// PARSE INPUT - TOKENIZATION - Utils for t_token doubly linked list
+
+t_token	*create_token(char *value, int type);
+void	clear_tokens(t_token **head);
+void	insert_token_node(t_token *prev_node, t_token *new_node);
+void	delete_token(t_token **head, t_token *node_to_delete);
+void	append_token(t_token **head, t_token *new_node);
+
 // PARSE INPUT - Utils Parse Token 1 - Validate Syntax
 
 int		validate_syntax(t_token **token);
@@ -130,22 +150,7 @@ void	remove_substring(char *str, char *substr);
 char	*replace_substring(char *str, char *substr, char *replacement);
 char	*extract_var_without_symbol(char *var_str, int *var_name_len);
 
-// TOKENIZATION
+// PARSE INPUT - Utils Parse Token 3 - Handle Quotes
 
-int		tokenization(t_data *data, char *input);
-int		save_word_or_seperator(int *i_current, char *input, int from, t_data *data);
-void	save_word(int from, char *input, int i_current, t_token **tokens);
-void	save_seperator(int i_current, int type, char *input, t_token **tokens);
-
-// TOKENIZATION - Utils Tokenization
-
-int		get_seperator(char *input, int i_current);
-int		check_quote(int	is_quote, char *input, int i_current);
-
-// TOKENIZATION - Utils for t_token doubly linked list
-
-t_token	*create_token(char *value, int type);
-void	clear_tokens(t_token **head);
-void	insert_token_node(t_token *prev_node, t_token *new_node);
-void	delete_token(t_token **head, t_token *node_to_delete);
-void	append_token(t_token **head, t_token *new_node);
+void	handle_quotes(t_token **token_list);
+void	remove_all_quotes(char *value, int is_quote_old, int *i);

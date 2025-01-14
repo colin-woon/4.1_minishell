@@ -11,7 +11,7 @@
 
 # Compiler and flags
 CC			=	gcc
-CFLAGS		=	$(INCLUDES) $(DEBUG)
+CFLAGS		=	$(INCLUDES) $(DEBUG) $(FSAN_ADD)
 TEMP		=	-Wall -Werror -Wextra
 INCLUDES	=	-I$(INC_LIBFT) -I$(INC_DIR)
 DEBUG		=	-g3
@@ -40,6 +40,7 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/parser/utils_parse_token_1.c \
 					srcs/parser/utils_parse_token_2a.c \
 					srcs/parser/utils_parse_token_2b.c \
+					srcs/parser/utils_parse_token_3.c \
 					srcs/parser/tokenization/lexer.c \
 					srcs/parser/tokenization/utils_lexer.c \
 					srcs/parser/tokenization/utils_t_token.c
