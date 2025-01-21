@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 14:33:31 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/21 16:00:44 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,3 +175,17 @@ char	*extract_var_without_symbol(char *var_str, int *var_name_len);
 
 void	handle_quotes(t_token **token_list);
 void	remove_all_quotes(char *value, int is_quote_old, int *i);
+
+// PARSE INPUT - COMMANDS
+// PARSE INPUT - COMMANDS - utils_t_cmd
+
+t_cmd	*create_cmd(char *name, char *path, char **args);
+void	prepend_cmd(t_cmd **head, t_cmd *new_cmd);
+void	append_cmd(t_cmd **head, t_cmd *new_cmd);
+void	delete_cmd(t_cmd **head, t_cmd *cmd_to_delete);
+void	clear_cmd_list(t_cmd **head);
+
+// PARSE INPUT - COMMANDS - utils_t_io_fds
+
+t_io_fds	*create_io_fds(char *infile, char *outfile, char *heredoc_limiter, int is_heredoc_quotes);
+void	free_io_fds(t_io_fds *io_fds);
