@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 16:00:44 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/21 16:47:33 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_data
 	char	**envp_origin;
 	int		std_fds[3];
 	t_token	*tokens;
+	t_cmd	*cmd;
 }	t_data;
 
 // DEBUG - Printing
@@ -107,7 +108,8 @@ void	print_envp_array(t_data *data);
 void	print_value_str(char *message, char *value);
 void	print_value_int(char *message, int value);
 void	print_value_char(char *message, char value);
-
+void	print_cmd(t_cmd *cmd);
+void	print_io_fds(t_io_fds *io_fds);
 
 // MEMORY - Utils Free
 
@@ -179,7 +181,7 @@ void	remove_all_quotes(char *value, int is_quote_old, int *i);
 // PARSE INPUT - COMMANDS
 // PARSE INPUT - COMMANDS - utils_t_cmd
 
-t_cmd	*create_cmd(char *name, char *path, char **args);
+t_cmd	*create_cmd();
 void	prepend_cmd(t_cmd **head, t_cmd *new_cmd);
 void	append_cmd(t_cmd **head, t_cmd *new_cmd);
 void	delete_cmd(t_cmd **head, t_cmd *cmd_to_delete);

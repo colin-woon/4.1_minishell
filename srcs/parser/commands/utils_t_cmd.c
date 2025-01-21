@@ -6,28 +6,28 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:42:32 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 15:51:13 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/21 16:47:33 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	*create_cmd(char *name, char *path, char **args);
+t_cmd	*create_cmd();
 void	prepend_cmd(t_cmd **head, t_cmd *new_cmd);
 void	append_cmd(t_cmd **head, t_cmd *new_cmd);
 void	delete_cmd(t_cmd **head, t_cmd *cmd_to_delete);
 void	clear_cmd_list(t_cmd **head);
 
-t_cmd	*create_cmd(char *name, char *path, char **args)
+t_cmd	*create_cmd()
 {
 	t_cmd	*new_cmd;
 
 	new_cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new_cmd)
 		return (NULL);
-	new_cmd->name = name;
-	new_cmd->path = path;
-	new_cmd->args = args;
+	new_cmd->name = NULL;
+	new_cmd->path = NULL;
+	new_cmd->args = NULL;
 	new_cmd->has_pipe = 0;
 	new_cmd->pipe_fd = NULL;
 	new_cmd->io_fds = NULL;

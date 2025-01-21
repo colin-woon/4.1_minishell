@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:16:11 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 16:03:12 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/21 16:59:17 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,15 @@ void	construct_commands(t_data *data, t_token *token)
 	t_token	*temp;
 
 	temp = token;
-	// while (temp->next != NULL)
-	// {
-
-	// }
-
+	while (temp->next != NULL)
+	{
+		if (temp == token)
+			append_cmd(&data->cmd, create_cmd(temp->value, NULL, NULL));
+		// if (temp->type == WORD || temp->type == VARIABLE)
+		// 	parse_word(&data->cmd, &temp);
+		// else if (temp->type == END_OF_FILE)
+		// 	break ;
+		temp = temp->next;
+	}
+	print_cmd(data->cmd);
 }

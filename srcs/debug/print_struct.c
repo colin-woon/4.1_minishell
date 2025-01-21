@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:54:48 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 14:38:30 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/21 16:43:45 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	print_envp_array(t_data *data);
 void	print_value_str(char *message, char *value);
 void	print_value_int(char *message, int value);
 void	print_value_char(char *message, char value);
+void	print_cmd(t_cmd *cmd);
+void	print_io_fds(t_io_fds *io_fds);
 
 void	print_envp_array(t_data *data)
 {
@@ -96,10 +98,5 @@ void	print_cmd(t_cmd *cmd)
 	{
 		printf("pipe_fd[0]: %d\n", cmd->pipe_fd[0]);
 		printf("pipe_fd[1]: %d\n", cmd->pipe_fd[1]);
-	}
-	if (cmd->io_fds)
-	{
-		printf("io_fds:\n");
-		print_io_fds(cmd->io_fds);
 	}
 }
