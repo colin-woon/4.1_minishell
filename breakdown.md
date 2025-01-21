@@ -39,9 +39,8 @@ Expand variable (DONE)
 -- ELSE
 	- next token
 
-Handle quotes
+Handle quotes (DONE)
 - finds quote in token value
-
 -- IF FOUND
 	-- THEN remove quotes (NEEDS FURTHER BREAKDOWN)
 -- ELSE

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/14 18:35:51 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/21 14:33:31 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,45 @@ enum e_syntax_errors
  # define MSG_SYNTAX_ERROR "minishell: syntax error near unexpected token "
  # define MSG_MALLOC_ERROR "malloc error"
 
-enum e_quote_status {
+enum e_quote_status
+{
 	NO_QUOTE,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
 };
 
-typedef struct s_token {
+typedef struct s_token
+{
 	char			*value;
 	int				type;
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
 
-typedef struct s_command {
+typedef struct s_io_fds
+{
+	char	*infile;
+	char	*outfile;
+	char	*heredoc_limiter;
+	int		is_heredoc_quotes;
+	int		fd_in;
+	int		fd_out;
+}	t_io_fds;
 
-}	t_command;
+typedef struct s_cmd
+{
+	char			*name;
+	char			*path;
+	char			**args;
+	int				has_pipe;
+	int				*pipe_fd;
+	t_io_fds		*io_fds;
+	struct s_cmd	*prev;
+	struct s_cmd	*next;
+}	t_cmd;
 
-typedef struct s_data {
+typedef struct s_data
+{
 	char	**envp_array;
 	char	**envp_origin;
 	int		std_fds[3];
