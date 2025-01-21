@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:16:11 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 15:41:09 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/21 16:03:12 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ void	construct_commands(t_data *data, t_token *token)
 	t_token	*temp;
 
 	temp = token;
-	while (temp->next != NULL)
-	{
+	// while (temp->next != NULL)
+	// {
 
-	}
+	// }
+
 }
