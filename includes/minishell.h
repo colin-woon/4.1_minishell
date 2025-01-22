@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/22 18:55:09 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/22 20:18:24 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,6 @@ int		is_consecutive_operator(t_token *token_node);
 void		substitute_variable(t_data *data, t_token **token_list);
 char		*get_variable(t_token *token, char *var_str, t_data *data);
 void		replace_variable(t_token *token_node, char *variable_name, char *variable_result);
-static void	clean_up(char *extracted_var, char *var_w_equal_sign);
 
 // PARSE INPUT - Utils Parse Token 2b - Helper Functions
 

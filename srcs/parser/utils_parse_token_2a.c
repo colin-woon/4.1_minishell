@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 18:15:34 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/22 20:18:37 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void		substitute_variable(t_data *data, t_token **token_list);
 char		*get_variable(t_token *token, char *var_str, t_data *data);
 void		replace_variable(t_token *token_node, char *variable_name, \
 char *variable_result);
-static void	clean_up(char *extracted_var, char *var_w_equal_sign);
 int			is_valid_variable(char *value, int i, int is_quote);
 
 /*
@@ -78,13 +77,6 @@ char *variable_result)
 	free_ptr(variable_result);
 }
 
-
-static void	clean_up(char *extracted_var, char *var_w_equal_sign)
-{
-	free_ptr(extracted_var);
-	free_ptr(var_w_equal_sign);
-}
-
 /*
 Return values
 NULL - variable doesnt exist
@@ -93,27 +85,24 @@ status codes - ? detected
  */
 char	*get_variable(t_token *token, char *var_str, t_data *data)
 {
-	int		var_name_len;
-	int		i_env;
+	char	*value;
 	char	*extracted_var;
-	char	*var_w_equal_sign;
+	int		var_name_len;
 
-	i_env = -1;
 	var_name_len = 0;
 	extracted_var = extract_var_without_symbol(var_str, &var_name_len);
-	var_w_equal_sign = ft_strjoin(extracted_var, "=");
-	while (data->envp_array[++i_env])
+
+	if (extracted_var[0] == '?')
 	{
-		if (!ft_strncmp(var_w_equal_sign, \
-		data->envp_array[i_env], var_name_len + 1))
-		{
-			return (clean_up(extracted_var, var_w_equal_sign), \
-			ft_strdup(data->envp_array[i_env] + var_name_len + 1));
-		}
+		free_ptr(extracted_var);
+		return (ft_itoa(g_last_exit_code));
 	}
+
+	value = getenv(extracted_var);
 	free_ptr(extracted_var);
-	if (var_w_equal_sign[0] == '?')
-		return (free_ptr(var_w_equal_sign), ft_itoa(g_last_exit_code));
+
+	if (value)
+		return (ft_strdup(value));
 	else
-		return (free_ptr(var_w_equal_sign), NULL);
+		return (NULL);
 }
