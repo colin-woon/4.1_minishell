@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:42:32 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 16:47:33 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/22 18:25:39 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	prepend_cmd(t_cmd **head, t_cmd *new_cmd);
 void	append_cmd(t_cmd **head, t_cmd *new_cmd);
 void	delete_cmd(t_cmd **head, t_cmd *cmd_to_delete);
 void	clear_cmd_list(t_cmd **head);
+t_cmd	*get_last_cmd(t_cmd *cmd);
 
 t_cmd	*create_cmd()
 {
@@ -25,14 +26,7 @@ t_cmd	*create_cmd()
 	new_cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new_cmd)
 		return (NULL);
-	new_cmd->name = NULL;
-	new_cmd->path = NULL;
-	new_cmd->args = NULL;
-	new_cmd->has_pipe = 0;
-	new_cmd->pipe_fd = NULL;
-	new_cmd->io_fds = NULL;
-	new_cmd->prev = NULL;
-	new_cmd->next = NULL;
+	ft_memset(new_cmd, 0, sizeof(t_cmd));
 	return (new_cmd);
 }
 
@@ -96,7 +90,7 @@ void	clear_cmd_list(t_cmd **head)
 	*head = NULL;
 }
 
-t_cmd	*lst_last_cmd(t_cmd *cmd)
+t_cmd	*get_last_cmd(t_cmd *cmd)
 {
 	while (cmd->next != NULL)
 		cmd = cmd->next;

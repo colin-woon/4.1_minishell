@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/14 18:05:04 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/21 18:15:34 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,12 @@ static void	clean_up(char *extracted_var, char *var_w_equal_sign)
 	free_ptr(var_w_equal_sign);
 }
 
+/*
+Return values
+NULL - variable doesnt exist
+any str - variable exists
+status codes - ? detected
+ */
 char	*get_variable(t_token *token, char *var_str, t_data *data)
 {
 	int		var_name_len;

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 16:47:33 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/22 17:35:07 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ void	prepend_cmd(t_cmd **head, t_cmd *new_cmd);
 void	append_cmd(t_cmd **head, t_cmd *new_cmd);
 void	delete_cmd(t_cmd **head, t_cmd *cmd_to_delete);
 void	clear_cmd_list(t_cmd **head);
+t_cmd	*get_last_cmd(t_cmd *cmd);
 
 // PARSE INPUT - COMMANDS - utils_t_io_fds
 
