@@ -21,7 +21,7 @@ echo "${YELLOW}PRINT COMMAND TO SEE${END}"
 # ../minishell -debug "echo 'ab 'cd' ef'"
 # echo
 echo "${BLUE}With PIPE${END}"
-echo "${BLUE}INPUT: echo 'ab 'cd' ef' | echo "after piped"${END}"
+echo "${BLUE}INPUT: echo 'ab 'cd' ef' | echo \"after piped\"${END}"
 ../minishell -debug "echo 'ab 'cd' ef'| echo \"after piped\""
 echo
 

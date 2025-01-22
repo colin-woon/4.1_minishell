@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:16:11 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/22 18:39:29 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/22 18:55:25 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	parse_tokens(t_token **token, t_data *data)
 void	parse_word(t_cmd **cmd, t_token **tokens);
 int		fill_cmd_args(t_token **current_tokens, t_cmd *last_cmd);
 int		count_args_in_tokens(t_token *token);
+void	parse_pipe(t_cmd **cmd, t_token **current_tokens);
 
 void	construct_commands(t_data *data, t_token *token)
 {
@@ -50,15 +51,29 @@ void	construct_commands(t_data *data, t_token *token)
 	// print_tokens(temp);
 	while (temp->next != NULL)
 	{
+		print_value_str("token is now", temp->value);
 		if (temp == token)
 			append_cmd(&data->cmd, create_cmd());
 		if (temp->type == WORD || temp->type == VARIABLE)
 			parse_word(&data->cmd, &temp);
+		else if (temp->type == PIPE)
+			parse_pipe(&data->cmd, &temp);
 		else if (temp->type == END_OF_FILE)
 			break ;
 		// temp = temp->next;
 	}
-	print_cmd(data->cmd);
+	print_all_cmds(data->cmd);
+}
+
+void	parse_pipe(t_cmd **cmd, t_token **current_tokens)
+{
+	t_cmd	*last_cmd;
+
+	last_cmd = get_last_cmd(*cmd);
+	last_cmd->has_pipe = 1;
+	append_cmd(&last_cmd, create_cmd());
+	*current_tokens = (*current_tokens)->next;
+	printf("HELLO\n");
 }
 
 void	parse_word(t_cmd **cmd, t_token **current_tokens)

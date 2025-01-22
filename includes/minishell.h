@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/22 17:35:07 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/22 18:55:09 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	print_value_str(char *message, char *value);
 void	print_value_int(char *message, int value);
 void	print_value_char(char *message, char value);
 void	print_cmd(t_cmd *cmd);
+void	print_all_cmds(t_cmd *head);
 void	print_io_fds(t_io_fds *io_fds);
 
 // MEMORY - Utils Free
