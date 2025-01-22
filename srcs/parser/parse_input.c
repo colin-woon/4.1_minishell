@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:16:11 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 16:59:17 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/22 18:39:29 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,89 @@ int	parse_tokens(t_token **token, t_data *data)
 	handle_quotes(&data->tokens);
 	return (SUCCESS);
 }
+void	parse_word(t_cmd **cmd, t_token **tokens);
+int		fill_cmd_args(t_token **current_tokens, t_cmd *last_cmd);
+int		count_args_in_tokens(t_token *token);
 
 void	construct_commands(t_data *data, t_token *token)
 {
 	t_token	*temp;
 
 	temp = token;
+	// print_tokens(temp);
 	while (temp->next != NULL)
 	{
 		if (temp == token)
-			append_cmd(&data->cmd, create_cmd(temp->value, NULL, NULL));
-		// if (temp->type == WORD || temp->type == VARIABLE)
-		// 	parse_word(&data->cmd, &temp);
-		// else if (temp->type == END_OF_FILE)
-		// 	break ;
-		temp = temp->next;
+			append_cmd(&data->cmd, create_cmd());
+		if (temp->type == WORD || temp->type == VARIABLE)
+			parse_word(&data->cmd, &temp);
+		else if (temp->type == END_OF_FILE)
+			break ;
+		// temp = temp->next;
 	}
 	print_cmd(data->cmd);
+}
+
+void	parse_word(t_cmd **cmd, t_token **current_tokens)
+{
+	t_token	*temp;
+	t_cmd	*last_cmd;
+
+	temp = *current_tokens;
+	while (temp->type == WORD || temp->type == VARIABLE)
+	{
+		last_cmd = get_last_cmd(*cmd);
+		if (temp->prev == NULL || temp->prev->type == PIPE \
+		|| last_cmd->name == NULL)
+		{
+			last_cmd->name = ft_strdup(temp->value);
+			temp = temp->next;
+			// printf("hello\n");
+		}
+		else
+			fill_cmd_args(&temp, last_cmd);
+	}
+	*current_tokens = temp;
+}
+
+int	fill_cmd_args(t_token **current_tokens, t_cmd *last_cmd)
+{
+	int		i;
+	int		nb_of_args;
+	t_token	*temp;
+
+	nb_of_args = count_args_in_tokens(temp);
+	last_cmd->args = malloc((nb_of_args + 2) * sizeof(char *));
+	if (!last_cmd->args)
+	{
+		g_last_exit_code = MALLOC_ERROR;
+		return (FAILURE);
+	}
+	i = 1;
+	temp = *current_tokens;
+	last_cmd->args[0] = ft_strdup(last_cmd->name);
+	while (temp->type == WORD || temp->type == VARIABLE)
+	{
+		last_cmd->args[i] = ft_strdup(temp->value);
+		i++;
+		temp = temp->next;
+	}
+	last_cmd->args[i] = NULL;
+	*current_tokens = temp;
+	return (SUCCESS);
+}
+
+int	count_args_in_tokens(t_token *token)
+{
+	int		result;
+	t_token	*temp;
+
+	result = 0;
+	temp = token;
+	while (temp && (temp->type == WORD || temp->type == VARIABLE))
+	{
+		result++;
+		temp = temp->next;
+	}
+	return (result);
 }

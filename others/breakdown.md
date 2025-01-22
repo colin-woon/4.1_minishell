@@ -59,12 +59,12 @@ WHILE current temp next is not NULL
 	- append
 
 	if type is WORD || VARIABLE
-	- parse_word (NFB)
+	- parse_word
 		-- LOOP while same types
 			- get last cmd,
 			-- IF prev is NULL / prev is PIPE / last_cmd is NULL
 				-- IF type is VARIABLE and the value got space (is_space)
-					- split_var_cmd_token (NFB) (rare usecase) (is detecting if VAR type is "-l -a" after expanding, then split with space as delimiter, so can use as command flags)
+					- split_var_cmd_token (rare usecase) (is detecting if VAR type is "-l -a" after expanding, then split with space as delimiter, so can use as command flags)
 				-- ELSE
 					- strdup the token value as cmd name in last cmd
 				-- NEXT
@@ -73,7 +73,7 @@ WHILE current temp next is not NULL
 			{
 				-- IF last cmd name is echo
 					-- IF last cmd no args
-						- create_args_echo_mode (NFB) (unsure usecase)
+						- create_args_echo_mode (unsure usecase)
 						{
 							- remove empty VARIABLE type tokens after parsing
 							- count args
