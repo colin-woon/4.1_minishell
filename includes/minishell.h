@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 15:05:17 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 15:29:47 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,11 @@ void	construct_commands(t_data *data, t_token *token);
 void	parse_word(t_cmd **cmd, t_token **tokens);
 int		fill_cmd_args(t_token **current_tokens, t_cmd *last_cmd);
 int		count_args_in_tokens(t_token *token);
+
+// PARSE INPUT - COMMANDS - 1_parse_redirect_in
+
+void	parse_redirect_in(t_cmd **last_cmd, t_token **tokens);
+void	open_infile(t_io_fds *io, char *filename);
 
 // PARSE INPUT - COMMANDS - 5_parse_pipe
 
