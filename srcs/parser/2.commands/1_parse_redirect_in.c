@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:28:10 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 15:31:58 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 15:38:23 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	open_infile(t_io_fds *io, char *filename)
 {
 	io->infile = ft_strdup(filename);
 	io->fd_in = open(io->infile, O_RDONLY);
-	if(io->fd_in == -1)
+	if (io->fd_in == -1)
 	{
 		print_errno_str(io->infile, strerror(errno));
 		g_last_exit_code = errno;

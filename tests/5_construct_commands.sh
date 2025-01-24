@@ -33,17 +33,30 @@ echo
 # ../minishell -debug "echo 'ab 'cd' ef'| echo \"after piped\""
 # echo
 
-echo "${BLUE}PARSE REDIRECT_IN${END}"
+# echo "${BLUE}PARSE REDIRECT_IN${END}"
+# echo "${RED}TEST ERROR${END}"
+# echo "${ORANGE}INPUT: cat < fakefile.txt ${END}"
+# ../minishell -debug "cat < fakefile.txt "
+# echo
+
+# echo "${RED}TEST FILE${END}"
+# echo "${ORANGE}INPUT: cat < infile.txt ${END}"
+# touch infile.txt
+# ../minishell -debug "cat < infile.txt "
+# rm infile.txt
+# echo
+
+echo "${BLUE}PARSE REDIRECT_OUT${END}"
 echo "${RED}TEST ERROR${END}"
-echo "${ORANGE}INPUT: cat < fakefile.txt ${END}"
-../minishell -debug "cat < fakefile.txt "
+echo "${ORANGE}INPUT: echo HI > fakefile.txt ${END}"
+../minishell -debug "echo HI > fakefile.txt "
 echo
 
 echo "${RED}TEST FILE${END}"
-echo "${ORANGE}INPUT: cat < infile.txt ${END}"
-touch infile.txt
-../minishell -debug "cat < infile.txt "
-rm infile.txt
+echo "${ORANGE}INPUT: echo HI > outfile.txt ${END}"
+touch outfile.txt
+../minishell -debug "echo HI > outfile.txt "
+rm outfile.txt
 echo
 
 # silences the command
