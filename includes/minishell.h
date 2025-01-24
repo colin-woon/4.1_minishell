@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 15:29:47 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 15:45:14 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,11 @@ int		count_args_in_tokens(t_token *token);
 
 void	parse_redirect_in(t_cmd **last_cmd, t_token **tokens);
 void	open_infile(t_io_fds *io, char *filename);
+
+// PARSE INPUT - COMMANDS - 2_parse_redirect_out
+
+void	open_outfile_truncate(t_io_fds *io, char *filename);
+void	parse_redirect_out(t_cmd **last_cmd, t_token **tokens);
 
 // PARSE INPUT - COMMANDS - 5_parse_pipe
 

@@ -46,18 +46,13 @@ echo
 # rm infile.txt
 # echo
 
-echo "${BLUE}PARSE REDIRECT_OUT${END}"
-echo "${RED}TEST ERROR${END}"
-echo "${ORANGE}INPUT: echo HI > fakefile.txt ${END}"
-../minishell -debug "echo HI > fakefile.txt "
-echo
-
-echo "${RED}TEST FILE${END}"
-echo "${ORANGE}INPUT: echo HI > outfile.txt ${END}"
-touch outfile.txt
-../minishell -debug "echo HI > outfile.txt "
-rm outfile.txt
-echo
+# echo "${BLUE}PARSE REDIRECT_OUT${END}"
+# echo "${RED}TEST FILE${END}"
+# echo "${ORANGE}INPUT: echo HI > outfile.txt ${END}"
+# touch outfile.txt
+# ../minishell -debug "echo HI > outfile.txt "
+# rm outfile.txt
+# echo
 
 # silences the command
 make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1
