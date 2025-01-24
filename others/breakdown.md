@@ -150,6 +150,6 @@ WHILE current temp next is not NULL
 	# elif type is END_OF_FILE
 	# - break
 
-then prep_no_arg_commands, some commands like pwd, whoami, will not have any args, but they will only fill in the command name of the t_cmd data struct
+# then prep_no_arg_commands, some commands like pwd, whoami, will not have any args, but they will only fill in the command name of the t_cmd data struct
 
 ```
