@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 17:47:38 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 19:17:18 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void	remove_all_quotes(char *value, int is_quote_old, int *i);
 t_cmd	*create_cmd();
 void	prepend_cmd(t_cmd **head, t_cmd *new_cmd);
 void	append_cmd(t_cmd **head, t_cmd *new_cmd);
-void	delete_cmd(t_cmd **head, t_cmd *cmd_to_delete);
+void	delete_cmd(t_cmd *cmd, void (*del)(void *));
 void	clear_cmd_list(t_cmd **head);
 t_cmd	*get_last_cmd(t_cmd *cmd);
 
