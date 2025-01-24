@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:05:49 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 17:13:48 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 17:50:59 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void	run_heredoc(t_io_fds *io)
 	return (free_ptr(buffer), free_ptr(input));
 }
 
+/*
+Second if statement with the +1 includes the newline character
+ */
 int	is_matching_heredoc_limiter(char *input, char *limiter)
 {
 	if (!ft_strncmp(input, limiter, ft_strlen(limiter)))

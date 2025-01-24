@@ -103,32 +103,48 @@ WHILE current temp next is not NULL
 # - create_args_echo_mode (NFB) (unsure usecase) (only exist because want to join args together) (and removes empty var args)
 # Can combine because when doing echo builtin, can just loop args, use string join, then print out
 
-
-	elif type is REDIRECT_IN
-	- parse_redirect_in (NFB) (for <, the filename will always appear after <,)
-	{
-		- get_last_cmd
-		- init_io_fds for the cmd (can use memset to 0, but the fds should initialize it with negative numbers since std_fd 0 is std_in);
-		-- open_infile (NFB)
-		{
+	# elif type is REDIRECT_IN
+	# - parse_redirect_in (NFB) (for <, the filename will always appear after <,)
+	# {
+	# 	- get_last_cmd
+	# 	- init_io_fds for the cmd (can use memset to 0, but the fds should initialize it with negative numbers since std_fd 0 is std_in);
+	# 	-- open_infile (NFB)
+	# 	{
 			-- remove_old_file_ref (NFB) (usecase, cat < input1.txt < input2.txt, mutiple redir IN in a row)
-			{
-				-- IF infile
-					IF fd_in not initialized ||
-			}
-			- save the file name at io.infile
-			- if io.infile is NULL, handle error (probably wont happen)
-			- if fd-in still at initial state, handle error
+	# 		{
+	# 			-- IF infile
+	# 				IF fd_in not initialized ||
+	# 		}
+	# 		- save the file name at io.infile
+	# 		- if io.infile is NULL, handle error (probably wont happen)
+	# 		- if fd-in still at initial state, handle error
+	# 	}
+	# 	-- IF the temp next next exists, replace temp
+	# 	-- ELSE temp next
+	# }
+	# elif type is REDIRECT_OUT
+	# - parse_redirect_out
+	# 	-- same as redirect_in but with different file permissions and outfile
+
+	elif type is HEREDOC (NEED TO TEST)
+	- parse_heredoc
+	{
+		- same flow as redirect_in at the start
+		- opens a temporary file for heredoc get_heredoc_name for multiple heredocs
+		- get_heredoc_limiter
+		-- run_heredoc (NFB)
+		{
+			-- run an infinite loop
+				- should SET_SIGNALS
+				- if input is same as limiter or NULL detected
+					- break loop
+				- use a buffer, then keep strjoin for each iteration
+			- write the buffer into the file
 		}
-		-- IF the temp next next exists, replace temp
-		-- ELSE temp next
 	}
-	elif type is REDIRECT_OUT
-	- parse_redirect_out (NFB)
-	elif type is HEREDOC
-	- parse_heredoc (NFB)
-	elif type is APPEND
-	- parse_append (NFB)
+	# elif type is APPEND
+	# - parse_append (NFB)
+	# 	-similar flow as parse_redirect_out
 	# elif type is PIPE
 	# - parse_pipe
 	elif type is END_OF_FILE

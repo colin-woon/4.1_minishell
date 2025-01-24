@@ -48,6 +48,8 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/parser/2.commands/0_parse_word.c \
 					srcs/parser/2.commands/1_parse_redirect_in.c \
 					srcs/parser/2.commands/2_parse_redirect_out.c \
+					srcs/parser/2.commands/3_parse_heredoc.c \
+					srcs/parser/2.commands/4_parse_append.c \
 					srcs/parser/2.commands/5_parse_pipe.c \
 					srcs/parser/2.commands/utils_t_cmd.c \
 					srcs/parser/2.commands/utils_t_io_fds.c \
