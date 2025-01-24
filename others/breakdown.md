@@ -147,8 +147,8 @@ WHILE current temp next is not NULL
 	# 	-similar flow as parse_redirect_out
 	# elif type is PIPE
 	# - parse_pipe
-	elif type is END_OF_FILE
-	- break
+	# elif type is END_OF_FILE
+	# - break
 
 then prep_no_arg_commands, some commands like pwd, whoami, will not have any args, but they will only fill in the command name of the t_cmd data struct
 

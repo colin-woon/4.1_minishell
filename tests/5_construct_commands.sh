@@ -60,13 +60,25 @@ echo
 # ../minishell -debug "wc -l << \"\$PAGER\""
 # echo
 
-echo "${BLUE}PARSE APPEND${END}"
-echo "${RED}TEST FILE${END}"
-echo "${ORANGE}INPUT: echo HI >> outfile.txt ${END}"
-touch outfile.txt
-../minishell -debug "echo HI >> outfile.txt "
-rm outfile.txt
+# echo "${BLUE}PARSE APPEND${END}"
+# echo "${RED}TEST FILE${END}"
+# echo "${ORANGE}INPUT: echo HI >> outfile.txt ${END}"
+# touch outfile.txt
+# ../minishell -debug "echo HI >> outfile.txt "
+# rm outfile.txt
+# echo
+
+echo "${BLUE}GENERAL COMMANDS, PRINT TO CHECK${END}"
+echo "${ORANGE}INPUT: ls${END}"
+../minishell -debug "ls"
 echo
+echo "${ORANGE}INPUT: pwd${END}"
+../minishell -debug "pwd"
+echo
+echo "${ORANGE}INPUT: env${END}"
+../minishell -debug "env"
+echo
+
 
 # silences the command
 make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1
