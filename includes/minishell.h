@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 15:45:14 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 17:06:42 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ enum e_syntax_errors
 };
 
  # define TOKEN_BUFFER 4096
+ # define HEREDOC_NAME "/tmp/.heredoc.txt"
+
  # define MSG_FAILURE "error"
  # define MSG_UNCLOSED_SINGLE_QUOTE "minishell: unexpected EOF while looking for matching '"
  # define MSG_UNCLOSED_DOUBLE_QUOTE "minishell: unexpected EOF while looking for matching \""
@@ -213,6 +215,13 @@ void	open_infile(t_io_fds *io, char *filename);
 
 void	open_outfile_truncate(t_io_fds *io, char *filename);
 void	parse_redirect_out(t_cmd **last_cmd, t_token **tokens);
+
+// PARSE INPUT - COMMANDS - 3_parse_heredoc
+
+void	parse_heredoc(t_cmd **last_cmd, t_token **tokens);
+void	run_heredoc(t_io_fds *io);
+int		is_matching_heredoc_limiter(char *input, char *limiter);
+
 
 // PARSE INPUT - COMMANDS - 5_parse_pipe
 
