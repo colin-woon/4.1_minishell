@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 13:42:48 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 15:05:17 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void	garbage_collector(t_data *data, char *input);
 void	print_error(int error_code);
 void	print_syntax_error(int syntax_error, char *value);
 void	ft_quoted_putendl_fd(char *value, int fd);
+void	print_errno_str(char *source, char *err_no_msg);
 
 // INITIALIZATION
 
@@ -190,7 +191,7 @@ t_cmd	*get_last_cmd(t_cmd *cmd);
 
 // PARSE INPUT - COMMANDS - utils_t_io_fds
 
-t_io_fds	*create_io_fds(char *infile, char *outfile, char *heredoc_limiter, int is_heredoc_quotes);
+void	init_io_fds(t_cmd *cmd);
 void	free_io_fds(t_io_fds *io_fds);
 
 // PARSE INPUT - COMMANDS - construction

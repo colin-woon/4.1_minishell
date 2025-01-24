@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:24:42 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/06 18:48:19 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 15:24:52 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	print_error(int error_code);
 void	print_syntax_error(int syntax_error, char *value);
 void	ft_quoted_putendl_fd(char *value, int fd);
+void	print_errno_str(char *source, char *err_no_msg);
 
 void	print_error(int error_code)
 {
@@ -49,4 +50,11 @@ void	ft_quoted_putendl_fd(char *value, int fd)
 	ft_putstr_fd(value, fd);
 	ft_putchar_fd('\'', fd);
 	ft_putchar_fd('\n', fd);
+}
+
+void	print_errno_str(char *source, char *err_no_msg)
+{
+	ft_putstr_fd(source, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putendl_fd(err_no_msg, STDERR_FILENO);
 }
