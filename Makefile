@@ -44,6 +44,9 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/parser/1.parse_tokens/utils_parse_token_2a.c \
 					srcs/parser/1.parse_tokens/utils_parse_token_2b.c \
 					srcs/parser/1.parse_tokens/utils_parse_token_3.c \
+					srcs/parser/2.commands/construction.c \
+					srcs/parser/2.commands/0_parse_word.c \
+					srcs/parser/2.commands/5_parse_pipe.c \
 					srcs/parser/2.commands/utils_t_cmd.c \
 					srcs/parser/2.commands/utils_t_io_fds.c \
 
