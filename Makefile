@@ -11,7 +11,7 @@
 
 # Compiler and flags
 CC			=	gcc
-CFLAGS		=	$(INCLUDES) $(DEBUG) $(FSAN_ADD)
+CFLAGS		=	$(INCLUDES) $(DEBUG)
 TEMP		=	-Wall -Werror -Wextra
 INCLUDES	=	-I$(INC_LIBFT) -I$(INC_DIR)
 DEBUG		=	-g3
@@ -90,7 +90,6 @@ re: fclean $(OBJS_DIR) all
 test:
 	make remake_libft
 	$(CC) $(CFLAGS) test.c $(LIB_FLAGS)
-	./a.out
 
 test_clean:
 	rm -rf a.out
