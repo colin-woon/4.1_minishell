@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:38:15 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 13:40:31 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 17:43:26 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	fill_cmd_args(t_token **current_tokens, t_cmd *last_cmd)
 	int		nb_of_args;
 	t_token	*temp;
 
+	temp = *current_tokens;
 	nb_of_args = count_args_in_tokens(temp);
 	last_cmd->args = malloc((nb_of_args + 2) * sizeof(char *));
 	if (!last_cmd->args)
@@ -51,7 +52,6 @@ int	fill_cmd_args(t_token **current_tokens, t_cmd *last_cmd)
 		return (FAILURE);
 	}
 	i = 1;
-	temp = *current_tokens;
 	last_cmd->args[0] = ft_strdup(last_cmd->name);
 	while (temp->type == WORD || temp->type == VARIABLE)
 	{
