@@ -11,7 +11,7 @@
 
 # Compiler and flags
 CC			=	gcc
-CFLAGS		=	$(INCLUDES) $(DEBUG) $(FSAN_ADD)
+CFLAGS		=	$(INCLUDES) $(DEBUG)
 TEMP		=	-Wall -Werror -Wextra
 INCLUDES	=	-I$(INC_LIBFT) -I$(INC_DIR)
 DEBUG		=	-g3
@@ -37,15 +37,15 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/debug/print_struct.c \
 					srcs/error.c \
 					srcs/parser/parse_input.c \
-					srcs/parser/tokenization/lexer.c \
-					srcs/parser/tokenization/utils_lexer.c \
-					srcs/parser/tokenization/utils_t_token.c\
-					srcs/parser/utils_parse_token_1.c \
-					srcs/parser/utils_parse_token_2a.c \
-					srcs/parser/utils_parse_token_2b.c \
-					srcs/parser/utils_parse_token_3.c \
-					srcs/parser/commands/utils_t_cmd.c \
-					srcs/parser/commands/utils_t_io_fds.c \
+					srcs/parser/0.tokenization/lexer.c \
+					srcs/parser/0.tokenization/utils_lexer.c \
+					srcs/parser/0.tokenization/utils_t_token.c\
+					srcs/parser/1.parse_tokens/utils_parse_token_1.c \
+					srcs/parser/1.parse_tokens/utils_parse_token_2a.c \
+					srcs/parser/1.parse_tokens/utils_parse_token_2b.c \
+					srcs/parser/1.parse_tokens/utils_parse_token_3.c \
+					srcs/parser/2.commands/utils_t_cmd.c \
+					srcs/parser/2.commands/utils_t_io_fds.c \
 
 OBJS_FILES		=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 

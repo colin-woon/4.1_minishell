@@ -16,15 +16,20 @@ make -C "$MAKEFILE_DIR"
 echo
 
 echo "${YELLOW}PRINT COMMAND TO SEE${END}"
-# echo "${BLUE}Normal command${END}"
-# echo "${BLUE}INPUT: echo 'ab 'cd' ef'${END}"
-# ../minishell -debug "echo 'ab 'cd' ef'"
-# echo
-echo "${BLUE}With PIPE${END}"
-echo "${BLUE}INPUT: echo 'ab 'cd' ef' | echo \"after piped\"${END}"
-../minishell -debug "echo 'ab 'cd' ef'| echo \"after piped\""
+echo "${BLUE}PARSE WORD OR VARIABLE${END}"
+echo "${BLUE}WORD${END}"
+echo "${BLUE}INPUT: echo 'ab 'cd' ef'${END}"
+../minishell -debug "echo 'ab 'cd' ef'"
 echo
-
+echo "${BLUE}VARIABLE${END}"
+echo "${BLUE}INPUT: echo \"hello \$PAGER world\"${END}"
+../minishell -debug "echo \"hello \$PAGER world\""
+echo
+# echo "${BLUE}PARSE PIPE${END}"
+# echo "${BLUE}With PIPE${END}"
+# echo "${BLUE}INPUT: echo 'ab 'cd' ef' | echo \"after piped\"${END}"
+# ../minishell -debug "echo 'ab 'cd' ef'| echo \"after piped\""
+# echo
 
 # silences the command
 make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1
