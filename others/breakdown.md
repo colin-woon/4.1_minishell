@@ -157,35 +157,51 @@ WHILE current temp next is not NULL
 ```sh
 EXECUTION
 
-Prep for execution
--- IF data.cmd is NULL,
-	-SUCCESS
--- IF data.cmd.name is NULL
-	-- if data.cmd.iofds &&
-			!check_infile_outfile
-			{
-				-- IF !io OR (!infile && !outfile)
-					SUCCESS
-				-- infile exist but fd is still -1 OR outfile exist but fd is still -1
-					FAILURE
-				SUCCESS
-			}
-		FAILURE
-	SUCCESS
-- IF
-		!create_pipes
-		{
-			-- LOOP through COMMANDS
-				-- IF command has pipe OR previous command has pipe
-					- malloc fd int array with size 2
-					-- IF (malloc_error OR pipe(fd) error)
-						free_data, if pipe error, 129, if malloc_error, mallor_error, RETURN FAILURE
-					- assign the fd int array to the cmd pipe_fd
-				-next COMMAND
-				RETURN SUCCESS
-		}
-	FAILURE
+# Prep for execution
+# -- IF data.cmd is NULL,
+# 	-EXIT
+# -- IF data.cmd.name is NULL
+# 	-- if data.cmd.iofds &&
+# 			!check_infile_outfile
+# 			{
+# 				-- IF !io OR (!infile && !outfile)
+# 					SUCCESS
+# 				-- infile exist but fd is still -1 OR outfile exist but fd is still -1
+# 					FAILURE
+# 				SUCCESS
+# 			}
+# 		EXIT
+# 	EXIT
+# - IF
+# 		!create_pipes
+# 		{
+# 			-- LOOP through COMMANDS
+# 				-- IF command has pipe OR previous command has pipe
+# 					- malloc fd int array with size 2
+# 					-- IF (malloc_error OR pipe(fd) error)
+# 						free_data, if pipe error, 129, if malloc_error, mallor_error, RETURN FAILURE
+# 					- assign the fd int array to the cmd pipe_fd
+# 				-next COMMAND
+# 				RETURN EXIT
+# 		}
+# 	EXIT
+# RETURN DONT EXIT
 
 
+Redirect_io (NFB)
+-- IF io == NULL
+	return
+-- init_stdfds as backup
+-- IF fd_in value changed from -1
+	- dup2 to STDIN
+		- handle dup2 error incase
+-- IF fd_out value changed from -1
+	- dup2 to STDOUT
+		- handle dup2 error incase
 
+Execute Builtin (NFB)
+
+Restore_io (NFB)
+-- IF io == NULL
+-- if stdfds is dupped, dup2 to the original stdfds again and close the backup stdfds
 ```

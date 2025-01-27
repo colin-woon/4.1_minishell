@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:30:18 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 15:35:12 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/27 16:41:27 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	execute_commands(t_data *data)
 	is_exit = validate_commands(data);
 	if (is_exit)
 		return ;
-	// if (!data->cmd->has_pipe && !data->cmd->prev && is_valid_files(data->cmd->io_fds))
-	// {
-	// 	redirect_io
-	// 	execute_builtin
-	// 	restore_io
-	// }
+	if (!data->cmd->has_pipe && !data->cmd->prev && is_valid_files(data->cmd->io_fds))
+	{
+		redirect_stdio(data->cmd->io_fds);
+		// is_exit = execute_builtin;
+		restore_stdio(data->cmd->io_fds);
+	}
 	if (is_exit)
 		return ;
 	// return (create_children(data));

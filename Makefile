@@ -53,7 +53,8 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/parser/2.commands/5_parse_pipe.c \
 					srcs/parser/2.commands/utils_t_cmd.c \
 					srcs/parser/2.commands/utils_t_io_fds.c \
-					srcs/execution/validation.c
+					srcs/execution/validation.c \
+					srcs/execution/handle_stdio.c \
 
 OBJS_FILES		=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 

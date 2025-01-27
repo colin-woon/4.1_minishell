@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 15:32:23 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/27 16:42:29 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_io_fds
 	int		is_heredoc_quotes;
 	int		fd_in;
 	int		fd_out;
+	int		std_fds[2];
 }	t_io_fds;
 
 typedef struct s_cmd
@@ -101,7 +102,6 @@ typedef struct s_data
 {
 	char	**envp_array;
 	char	**envp_origin;
-	int		std_fds[3];
 	t_token	*tokens;
 	t_cmd	*cmd;
 }	t_data;
@@ -133,7 +133,6 @@ void	print_errno_str(char *source, char *err_no_msg);
 
 void	init_shell_data(t_data *data, char **envp);
 void	init_env(t_data *data, char **envp);
-void	init_stdfds(t_data *data);
 
 // PARSE INPUT
 
@@ -239,3 +238,9 @@ void	parse_pipe(t_cmd **cmd, t_token **current_tokens);
 int	create_pipes(t_data *data);
 int	is_valid_files(t_io_fds *io);
 int	validate_commands(t_data *data);
+
+// EXECUTION - Handle_stdios
+
+void	init_stdfds(t_io_fds *io);
+void	restore_stdio(t_io_fds *io);
+void	redirect_stdio(t_io_fds *io);
