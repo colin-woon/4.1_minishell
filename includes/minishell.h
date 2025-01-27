@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 16:42:29 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/27 16:56:18 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,11 @@ void	open_outfile_append(t_io_fds *io, char *filename);
 // PARSE INPUT - COMMANDS - 5_parse_pipe
 
 void	parse_pipe(t_cmd **cmd, t_token **current_tokens);
+
+// EXECUTION - Execute
+
+void	execute_commands(t_data *data);
+int		execute_builtin(t_data *data, t_cmd *cmd);
 
 // EXECUTION - Validation
 
