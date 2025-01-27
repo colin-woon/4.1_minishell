@@ -6,15 +6,15 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:20:39 by jow               #+#    #+#             */
-/*   Updated: 2025/01/25 14:57:02 by jow              ###   ########.fr       */
+/*   Updated: 2025/01/27 20:28:03 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	current_directory(t_data *data);
+int	ft_cd(t_data *data);
 
-int	current_directory(t_data *data)
+int	ft_cd(t_data *data)
 {
 	char	*cwd;
 
