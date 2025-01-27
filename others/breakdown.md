@@ -187,21 +187,28 @@ EXECUTION
 # 	EXIT
 # RETURN DONT EXIT
 
-
-Redirect_io (NFB)
--- IF io == NULL
-	return
--- init_stdfds as backup
--- IF fd_in value changed from -1
-	- dup2 to STDIN
-		- handle dup2 error incase
--- IF fd_out value changed from -1
-	- dup2 to STDOUT
-		- handle dup2 error incase
+# Redirect_io
+# -- IF io == NULL
+# 	return
+# -- init_stdfds as backup
+# -- IF fd_in value changed from -1
+# 	- dup2 to STDIN
+# 		- handle dup2 error incase
+# -- IF fd_out value changed from -1
+# 	- dup2 to STDOUT
+# 		- handle dup2 error incase
 
 Execute Builtin (NFB)
 
-Restore_io (NFB)
--- IF io == NULL
--- if stdfds is dupped, dup2 to the original stdfds again and close the backup stdfds
+# Restore_io
+# -- IF io == NULL
+# -- if stdfds is dupped, dup2 to the original stdfds again and close the backup stdfds
+```
+
+```sh
+TO TEST:
+- multiple valid < << > >>
+	eg: cat < realfile1.txt < realfile2.txt (should show realfile2.txt contents)
+- test HEREDOC
+- test builtin redirections
 ```
