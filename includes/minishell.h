@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 19:17:18 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/27 13:51:37 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ enum e_error_codes
 {
 	SUCCESS,
 	FAILURE,
+	SYNTAX_ERROR,
 	UNCLOSED_SINGLE_QUOTE,
 	UNCLOSED_DOUBLE_QUOTE,
 	QUOTE_ERROR,
-	MALLOC_ERROR
+	MALLOC_ERROR,
+	CMD_NOT_FOUND_ERROR = 127,
 };
 
 enum e_syntax_errors

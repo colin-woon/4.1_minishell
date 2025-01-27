@@ -6,13 +6,13 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:58:27 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 18:23:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/27 13:53:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	construct_commands(t_data *data, t_token *token);
+void		construct_commands(t_data *data, t_token *token);
 static void	parse_one_word_command(t_data *data);
 
 void	construct_commands(t_data *data, t_token *token)
@@ -42,6 +42,9 @@ void	construct_commands(t_data *data, t_token *token)
 	parse_one_word_command(data);
 }
 
+/*
+Duplicates the command name to the first element of the args 2d array
+ */
 static void	parse_one_word_command(t_data *data)
 {
 	t_cmd	*cmd;
