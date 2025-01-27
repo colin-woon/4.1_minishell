@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 13:51:37 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/27 15:32:23 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ enum e_error_codes
 	QUOTE_ERROR,
 	MALLOC_ERROR,
 	CMD_NOT_FOUND_ERROR = 127,
+	PIPE_ERROR = 129,
 };
 
 enum e_syntax_errors
@@ -232,3 +233,9 @@ void	open_outfile_append(t_io_fds *io, char *filename);
 // PARSE INPUT - COMMANDS - 5_parse_pipe
 
 void	parse_pipe(t_cmd **cmd, t_token **current_tokens);
+
+// EXECUTION - Validation
+
+int	create_pipes(t_data *data);
+int	is_valid_files(t_io_fds *io);
+int	validate_commands(t_data *data);

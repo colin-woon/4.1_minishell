@@ -11,7 +11,7 @@
 
 # Compiler and flags
 CC			=	gcc
-CFLAGS		=	$(INCLUDES) $(DEBUG)
+CFLAGS		=	$(INCLUDES) $(DEBUG) $(FSAN_ADD)
 TEMP		=	-Wall -Werror -Wextra
 INCLUDES	=	-I$(INC_LIBFT) -I$(INC_DIR)
 DEBUG		=	-g3
@@ -53,6 +53,7 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/parser/2.commands/5_parse_pipe.c \
 					srcs/parser/2.commands/utils_t_cmd.c \
 					srcs/parser/2.commands/utils_t_io_fds.c \
+					srcs/execution/validation.c
 
 OBJS_FILES		=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 

@@ -151,5 +151,41 @@ WHILE current temp next is not NULL
 	# - break
 
 # then prep_no_arg_commands, some commands like pwd, whoami, will not have any args, but they will only fill in the command name of the t_cmd data struct
+```
+
+
+```sh
+EXECUTION
+
+Prep for execution
+-- IF data.cmd is NULL,
+	-SUCCESS
+-- IF data.cmd.name is NULL
+	-- if data.cmd.iofds &&
+			!check_infile_outfile
+			{
+				-- IF !io OR (!infile && !outfile)
+					SUCCESS
+				-- infile exist but fd is still -1 OR outfile exist but fd is still -1
+					FAILURE
+				SUCCESS
+			}
+		FAILURE
+	SUCCESS
+- IF
+		!create_pipes
+		{
+			-- LOOP through COMMANDS
+				-- IF command has pipe OR previous command has pipe
+					- malloc fd int array with size 2
+					-- IF (malloc_error OR pipe(fd) error)
+						free_data, if pipe error, 129, if malloc_error, mallor_error, RETURN FAILURE
+					- assign the fd int array to the cmd pipe_fd
+				-next COMMAND
+				RETURN SUCCESS
+		}
+	FAILURE
+
+
 
 ```
