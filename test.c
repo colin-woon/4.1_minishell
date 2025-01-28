@@ -53,8 +53,6 @@ void	init_env(t_data *data, char **envp)
 	}
 }
 
-/*-------------------------------------------------------------------*/
-
 char	*get_env_var_value(t_data *data, char *key)
 {
 	int	i;
@@ -127,6 +125,65 @@ int	set_env_var(t_data *data, char *key, char *value)
 	free(new_env);
 	return (EXIT_SUCCESS);
 }
+/*-------------------------------------------------------------------*/
+
+static char	**get_key_value_pair(char *arg)
+{
+	char	*equal_sign_pos;
+	char	**tmp;
+
+	equal_sign_pos = ft_strchr(arg, '=');
+	tmp = malloc(sizeof(tmp) * 3);
+	tmp[0] = ft_substr(arg, 0, equal_sign_pos - arg);
+	tmp[1] = ft_strdup(equal_sign_pos + 1);
+	tmp[2] = NULL;
+	return (tmp);
+}
+
+int	check_valid_env_var(char *env_var)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_isalpha(env_var[i]) && env_var[i] != '_')
+		return (EXIT_FAILURE);
+	i++;
+	while (env_var[i])
+	{
+		if (!ft_isalnum(env_var[i]) && env_var[i] != '_')
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	ft_export(t_data *data, char **args)
+{
+	int		i;
+	int	a;
+	char	**tmp;
+
+	i = 1;
+	a = i + 1;
+	if (!args[a])
+		return (ft_env(data, args));
+	while (args[i])
+	{
+		if (!check_valid_env_var(args[i]))
+		{
+			//print_syntax_error(QUOTE_ERROR, args[i]);
+			printf("error\n");
+			return (EXIT_FAILURE);
+		}
+		else if (ft_strchr(args[i], '='))
+		{
+			tmp = get_key_value_pair(args[i]);
+			set_env_var(data, tmp[0], tmp[1]);
+			ft_free_2d_array(tmp);
+		}
+	}
+	return (EXIT_SUCCESS);
+}
 
 void	ft_update_envlst(t_data *data, char *key, char *value)
 {
@@ -188,6 +245,8 @@ int	ft_cd(t_data *data, char **args)
 	return (change_dir(data, args[2]));
 }
 
+
+
 int main(int ac, char **av, char **envp)
 {
 	(void) ac;
@@ -204,6 +263,8 @@ int main(int ac, char **av, char **envp)
 		get_home_path(data);
 	if (!ft_strncmp(input, "cd", 2))
 		ft_cd(data, av);
+	if (!ft_strncmp(input, "export", 6))
+		ft_export(data, av);
 	printf("NEWPWD: %s\n", get_env_var_value(data, "PWD"));
 	return (0);
 }
