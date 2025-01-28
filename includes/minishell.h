@@ -34,10 +34,14 @@ enum e_error_codes
 {
 	SUCCESS,
 	FAILURE,
+	SYNTAX_ERROR,
 	UNCLOSED_SINGLE_QUOTE,
 	UNCLOSED_DOUBLE_QUOTE,
 	QUOTE_ERROR,
-	MALLOC_ERROR
+	MALLOC_ERROR,
+	CMD_NOT_EXECUTABLE = 126,
+	CMD_NOT_FOUND_ERROR = 127,
+	// PIPE_ERROR = 129,
 };
 
 enum e_syntax_errors
@@ -48,6 +52,10 @@ enum e_syntax_errors
 };
 
  # define TOKEN_BUFFER 4096
+ # define HEREDOC_NAME "/tmp/.heredoc.txt"
+ # define READ_END 0
+ # define WRITE_END 1
+
  # define MSG_FAILURE "error"
  # define MSG_UNCLOSED_SINGLE_QUOTE "minishell: unexpected EOF while looking for matching '"
  # define MSG_UNCLOSED_DOUBLE_QUOTE "minishell: unexpected EOF while looking for matching \""
@@ -78,6 +86,7 @@ typedef struct s_io_fds
 	int		is_heredoc_quotes;
 	int		fd_in;
 	int		fd_out;
+	int		std_fds[2];
 }	t_io_fds;
 
 typedef struct s_cmd
@@ -96,9 +105,9 @@ typedef struct s_data
 {
 	char	**envp_array;
 	char	**envp_origin;
-	int		std_fds[3];
 	t_token	*tokens;
 	t_cmd	*cmd;
+	pid_t	pid;
 }	t_data;
 
 // DEBUG - Printing
@@ -122,12 +131,12 @@ void	garbage_collector(t_data *data, char *input);
 void	print_error(int error_code);
 void	print_syntax_error(int syntax_error, char *value);
 void	ft_quoted_putendl_fd(char *value, int fd);
+void	print_errno_str(char *source, char *err_no_msg);
 
 // INITIALIZATION
 
 void	init_shell_data(t_data *data, char **envp);
 void	init_env(t_data *data, char **envp);
-void	init_stdfds(t_data *data);
 
 // PARSE INPUT
 
@@ -184,14 +193,66 @@ void	remove_all_quotes(char *value, int is_quote_old, int *i);
 t_cmd	*create_cmd();
 void	prepend_cmd(t_cmd **head, t_cmd *new_cmd);
 void	append_cmd(t_cmd **head, t_cmd *new_cmd);
-void	delete_cmd(t_cmd **head, t_cmd *cmd_to_delete);
+void	delete_cmd(t_cmd *cmd, void (*del)(void *));
 void	clear_cmd_list(t_cmd **head);
 t_cmd	*get_last_cmd(t_cmd *cmd);
 
 // PARSE INPUT - COMMANDS - utils_t_io_fds
 
-t_io_fds	*create_io_fds(char *infile, char *outfile, char *heredoc_limiter, int is_heredoc_quotes);
+void	init_io_fds(t_cmd *cmd);
 void	free_io_fds(t_io_fds *io_fds);
+
+// PARSE INPUT - COMMANDS - construction
+
+void	construct_commands(t_data *data, t_token *token);
+
+// PARSE INPUT - COMMANDS - 0_parse_word
+
+void	parse_word(t_cmd **cmd, t_token **tokens);
+int		fill_cmd_args(t_token **current_tokens, t_cmd *last_cmd);
+int		count_args_in_tokens(t_token *token);
+
+// PARSE INPUT - COMMANDS - 1_parse_redirect_in
+
+void	parse_redirect_in(t_cmd **last_cmd, t_token **tokens);
+void	open_infile(t_io_fds *io, char *filename);
+
+// PARSE INPUT - COMMANDS - 2_parse_redirect_out
+
+void	open_outfile_truncate(t_io_fds *io, char *filename);
+void	parse_redirect_out(t_cmd **last_cmd, t_token **tokens);
+
+// PARSE INPUT - COMMANDS - 3_parse_heredoc
+
+void	parse_heredoc(t_cmd **last_cmd, t_token **tokens);
+void	run_heredoc(t_io_fds *io);
+int		is_matching_heredoc_limiter(char *input, char *limiter);
+
+// PARSE INPUT - COMMANDS - 4_parse_append
+
+void	parse_append(t_cmd **last_cmd, t_token **tokens);
+void	open_outfile_append(t_io_fds *io, char *filename);
+
+// PARSE INPUT - COMMANDS - 5_parse_pipe
+
+void	parse_pipe(t_cmd **cmd, t_token **current_tokens);
+
+// EXECUTION - Execute
+
+void	execute_commands(t_data *data);
+int		execute_builtin(t_data *data, t_cmd *cmd);
+
+// EXECUTION - Validation
+
+int	create_pipes(t_data *data);
+int	is_valid_files(t_io_fds *io);
+int	validate_commands(t_data *data);
+
+// EXECUTION - Handle_stdios
+
+void	init_stdfds(t_io_fds *io);
+void	restore_stdio(t_io_fds *io);
+void	redirect_stdio(t_io_fds *io);
 
 // BUILTINS - PWD
 

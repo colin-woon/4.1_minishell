@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:30:18 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/13 21:53:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/27 16:57:56 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ int	main(int ac, char **av, char **envp)
 		else
 			input = readline("minishell > ");
 		add_history(input);
-		parse_input(&data, input);
+		if (parse_input(&data, input) == SUCCESS)
+			execute_commands(&data);
 		garbage_collector(&data, input);
 		if (ac > 1 && !ft_strncmp(av[1], "-debug", 6))
 			break ;
 	}
 }
+

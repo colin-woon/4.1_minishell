@@ -37,15 +37,25 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/debug/print_struct.c \
 					srcs/error.c \
 					srcs/parser/parse_input.c \
-					srcs/parser/tokenization/lexer.c \
-					srcs/parser/tokenization/utils_lexer.c \
-					srcs/parser/tokenization/utils_t_token.c\
-					srcs/parser/utils_parse_token_1.c \
-					srcs/parser/utils_parse_token_2a.c \
-					srcs/parser/utils_parse_token_2b.c \
-					srcs/parser/utils_parse_token_3.c \
-					srcs/parser/commands/utils_t_cmd.c \
-					srcs/parser/commands/utils_t_io_fds.c \
+					srcs/parser/0.tokenization/lexer.c \
+					srcs/parser/0.tokenization/utils_lexer.c \
+					srcs/parser/0.tokenization/utils_t_token.c\
+					srcs/parser/1.parse_tokens/utils_parse_token_1.c \
+					srcs/parser/1.parse_tokens/utils_parse_token_2a.c \
+					srcs/parser/1.parse_tokens/utils_parse_token_2b.c \
+					srcs/parser/1.parse_tokens/utils_parse_token_3.c \
+					srcs/parser/2.commands/construction.c \
+					srcs/parser/2.commands/0_parse_word.c \
+					srcs/parser/2.commands/1_parse_redirect_in.c \
+					srcs/parser/2.commands/2_parse_redirect_out.c \
+					srcs/parser/2.commands/3_parse_heredoc.c \
+					srcs/parser/2.commands/4_parse_append.c \
+					srcs/parser/2.commands/5_parse_pipe.c \
+					srcs/parser/2.commands/utils_t_cmd.c \
+					srcs/parser/2.commands/utils_t_io_fds.c \
+					srcs/execution/execute.c \
+					srcs/execution/validation.c \
+					srcs/execution/handle_stdio.c \
 
 OBJS_FILES		=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 

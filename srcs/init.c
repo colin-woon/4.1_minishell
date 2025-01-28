@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:52:30 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 16:40:56 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/27 18:28:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void	init_shell_data(t_data *data, char **envp);
 void	init_env(t_data *data, char **envp);
-void	init_stdfds(t_data *data);
 
 void	init_shell_data(t_data *data, char **envp)
 {
 	init_env(data, envp);
-	init_stdfds(data);
 	data->envp_origin = envp;
 	data->cmd = NULL;
+	data->pid = -1;
 	g_last_exit_code = 0;
 }
 
@@ -46,9 +45,3 @@ void	init_env(t_data *data, char **envp)
 	}
 }
 
-void	init_stdfds(t_data *data)
-{
-	data->std_fds[STDIN_FILENO] = dup(STDIN_FILENO);
-	data->std_fds[STDOUT_FILENO] = dup(STDOUT_FILENO);
-	data->std_fds[STDERR_FILENO] = dup(STDERR_FILENO);
-}

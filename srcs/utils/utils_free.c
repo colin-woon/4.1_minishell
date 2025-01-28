@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 00:17:52 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/30 19:07:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 19:08:47 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ void	garbage_collector(t_data *data, char *input)
 		data->envp_origin = NULL;
 	if (data->tokens)
 		clear_tokens(&data->tokens);
+	if (data->cmd)
+		clear_cmd_list(&data->cmd);
 	free_ptr(input);
 }

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:42:32 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/22 18:25:39 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 19:16:58 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_cmd	*create_cmd();
 void	prepend_cmd(t_cmd **head, t_cmd *new_cmd);
 void	append_cmd(t_cmd **head, t_cmd *new_cmd);
-void	delete_cmd(t_cmd **head, t_cmd *cmd_to_delete);
+void	delete_cmd(t_cmd *cmd, void (*del)(void *));
 void	clear_cmd_list(t_cmd **head);
 t_cmd	*get_last_cmd(t_cmd *cmd);
 
@@ -60,19 +60,6 @@ void	prepend_cmd(t_cmd **head, t_cmd *new_cmd)
 	*head = new_cmd;
 }
 
-void	delete_cmd(t_cmd **head, t_cmd *cmd_to_delete)
-{
-	if (!head || !*head || !cmd_to_delete)
-		return;
-	if (cmd_to_delete->prev)
-		cmd_to_delete->prev->next = cmd_to_delete->next;
-	else
-		*head = cmd_to_delete->next;
-	if (cmd_to_delete->next)
-		cmd_to_delete->next->prev = cmd_to_delete->prev;
-	free(cmd_to_delete);
-}
-
 void	clear_cmd_list(t_cmd **head)
 {
 	t_cmd	*temp;
@@ -84,10 +71,23 @@ void	clear_cmd_list(t_cmd **head)
 	while (temp)
 	{
 		next = temp->next;
-		free(temp);
+		delete_cmd(temp, &free_ptr);
 		temp = next;
 	}
 	*head = NULL;
+}
+
+void	delete_cmd(t_cmd *cmd, void (*del)(void *))
+{
+	if (cmd->name)
+		(*del)(cmd->name);
+	if (cmd->args)
+		ft_free_2d_array(cmd->args);
+	if (cmd->pipe_fd)
+		(*del)(cmd->pipe_fd);
+	if (cmd->io_fds)
+		free_io_fds(cmd->io_fds);
+	(*del)(cmd);
 }
 
 t_cmd	*get_last_cmd(t_cmd *cmd)

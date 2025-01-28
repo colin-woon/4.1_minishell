@@ -6,36 +6,38 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:52:17 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/21 15:57:08 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/24 16:33:54 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_io_fds	*create_io_fds(char *infile, char *outfile, char *heredoc_limiter, int is_heredoc_quotes);
+void	init_io_fds(t_cmd *cmd);
 void	free_io_fds(t_io_fds *io_fds);
 
-t_io_fds	*create_io_fds(char *infile, char *outfile, char *heredoc_limiter, int is_heredoc_quotes)
+void	init_io_fds(t_cmd *cmd)
 {
-	t_io_fds *new_io;
-
-	new_io = (t_io_fds *)malloc(sizeof(t_io_fds));
-	if (!new_io)
-		return (NULL);
-	new_io->infile = ft_strdup(infile);
-	new_io->outfile = ft_strdup(outfile);
-	new_io->heredoc_limiter = ft_strdup(heredoc_limiter);
-	new_io->is_heredoc_quotes = is_heredoc_quotes;
-	new_io->fd_in = -1;
-	new_io->fd_out = -1;
-	return (new_io);
+	if (cmd->io_fds)
+		return ;
+	cmd->io_fds = malloc(sizeof(t_io_fds));
+	if (!cmd->io_fds)
+	{
+		g_last_exit_code = MALLOC_ERROR;
+		return ;
+	}
+	cmd->io_fds->infile = NULL;
+	cmd->io_fds->outfile = NULL;
+	cmd->io_fds->heredoc_limiter = NULL;
+	cmd->io_fds->is_heredoc_quotes = 0;
+	cmd->io_fds->fd_in = -1;
+	cmd->io_fds->fd_out = -1;
 }
 
 void	free_io_fds(t_io_fds *io_fds)
 {
 	if (!io_fds)
 		return;
-	if (io_fds->infile)
+	if (io_fds->infile && io_fds->infile != HEREDOC_NAME)
 		free_ptr(io_fds->infile);
 	if (io_fds->outfile)
 		free_ptr(io_fds->outfile);
