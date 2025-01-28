@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:41:10 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 16:41:52 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/28 17:02:51 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	redirect_stdio(t_io_fds *io)
 		}
 	}
 }
-
 
 void	init_stdfds(t_io_fds *io)
 {

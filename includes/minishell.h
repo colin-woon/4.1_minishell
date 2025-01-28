@@ -6,13 +6,14 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/28 15:08:52 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/28 17:14:44 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <sys/wait.h>
 
 extern int	g_last_exit_code;
 
@@ -95,7 +96,7 @@ typedef struct s_cmd
 	char			*path;
 	char			**args;
 	int				has_pipe;
-	int				*pipe_fd;
+	int				pipe_fd[2];
 	t_io_fds		*io_fds;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
@@ -125,6 +126,8 @@ void	print_io_fds(t_io_fds *io_fds);
 
 void	free_ptr(void *ptr);
 void	garbage_collector(t_data *data, char *input);
+void	close_pipes(t_cmd *cmd, t_cmd *cmd_to_ignore);
+void	close_fds(t_cmd *cmd, int is_restore_stdio);
 
 // ERROR HANDLING
 
@@ -239,7 +242,7 @@ void	parse_pipe(t_cmd **cmd, t_token **current_tokens);
 
 // EXECUTION - Execute
 
-void	execute_commands(t_data *data);
+void	execute(t_data *data);
 int		execute_builtin(t_data *data, t_cmd *cmd);
 
 // EXECUTION - Validation

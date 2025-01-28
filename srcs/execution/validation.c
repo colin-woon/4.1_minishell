@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:18:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 18:55:18 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/28 17:06:17 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,10 @@ int	create_pipes(t_data *data)
 	{
 		if (temp->has_pipe || (temp->prev && temp->prev->has_pipe))
 		{
-			temp->pipe_fd = malloc(sizeof(int) * 2);
-			if (!temp->pipe_fd)
-				g_last_exit_code = MALLOC_ERROR;
 			if (pipe(temp->pipe_fd) != 0)
 			{
 				print_errno_str("create_pipes", strerror(errno));
 				g_last_exit_code = FAILURE;
-			}
-			if (g_last_exit_code == MALLOC_ERROR \
-			|| g_last_exit_code == FAILURE)
-			{
 				garbage_collector(data, NULL);
 				return (FAILURE);
 			}

@@ -6,16 +6,17 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/28 12:38:27 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/28 17:01:30 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute_commands(t_data *data);
+void	execute(t_data *data);
 int		execute_builtin(t_data *data, t_cmd *cmd);
+int		execute_pipes(t_data *data);
 
-void	execute_commands(t_data *data)
+void	execute(t_data *data)
 {
 	int	is_exit;
 
@@ -31,7 +32,8 @@ void	execute_commands(t_data *data)
 	}
 	if (is_exit)
 		return ;
-	// return (create_children(data));
+	g_last_exit_code = execute_pipes(data);
+	return ;
 }
 int	execute_builtin(t_data *data, t_cmd *cmd)
 {
@@ -53,4 +55,51 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	// else if (ft_strncmp(cmd->name, "exit", 5) == 0)
 	// 	is_exit = exit_builtin(data, cmd->args);
 	return (is_exit);
+}
+
+int	execute_pipes(t_data *data)
+{
+	t_cmd	*cmd;
+	int		process_exit_code;
+
+	process_exit_code = -1;
+	cmd = data->cmd;
+	while (data->pid != -1 && cmd)
+	{
+		data->pid = fork();
+		if (data->pid == -1)
+		{
+			print_errno_str("fork", strerror(errno));
+			return (errno);
+		}
+		else if (data->pid == 0)
+			execute_commands(data, cmd);
+		cmd = cmd->next;
+	}
+	process_exit_code = wait_cmds(data);
+	return (process_exit_code);
+}
+
+int	wait_cmds(t_data *data)
+{
+	int		exit_status;
+	int		temp;
+	pid_t	killed_child_pid;
+
+	temp = -1;
+	killed_child_pid = 0;
+	while (killed_child_pid != -1)
+	{
+		if (killed_child_pid == data->pid)
+			temp = exit_status;
+		killed_child_pid = wait(&exit_status);
+	}
+	if (WIFSIGNALED(temp))
+		exit_status = 128 + WTERMSIG(temp);
+	else if (WIFEXITED(temp))
+		exit_status = WEXITSTATUS(temp);
+	else
+		exit_status = temp;
+
+	return (exit_status);
 }
