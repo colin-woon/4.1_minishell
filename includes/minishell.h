@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/25 14:41:58 by jow              ###   ########.fr       */
+/*   Updated: 2025/01/27 20:25:18 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,3 +196,7 @@ void	free_io_fds(t_io_fds *io_fds);
 // BUILTINS - PWD
 
 int		current_directory(t_data *data);
+
+// BUILTINS - ENV
+
+int		ft_env(t_data *data, char **args);
