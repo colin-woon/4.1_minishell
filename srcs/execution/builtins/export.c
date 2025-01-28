@@ -6,20 +6,27 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:30:57 by jow               #+#    #+#             */
-/*   Updated: 2025/01/28 12:06:30 by jow              ###   ########.fr       */
+/*   Updated: 2025/01/28 12:36:58 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
 /*
 ** This function is used to get the key and value pair from the argument
-** by 
+** by splitting the argument at the first '=' character.
 */
 static char	*get_key_value_pair(char *arg)
 {
+	char	*equal_sign_pos;
+	char	**tmp;
 
+	equal_sign_pos = ft_strchr(arg, '=');
+	tmp = malloc(sizeof(tmp) * 3);
+	tmp[0] = ft_substr(arg, 0, equal_sign_pos - arg);
+	tmp[1] = ft_strdup(equal_sign_pos + 1);
+	tmp[2] = NULL;
+	return (tmp);
 }
 
 int	check_valid_env_var(char *env_var)
