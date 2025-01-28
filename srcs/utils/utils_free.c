@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 00:17:52 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 19:08:47 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/28 16:14:12 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	free_ptr(void *ptr)
 
 void	garbage_collector(t_data *data, char *input)
 {
-	if (data->envp_array)
-	{
-		ft_free_2d_array(data->envp_array);
-		data->envp_array = NULL;
-	}
+	// if (data->envp_array)
+	// {
+	// 	ft_free_2d_array(data->envp_array);
+	// 	data->envp_array = NULL;
+	// }
 	if (data->envp_origin)
 		data->envp_origin = NULL;
 	if (data->tokens)

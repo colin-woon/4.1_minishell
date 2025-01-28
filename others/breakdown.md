@@ -233,22 +233,63 @@ Creating children
 			{
 				- execute_builtin
 				- exit shell if all is fine
-				- execute_sys_bin (NFB)
+				- execute_sys_bin
 				{
-
+					-- IF command is NULL OR command is directory
+						- CMD_NOT_FOUND
+					- get_cmd_path
+					{
+						-- IF cmd is NULL
+						- get the conetents of PATH variable from env, probably need to split with :
+						- prep the command to an absolute path, / + cmd name, eg: /ls
+						-- LOOP
+							- each path in PATH + / + cmd name,
+							- then check access F_OK X_OK
+							- IF ok, strdup into cmd.args[0], to be used for execve
+					}
+					-- IF command no path
+						- CMD_NOT_FOUND
+					-- execve, handle error incase
+					-- return exit failure if execve unsuccessful
 				}
 				- exit shell if all is fine
 			}
-			- execute_local_bin (NFB)
+			- execute_local_bin
 			{
-
+				- checks again if the command path is executable, since a / is detected,
+				- then assigns the correct error code if error, return
+				else
+				- execve
 			}
 			- exit_shell
 		}
 	# - next CMD
+
 get_children (cleanup processes as parent) (NFB)
 {
+	- close fds and pipe_fds but dont restore_stdio
+	- wait for all child processes to finish
+	- extract the exit code from the child process and use it for the parent process
+		# - 	if (WIFSIGNALED(save_status))
+		# 	status = 128 + WTERMSIG(save_status);
+		# else if (WIFEXITED(save_status))
+		# 	status = WEXITSTATUS(save_status);
+		# else
+		# 	status = save_status;
 
+# 	void	wait_cmds(t_info *info)
+# {
+# 	int		child_status;
+# 	pid_t	killed_child_pid;
+
+# 	killed_child_pid = 0;
+# 	while (killed_child_pid != -1)
+# 	{
+# 		if (killed_child_pid == info->last_pid)
+# 			info->exit_code = child_status;
+# 		killed_child_pid = wait(&child_status);
+# 	}
+}
 }
 ```
 
