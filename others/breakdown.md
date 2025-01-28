@@ -203,6 +203,53 @@ Execute Builtin (NFB)
 # Restore_io
 # -- IF io == NULL
 # -- if stdfds is dupped, dup2 to the original stdfds again and close the backup stdfds
+
+
+Creating children
+-- LOOP while data.pid is the parent process and cmd is not NULL
+	- fork and store child process pid in data.pid
+	- handle error IF -1
+	-- IF pid is 0, which is the child process,
+		execute (child process logic) (NFB)
+		{
+			-- IF no commmand OR no command name OR is_invalid_files
+				- exit child process
+			- set_pipe_fds (NFB)
+			{
+				HANDLES THIS KIND OF PIPE (cmd1 | cmd2 | cmd3)
+				-- IF cmd prev has a pipe output,
+					- dup2 prev pipe read_end to stdin
+				-- IF cmd current has a pipe output,
+					- dup2 prev pipe write_end to stdout
+				- close_pipefds (close all other pipes except own command pipe)
+			}
+			- redirect_stdio
+			- close_fds
+			{
+				- close infile & outfile fd
+				- close_pipeds (close all this time)
+			}
+			-- IF doesnt contain '/', is a relative path OR could be builtin
+			{
+				- execute_builtin
+				- exit shell if all is fine
+				- execute_sys_bin (NFB)
+				{
+
+				}
+				- exit shell if all is fine
+			}
+			- execute_local_bin (NFB)
+			{
+
+			}
+			- exit_shell
+		}
+	# - next CMD
+get_children (cleanup processes as parent) (NFB)
+{
+
+}
 ```
 
 ```sh

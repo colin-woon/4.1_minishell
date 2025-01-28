@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 16:56:18 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/27 19:31:35 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ enum e_error_codes
 	UNCLOSED_DOUBLE_QUOTE,
 	QUOTE_ERROR,
 	MALLOC_ERROR,
+	CMD_NOT_EXECUTABLE = 126,
 	CMD_NOT_FOUND_ERROR = 127,
-	PIPE_ERROR = 129,
+	// PIPE_ERROR = 129,
 };
 
 enum e_syntax_errors
@@ -52,6 +53,8 @@ enum e_syntax_errors
 
  # define TOKEN_BUFFER 4096
  # define HEREDOC_NAME "/tmp/.heredoc.txt"
+ # define READ_END 0
+ # define WRITE_END 1
 
  # define MSG_FAILURE "error"
  # define MSG_UNCLOSED_SINGLE_QUOTE "minishell: unexpected EOF while looking for matching '"
@@ -104,6 +107,7 @@ typedef struct s_data
 	char	**envp_origin;
 	t_token	*tokens;
 	t_cmd	*cmd;
+	pid_t	pid;
 }	t_data;
 
 // DEBUG - Printing
