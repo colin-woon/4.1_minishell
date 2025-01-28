@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 20:25:18 by jow              ###   ########.fr       */
+/*   Updated: 2025/01/28 12:39:53 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,13 @@ void	init_stdfds(t_io_fds *io);
 void	restore_stdio(t_io_fds *io);
 void	redirect_stdio(t_io_fds *io);
 
+// BUILTINS - CD
+
+int		fd_cd(t_data *data, char **args);
+char	*get_home_path(t_data *data);
+int		change_dir(t_data *data, char *path);
+void	ft_update_envlst(t_data *data, char *key, char *value);
+
 // BUILTINS - PWD
 
 int		current_directory(t_data *data);
@@ -261,3 +268,10 @@ int		current_directory(t_data *data);
 // BUILTINS - ENV
 
 int		ft_env(t_data *data, char **args);
+
+// BUILTINS - ENV Utils
+
+char	*get_env_var_value(t_data *data, char *key);
+int	set_env_var(t_data *data, char *key, char *tmp);
+int	get_env_var_index(t_data *data, char *key);
+

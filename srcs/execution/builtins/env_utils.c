@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 23:53:36 by jow               #+#    #+#             */
-/*   Updated: 2025/01/28 00:31:44 by jow              ###   ########.fr       */
+/*   Updated: 2025/01/28 12:43:41 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minshell.h"
+#include "minishell.h"
+
+char	*get_env_var_value(t_data *data, char *key);
+int	set_env_var(t_data *data, char *key, char *tmp);
+int	get_env_var_index(t_data *data, char *key);
 
 char	*get_env_var_value(t_data *data, char *key)
 {
@@ -23,7 +27,7 @@ char	*get_env_var_value(t_data *data, char *key)
 	i = 0;
 	while (data->envp_array[i])
 	{
-		if (ft_strcmp(tmp, data->envp_array[i], ft_strlen(key)) == 0)
+		if (ft_strncmp(tmp, data->envp_array[i], ft_strlen(key)) == 0)
 		{
 			free(tmp);
 			return (ft_strchr(data->envp_array[i], '=') + 1);
@@ -31,7 +35,7 @@ char	*get_env_var_value(t_data *data, char *key)
 		i++;
 	}
 	free(tmp);
-	return (EXIT_FAILURE);
+	return (NULL);
 }
 
 int	get_env_var_index(t_data *data, char *key)
@@ -71,7 +75,7 @@ int	set_env_var(t_data *data, char *key, char *tmp)
 		index = 0;
 		while (data->envp_array[index])
 			index++;
-		data->envp_array = realloc(data->, idx + 1);
+		data->envp_array = realloc(data->envp_array, index + 1);
 		if (!data->envp_array)
 		{
 			free(new_env);

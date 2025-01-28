@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 16:57:13 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/28 12:38:27 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	int	is_exit;
 
 	is_exit = 1;
-	// if (ft_strncmp(cmd->name, "cd", 3) == 0)
-	// 	is_exit = cd_builtin(data, cmd->args);
+	if (ft_strncmp(cmd->name, "cd", 3) == 0)
+		ft_cd(data, cmd->args);
 	// else if (ft_strncmp(cmd->name, "echo", 5) == 0)
 	// 	is_exit = echo_builtin(data, cmd->args);
 	// else if (ft_strncmp(cmd->name, "env", 4) == 0)
