@@ -11,7 +11,7 @@
 
 # Compiler and flags
 CC			=	gcc
-CFLAGS		=	$(INCLUDES) $(DEBUG) $(FSAN_ADD)
+CFLAGS		=	$(INCLUDES) $(DEBUG)
 TEMP		=	-Wall -Werror -Wextra
 INCLUDES	=	-I$(INC_LIBFT) -I$(INC_DIR)
 DEBUG		=	-g3
@@ -56,6 +56,12 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/execution/execute.c \
 					srcs/execution/validation.c \
 					srcs/execution/handle_stdio.c \
+					srcs/execution/builtins/cd.c \
+					srcs/execution/builtins/env_utils.c \
+					srcs/execution/builtins/env.c \
+					srcs/execution/builtins/export.c \
+					srcs/execution/builtins/pwd.c\
+
 
 OBJS_FILES		=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
 
@@ -100,7 +106,6 @@ re: fclean $(OBJS_DIR) all
 test:
 	make remake_libft
 	$(CC) $(CFLAGS) test.c $(LIB_FLAGS)
-	./a.out
 
 test_clean:
 	rm -rf a.out

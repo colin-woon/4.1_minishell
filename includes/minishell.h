@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 19:31:35 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/27 20:25:18 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,3 +253,11 @@ int	validate_commands(t_data *data);
 void	init_stdfds(t_io_fds *io);
 void	restore_stdio(t_io_fds *io);
 void	redirect_stdio(t_io_fds *io);
+
+// BUILTINS - PWD
+
+int		current_directory(t_data *data);
+
+// BUILTINS - ENV
+
+int		ft_env(t_data *data, char **args);
