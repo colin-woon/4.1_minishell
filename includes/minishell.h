@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/28 12:39:53 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/28 15:08:52 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ void	redirect_stdio(t_io_fds *io);
 
 // BUILTINS - CD
 
-int		fd_cd(t_data *data, char **args);
+int		ft_cd(t_data *data, char **args);
 char	*get_home_path(t_data *data);
 int		change_dir(t_data *data, char *path);
 void	ft_update_envlst(t_data *data, char *key, char *value);
