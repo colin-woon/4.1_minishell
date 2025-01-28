@@ -6,13 +6,13 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:49:02 by jow               #+#    #+#             */
-/*   Updated: 2025/01/28 12:38:50 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/28 15:08:44 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		fd_cd(t_data *data, char **args);
+int		ft_cd(t_data *data, char **args);
 char	*get_home_path(t_data *data);
 int		change_dir(t_data *data, char *path);
 void	ft_update_envlst(t_data *data, char *key, char *value);
