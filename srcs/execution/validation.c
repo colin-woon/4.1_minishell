@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:18:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/28 17:06:17 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 13:40:31 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	create_pipes(t_data *data)
 			{
 				print_errno_str("create_pipes", strerror(errno));
 				g_last_exit_code = FAILURE;
-				garbage_collector(data, NULL);
+				garbage_collector(data, NULL, false);
 				return (FAILURE);
 			}
 		}

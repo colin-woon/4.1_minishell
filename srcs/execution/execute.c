@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/28 17:01:30 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 14:14:59 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	execute(t_data *data);
 int		execute_builtin(t_data *data, t_cmd *cmd);
 int		execute_pipes(t_data *data);
+void	execute_commands(t_data *data, t_cmd *cmd);
+int		wait_cmds(t_data *data);
 
 void	execute(t_data *data)
 {
@@ -86,6 +88,7 @@ int	wait_cmds(t_data *data)
 	int		temp;
 	pid_t	killed_child_pid;
 
+	close_fds(data->cmd, false);
 	temp = -1;
 	killed_child_pid = 0;
 	while (killed_child_pid != -1)
@@ -100,6 +103,24 @@ int	wait_cmds(t_data *data)
 		exit_status = WEXITSTATUS(temp);
 	else
 		exit_status = temp;
-
 	return (exit_status);
+}
+
+void	execute_commands(t_data *data, t_cmd *cmd)
+{
+	if (!cmd || !cmd->name || !is_valid_files(cmd->io_fds))
+		exit_process(data, EXIT_FAILURE);
+	setup_pipefds(data->cmd, cmd);
+	redirect_stdio(cmd->io_fds);
+	close_fds(cmd, false);
+
+}
+
+void	setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore)
+{
+	if (cmd_to_ignore->prev && cmd_to_ignore->prev->has_pipe)
+		dup2(cmd_to_ignore->prev->pipe_fd[READ_END], STDIN_FILENO);
+	if (cmd_to_ignore->has_pipe)
+		dup2(cmd_to_ignore->pipe_fd[WRITE_END], STDOUT_FILENO);
+	close_pipes(cmds_list, cmd_to_ignore);
 }

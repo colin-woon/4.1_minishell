@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:30:18 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/28 16:47:32 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 13:40:20 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char **av, char **envp)
 		add_history(input);
 		if (parse_input(&data, input) == SUCCESS)
 			execute(&data);
-		garbage_collector(&data, input);
+		garbage_collector(&data, input, false);
 		if (ac > 1 && !ft_strncmp(av[1], "-debug", 6))
 			break ;
 	}

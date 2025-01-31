@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/28 17:14:44 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 13:41:39 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,10 @@ void	print_io_fds(t_io_fds *io_fds);
 // MEMORY - Utils Free
 
 void	free_ptr(void *ptr);
-void	garbage_collector(t_data *data, char *input);
+void	garbage_collector(t_data *data, char *input, int is_clear_env_cache);
 void	close_pipes(t_cmd *cmd, t_cmd *cmd_to_ignore);
 void	close_fds(t_cmd *cmd, int is_restore_stdio);
+void	exit_process(t_data *data, int exit_status);
 
 // ERROR HANDLING
 

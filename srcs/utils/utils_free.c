@@ -6,16 +6,17 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 00:17:52 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/28 17:14:17 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 14:09:40 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	free_ptr(void *ptr);
-void	garbage_collector(t_data *data, char *input);
+void	garbage_collector(t_data *data, char *input, int is_clear_env_cache);
 void	close_pipes(t_cmd *cmd, t_cmd *cmd_to_ignore);
 void	close_fds(t_cmd *cmd, int is_restore_stdio);
+void	exit_process(t_data *data, int exit_status);
 
 // Helps to avoid double frees
 void	free_ptr(void *ptr)
@@ -27,13 +28,14 @@ void	free_ptr(void *ptr)
 	}
 }
 
-void	garbage_collector(t_data *data, char *input)
+void	garbage_collector(t_data *data, char *input, int is_clear_env_cache)
 {
-	// if (data->envp_array)
-	// {
-	// 	ft_free_2d_array(data->envp_array);
-	// 	data->envp_array = NULL;
-	// }
+	if (is_clear_env_cache)
+	{
+		ft_free_2d_array(data->envp_array);
+		data->envp_array = NULL;
+		rl_clear_history();
+	}
 	if (data->envp_origin)
 		data->envp_origin = NULL;
 	if (data->tokens)
@@ -61,11 +63,22 @@ void	close_pipes(t_cmd *cmd, t_cmd *cmd_to_ignore)
 {
 	while (cmd)
 	{
-		if (cmd != cmd_to_ignore && cmd->pipe_fd)
+		if (cmd != cmd_to_ignore && cmd->has_pipe)
 		{
 			close(cmd->pipe_fd[READ_END]);
 			close(cmd->pipe_fd[WRITE_END]);
 		}
 		cmd = cmd->next;
 	}
+}
+
+void	exit_process(t_data *data, int exit_status)
+{
+	if (data)
+	{
+		if (data->cmd && data->cmd->io_fds)
+			close_fds(data->cmd, true);
+		garbage_collector(data, NULL, true);
+	}
+	exit(exit_status);
 }
