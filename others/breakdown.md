@@ -130,7 +130,7 @@ WHILE current temp next is not NULL
 	- parse_heredoc
 	{
 		- same flow as redirect_in at the start
-		- opens a temporary file for heredoc get_heredoc_name for multiple heredocs
+		- opens a temporary file for heredoc get_HEREDOC_FILE for multiple heredocs
 		- get_heredoc_limiter
 		-- run_heredoc (NFB)
 		{
