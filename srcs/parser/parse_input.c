@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:16:11 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 13:52:49 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 18:26:39 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	parse_input(t_data *data, char *input)
 		g_last_exit_code = QUOTE_ERROR;
 		return (FAILURE);
 	}
-	// print_tokens(data->tokens);
 	if (parse_tokens(&data->tokens, data) == FAILURE)
 	{
 		g_last_exit_code = SYNTAX_ERROR;
@@ -30,8 +29,6 @@ int	parse_input(t_data *data, char *input)
 	}
 	if (data->tokens->type != END_OF_FILE)
 		construct_commands(data, data->tokens);
-	// printf("\n");
-	// print_tokens(data->tokens);
 	return (SUCCESS);
 }
 

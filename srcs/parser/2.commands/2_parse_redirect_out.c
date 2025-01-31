@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:43:52 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 15:44:55 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 18:27:52 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,7 @@ void	open_outfile_truncate(t_io_fds *io, char *filename)
 	{
 		print_errno_str(io->outfile, strerror(errno));
 		g_last_exit_code = errno;
-		print_value_int("err is", g_last_exit_code);
 	}
 	else
-	{
-		printf("success\n");
 		close(io->fd_out);
-	}
 }
