@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:18:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 13:40:31 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 17:37:07 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	create_pipes(t_data *data);
 int	is_valid_files(t_io_fds *io);
-int	validate_commands(t_data *data);
+int	prepare_commands(t_data *data);
 
-int	validate_commands(t_data *data)
+int	prepare_commands(t_data *data)
 {
 	if (!data || !data->cmd)
 		return (1);

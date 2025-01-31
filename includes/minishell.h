@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 15:20:52 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 17:44:40 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ enum e_error_codes
 	MALLOC_ERROR,
 	CMD_NOT_EXECUTABLE = 126,
 	CMD_NOT_FOUND = 127,
-	// PIPE_ERROR = 129,
 };
 
 enum e_syntax_errors
@@ -253,13 +252,20 @@ int		execute_builtin(t_data *data, t_cmd *cmd);
 
 int	create_pipes(t_data *data);
 int	is_valid_files(t_io_fds *io);
-int	validate_commands(t_data *data);
+int	prepare_commands(t_data *data);
 
 // EXECUTION - Handle_stdios
 
 void	init_stdfds(t_io_fds *io);
 void	restore_stdio(t_io_fds *io);
 void	redirect_stdio(t_io_fds *io);
+
+// EXECUTION - Utils Pipe Commands
+
+int		get_cmd_path(t_data *data, t_cmd *cmd);
+void	setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore);
+int		is_invalid_command(t_cmd *cmd);
+int		wait_cmds(t_data *data);
 
 // BUILTINS - CD
 

@@ -11,7 +11,7 @@
 
 # Compiler and flags
 CC			=	gcc
-CFLAGS		=	$(INCLUDES) $(DEBUG)
+CFLAGS		=	$(INCLUDES) $(DEBUG) $(FSAN_ADD)
 TEMP		=	-Wall -Werror -Wextra
 INCLUDES	=	-I$(INC_LIBFT) -I$(INC_DIR)
 DEBUG		=	-g3
@@ -54,8 +54,9 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/parser/2.commands/utils_t_cmd.c \
 					srcs/parser/2.commands/utils_t_io_fds.c \
 					srcs/execution/execute.c \
-					srcs/execution/validation.c \
+					srcs/execution/prepare_commands.c \
 					srcs/execution/handle_stdio.c \
+					srcs/execution/utils_pipe_commands.c \
 					srcs/execution/builtins/cd.c \
 					srcs/execution/builtins/env_utils.c \
 					srcs/execution/builtins/env.c \

@@ -270,12 +270,12 @@ get_children (cleanup processes as parent) (NFB)
 	- close fds and pipe_fds but dont restore_stdio
 	- wait for all child processes to finish
 	- extract the exit code from the child process and use it for the parent process
-		# - 	if (WIFSIGNALED(save_status))
-		# 	status = 128 + WTERMSIG(save_status);
-		# else if (WIFEXITED(save_status))
-		# 	status = WEXITSTATUS(save_status);
-		# else
-		# 	status = save_status;
+		- 	if (WIFSIGNALED(save_status))
+			status = 128 + WTERMSIG(save_status);
+		else if (WIFEXITED(save_status))
+			status = WEXITSTATUS(save_status);
+		else
+			status = save_status;
 
 # 	void	wait_cmds(t_info *info)
 # {
