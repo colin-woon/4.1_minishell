@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 17:44:40 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 18:05:49 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ enum e_syntax_errors
 };
 
  # define TOKEN_BUFFER 4096
- # define HEREDOC_NAME "/tmp/.heredoc.txt"
+ # define HEREDOC_FILE "/tmp/.heredoc.txt"
  # define READ_END 0
  # define WRITE_END 1
 
