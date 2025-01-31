@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:42:32 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 19:16:58 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 16:23:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void	delete_cmd(t_cmd *cmd, void (*del)(void *))
 		(*del)(cmd->name);
 	if (cmd->args)
 		ft_free_2d_array(cmd->args);
-	if (cmd->pipe_fd)
-		(*del)(cmd->pipe_fd);
 	if (cmd->io_fds)
 		free_io_fds(cmd->io_fds);
 	(*del)(cmd);

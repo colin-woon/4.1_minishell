@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 13:41:39 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/01/31 15:20:52 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+# include <sys/stat.h>
+
 
 extern int	g_last_exit_code;
 
@@ -41,7 +44,7 @@ enum e_error_codes
 	QUOTE_ERROR,
 	MALLOC_ERROR,
 	CMD_NOT_EXECUTABLE = 126,
-	CMD_NOT_FOUND_ERROR = 127,
+	CMD_NOT_FOUND = 127,
 	// PIPE_ERROR = 129,
 };
 
