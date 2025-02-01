@@ -6,33 +6,33 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 23:53:36 by jow               #+#    #+#             */
-/*   Updated: 2025/01/28 00:31:44 by jow              ###   ########.fr       */
+/*   Updated: 2025/01/28 15:29:56 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minshell.h"
+#include "minishell.h"
 
-char	*get_env_var_value(t_data *data, char *key)
-{
-	int		i;
-	char	*tmp;
+// char	*get_env_var_value(t_data *data, char *key)
+// {
+// 	int		i;
+// 	char	*tmp;
 
-	tmp = ft_strjoin(key, "=");
-	if (!tmp)
-		return (NULL);
-	i = 0;
-	while (data->envp_array[i])
-	{
-		if (ft_strcmp(tmp, data->envp_array[i], ft_strlen(key)) == 0)
-		{
-			free(tmp);
-			return (ft_strchr(data->envp_array[i], '=') + 1);
-		}
-		i++;
-	}
-	free(tmp);
-	return (EXIT_FAILURE);
-}
+// 	tmp = ft_strjoin(key, "=");
+// 	if (!tmp)
+// 		return (NULL);
+// 	i = 0;
+// 	while (data->envp_array[i])
+// 	{
+// 		if (ft_strcmp(tmp, data->envp_array[i], ft_strlen(key)) == 0)
+// 		{
+// 			free(tmp);
+// 			return (ft_strchr(data->envp_array[i], '=') + 1);
+// 		}
+// 		i++;
+// 	}
+// 	free(tmp);
+// 	return (EXIT_FAILURE);
+// }
 
 int	get_env_var_index(t_data *data, char *key)
 {
@@ -43,6 +43,7 @@ int	get_env_var_index(t_data *data, char *key)
 	i = 0;
 	while (data->envp_array[i])
 	{
+		// print_value_str("data->envp_array[i]: ", data->envp_array[i]);
 		if (!ft_strncmp(data->envp_array[i], key, key_len) && data->envp_array[i][key_len] == '=')
 			return (i);
 		i++;
@@ -52,33 +53,11 @@ int	get_env_var_index(t_data *data, char *key)
 
 int	set_env_var(t_data *data, char *key, char *tmp)
 {
-	int		index;
-	char	*new_env;
+	int		i;
 
-	index = get_env_var_index(data, key);
-	if (tmp)
-		tmp = "";
-	new_env = ft_strjoin("=", tmp);
-	if (!new_env)
+	i = get_env_var_index(data, key);
+	data->envp_array[i] = replace_substring(data->envp_array[i], getenv(key), tmp);
+	if (!data->envp_array[i])
 		return (EXIT_FAILURE);
-	if (index != 1 && data->envp_array[index])
-	{
-		free(data->envp_array[index]);
-		data->envp_array[index] = ft_strjoin(key, new_env);
-	}
-	else
-	{
-		index = 0;
-		while (data->envp_array[index])
-			index++;
-		data->envp_array = realloc(data->, idx + 1);
-		if (!data->envp_array)
-		{
-			free(new_env);
-			return (EXIT_FAILURE);
-		}
-		data->envp_array[index] = ft_strjoin(key, new_env);
-	}
-	free(new_env);
 	return (EXIT_SUCCESS);
 }
