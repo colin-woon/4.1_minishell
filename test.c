@@ -160,13 +160,11 @@ int	check_valid_env_var(char *env_var)
 int	ft_export(t_data *data, char **args)
 {
 	int		i;
-	int	a;
 	char	**tmp;
 
-	i = 1;
-	a = i + 1;
-	if (!args[a])
-		return (ft_env(data, args));
+	i = 2;
+	if (!args[i])
+		return (ft_env(data, NULL));
 	while (args[i])
 	{
 		if (!check_valid_env_var(args[i]))
