@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/01 18:36:54 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/02 01:49:12 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_envp
 typedef struct s_data
 {
 	t_envp	*our_envp;
+	char	**envp_array;
 	t_token	*tokens;
 	t_cmd	*cmd;
 	pid_t	pid;
@@ -284,6 +285,9 @@ int		get_cmd_path(t_data *data, t_cmd *cmd);
 void	setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore);
 int		is_invalid_command(t_cmd *cmd);
 int		wait_cmds(t_data *data);
+
+// EXECUTION - Utils Convert Env
+char	**convert_envp(t_envp *envp);
 
 // BUILTINS - CD
 
