@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/02 01:54:18 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/02 02:16:16 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	is_not_exit = CMD_NOT_FOUND;
 	if (ft_strncmp(cmd->name, "cd", ft_strlen("cd")) == 0)
 		is_not_exit = ft_cd(data, cmd->args);
-	// else if (ft_strncmp(cmd->name, "echo", 5) == 0)
-	// 	is_not_exit = echo_builtin(data, cmd->args);
+	else if (ft_strncmp(cmd->name, "echo", 5) == 0)
+		is_not_exit = ft_echo(data, cmd->args);
 	// else if (ft_strncmp(cmd->name, "env", ft_strlen("anv")) == 0)
 	// 	is_not_exit = ft_env(data, cmd->args);
 	// else if (ft_strncmp(cmd->name, "export", ft_strlen("export")) == 0)
