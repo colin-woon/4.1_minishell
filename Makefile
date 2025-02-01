@@ -67,6 +67,7 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/execution/prepare_commands.c \
 					srcs/execution/handle_stdio.c \
 					srcs/execution/utils_pipe_commands.c \
+					srcs/execution/execute_utils.c \
 					srcs/execution/builtins/cd.c \
 					srcs/execution/builtins/env_utils.c \
 					srcs/execution/builtins/env.c \
