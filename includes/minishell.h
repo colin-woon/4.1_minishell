@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 18:05:49 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/01 17:47:00 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,14 @@ typedef struct s_cmd
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 }	t_cmd;
+
+// typedef struct s_envp
+// {
+// 	char			*variable_name;
+// 	char			*value;
+// 	struct s_envp	prev;
+// 	struct s_envp	next;
+// }	t_envp;
 
 typedef struct s_data
 {
@@ -276,11 +284,18 @@ void	ft_update_envlst(t_data *data, char *key, char *value);
 
 // BUILTINS - PWD
 
-int		current_directory(t_data *data);
+int	ft_pwd(t_data *data, char **args);
 
 // BUILTINS - ENV
 
 int		ft_env(t_data *data, char **args);
+
+// BUILTINS - EXPORT
+
+int	check_valid_env_var(char *env_var);
+int	ft_export(t_data *data, char **args);
+static char	**get_key_value_pair(char *arg);
+
 
 // BUILTINS - ENV Utils
 
