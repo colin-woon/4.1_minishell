@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/01 17:16:18 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/02 01:54:18 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		is_not_exit = ft_cd(data, cmd->args);
 	// else if (ft_strncmp(cmd->name, "echo", 5) == 0)
 	// 	is_not_exit = echo_builtin(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "env", ft_strlen("anv")) == 0)
-		is_not_exit = ft_env(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "export", ft_strlen("export")) == 0)
-		is_not_exit = ft_export(data, cmd->args);
+	// else if (ft_strncmp(cmd->name, "env", ft_strlen("anv")) == 0)
+	// 	is_not_exit = ft_env(data, cmd->args);
+	// else if (ft_strncmp(cmd->name, "export", ft_strlen("export")) == 0)
+	// 	is_not_exit = ft_export(data, cmd->args);
 	else if (ft_strncmp(cmd->name, "pwd", ft_strlen("pwd")) == 0)
 		is_not_exit = ft_pwd(data, cmd->args);
 	// else if (ft_strncmp(cmd->name, "unset", 6) == 0)
@@ -114,15 +114,23 @@ void	execute_commands(t_data *data, t_cmd *cmd)
 
 int	execute_binary(t_data *data, t_cmd *cmd)
 {
-	int	exit_status;
+	int		exit_status;
 
 	exit_status = is_invalid_command(cmd);
 	if (exit_status == CMD_NOT_FOUND || exit_status == CMD_NOT_EXECUTABLE)
 		return (exit_status);
+	data->envp_array = convert_envp(data->our_envp);
+	if (!data->envp_array)
+	{
+		print_errno_str("malloc", strerror(errno));
+		return (errno);
+	}
 	if (execve(cmd->args[0], cmd->args, data->envp_array) == -1)
 	{
 		print_errno_str("execve", strerror(errno));
+		ft_free_2d_array(data->envp_array);
 		return (FAILURE);
 	}
+	ft_free_2d_array(data->envp_array);
 	return (FAILURE);
 }
