@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:49:02 by jow               #+#    #+#             */
-/*   Updated: 2025/01/28 14:59:55 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/01 16:38:53 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_update_envlst(t_data *data, char *key, char *value);
 
 void	ft_update_envlst(t_data *data, char *key, char *value)
 {
-	set_env_var(data, "OLDPWD", getenv("PWD"));
-	set_env_var(data, "PWD", value);
+	// set_env_var(data, "OLDPWD", getenv("PWD"));
+	// set_env_var(data, "PWD", value);
 	free(value);
 }
 
