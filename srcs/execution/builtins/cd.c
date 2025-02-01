@@ -6,20 +6,20 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:49:02 by jow               #+#    #+#             */
-/*   Updated: 2025/01/28 00:40:29 by jow              ###   ########.fr       */
+/*   Updated: 2025/01/28 14:59:55 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		fd_cd(t_data *data, char **args);
+int		ft_cd(t_data *data, char **args);
 char	*get_home_path(t_data *data);
 int		change_dir(t_data *data, char *path);
 void	ft_update_envlst(t_data *data, char *key, char *value);
 
 void	ft_update_envlst(t_data *data, char *key, char *value)
 {
-	set_env_var(data, "OLDPWD", get_env_var_value(data, "PWD"));
+	set_env_var(data, "OLDPWD", getenv("PWD"));
 	set_env_var(data, "PWD", value);
 	free(value);
 }
