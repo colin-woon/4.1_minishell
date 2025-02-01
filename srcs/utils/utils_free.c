@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 00:17:52 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 14:09:40 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/01 18:08:33 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,10 @@ void	garbage_collector(t_data *data, char *input, int is_clear_env_cache)
 {
 	if (is_clear_env_cache)
 	{
-		ft_free_2d_array(data->envp_array);
-		data->envp_array = NULL;
+		// ft_free_2d_array(data->envp_array);
+		// data->envp_array = NULL;
 		rl_clear_history();
 	}
-	if (data->envp_origin)
-		data->envp_origin = NULL;
 	if (data->tokens)
 		clear_tokens(&data->tokens);
 	if (data->cmd)

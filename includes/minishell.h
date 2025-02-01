@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/01 17:47:00 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/01 18:36:54 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,18 +104,17 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-// typedef struct s_envp
-// {
-// 	char			*variable_name;
-// 	char			*value;
-// 	struct s_envp	prev;
-// 	struct s_envp	next;
-// }	t_envp;
+typedef struct s_envp
+{
+	char			*variable_name;
+	char			*value;
+	struct s_envp	*prev;
+	struct s_envp	*next;
+}	t_envp;
 
 typedef struct s_data
 {
-	char	**envp_array;
-	char	**envp_origin;
+	t_envp	*our_envp;
 	t_token	*tokens;
 	t_cmd	*cmd;
 	pid_t	pid;
@@ -131,6 +130,7 @@ void	print_value_char(char *message, char value);
 void	print_cmd(t_cmd *cmd);
 void	print_all_cmds(t_cmd *head);
 void	print_io_fds(t_io_fds *io_fds);
+void	print_envp_list(t_envp *head);
 
 // MEMORY - Utils Free
 
@@ -139,6 +139,16 @@ void	garbage_collector(t_data *data, char *input, int is_clear_env_cache);
 void	close_pipes(t_cmd *cmd, t_cmd *cmd_to_ignore);
 void	close_fds(t_cmd *cmd, int is_restore_stdio);
 void	exit_process(t_data *data, int exit_status);
+
+// Utils t_envp
+
+char	*get_our_envp(t_envp *envp, char *variable_name);
+t_envp	*create_envp_node(char *var_name, char *value);
+void	clear_envp_list(t_envp **head);
+void	update_envp_value(t_envp *head, char *var_name, char *new_value);
+t_envp	*search_envp(t_envp *head, char *var_name);
+void	delete_envp_node(t_envp **head, char *var_name);
+void	append_envp(t_envp **head, t_envp *new_node);
 
 // ERROR HANDLING
 
@@ -150,7 +160,7 @@ void	print_errno_str(char *source, char *err_no_msg);
 // INITIALIZATION
 
 void	init_shell_data(t_data *data, char **envp);
-void	init_env(t_data *data, char **envp);
+void	init_envp(t_data *data, char **envp);
 
 // PARSE INPUT
 

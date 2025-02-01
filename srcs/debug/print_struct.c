@@ -6,32 +6,33 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:54:48 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/22 18:57:08 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/01 18:26:26 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	print_tokens(t_token *tokens);
-void	print_envp_array(t_data *data);
+// void	print_envp_array(t_data *data);
 void	print_value_str(char *message, char *value);
 void	print_value_int(char *message, int value);
 void	print_value_char(char *message, char value);
 void	print_cmd(t_cmd *cmd);
 void	print_all_cmds(t_cmd *head);
 void	print_io_fds(t_io_fds *io_fds);
+void	print_envp_list(t_envp *head);
 
-void	print_envp_array(t_data *data)
-{
-	int	i;
+// void	print_envp_array(t_data *data)
+// {
+// 	int	i;
 
-	i = 0;
-	while (data->envp_array[i])
-	{
-		printf("%s\n", data->envp_array[i]);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (data->envp_array[i])
+// 	{
+// 		printf("%s\n", data->envp_array[i]);
+// 		i++;
+// 	}
+// }
 
 void	print_tokens(t_token *tokens)
 {
@@ -114,5 +115,18 @@ void	print_all_cmds(t_cmd *head)
 		printf("\n");
 		current = current->next;
 		i++;
+	}
+}
+
+void	print_envp_list(t_envp *head)
+{
+	t_envp	*temp;
+
+	temp = head;
+	while (temp)
+	{
+		print_value_str("Variable is", temp->variable_name);
+		print_value_str("Value is", temp->value);
+		temp = temp->next;
 	}
 }
