@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/28 15:38:42 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/01 17:16:18 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,27 @@ void	execute(t_data *data)
 int	execute_builtin(t_data *data, t_cmd *cmd)
 {
 	int	is_not_exit;
-	is_not_exit = 1;
 
-	if (ft_strncmp(cmd->name, "cd", 3) == 0)
+	is_not_exit = CMD_NOT_FOUND;
+	if (ft_strncmp(cmd->name, "cd", ft_strlen("cd")) == 0)
 		is_not_exit = ft_cd(data, cmd->args);
 	// else if (ft_strncmp(cmd->name, "echo", 5) == 0)
 	// 	is_not_exit = echo_builtin(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "env", 4) == 0)
+	else if (ft_strncmp(cmd->name, "env", ft_strlen("anv")) == 0)
 		is_not_exit = ft_env(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "export", 7) == 0)
+	else if (ft_strncmp(cmd->name, "export", ft_strlen("export")) == 0)
 		is_not_exit = ft_export(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "pwd", 4) == 0)
+	else if (ft_strncmp(cmd->name, "pwd", ft_strlen("pwd")) == 0)
 		is_not_exit = ft_pwd(data, cmd->args);
 	// else if (ft_strncmp(cmd->name, "unset", 6) == 0)
 	// 	is_not_exit = unset_builtin(data, cmd->args);
 	// else if (ft_strncmp(cmd->name, "exit", 5) == 0)
 	// 	is_not_exit = exit_builtin(data, cmd->args);
 	// is_not_exit = 0;
+
+	// if (is_not_exit == 0)
+	// 	return (1);
+	// else
 	return (is_not_exit);
 }
 

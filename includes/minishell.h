@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/01 16:35:42 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/01 17:47:00 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,14 @@ typedef struct s_cmd
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 }	t_cmd;
+
+// typedef struct s_envp
+// {
+// 	char			*variable_name;
+// 	char			*value;
+// 	struct s_envp	prev;
+// 	struct s_envp	next;
+// }	t_envp;
 
 typedef struct s_data
 {

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:30:57 by jow               #+#    #+#             */
-/*   Updated: 2025/02/01 16:39:04 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/01 17:06:59 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_export(t_data *data, char **args)
 		else if (ft_strchr(args[i], '='))
 		{
 			tmp = get_key_value_pair(args[i]);
-			// set_env_var(data, tmp[0], tmp[1]);
+			set_env_var(data, tmp[0], tmp[1]);
 			ft_free_2d_array(tmp);
 		}
 		i++;
