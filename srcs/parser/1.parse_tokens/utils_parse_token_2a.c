@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/22 20:18:37 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/01 18:38:12 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*get_variable(t_token *token, char *var_str, t_data *data)
 		return (ft_itoa(g_last_exit_code));
 	}
 
-	value = getenv(extracted_var);
+	value = get_our_envp(data->our_envp, extracted_var);
 	free_ptr(extracted_var);
 
 	if (value)
