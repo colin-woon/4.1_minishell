@@ -73,6 +73,7 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/execution/builtins/env.c \
 					srcs/execution/builtins/export.c \
 					srcs/execution/builtins/pwd.c\
+					srcs/execution/builtins/echo.c \
 
 
 OBJS_FILES		=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
