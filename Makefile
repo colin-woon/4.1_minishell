@@ -69,7 +69,6 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/execution/utils_pipe_commands.c \
 					srcs/execution/execute_utils.c \
 					srcs/execution/builtins/cd.c \
-					srcs/execution/builtins/env_utils.c \
 					srcs/execution/builtins/env.c \
 					srcs/execution/builtins/export.c \
 					srcs/execution/builtins/pwd.c\
