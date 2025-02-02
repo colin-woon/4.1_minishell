@@ -6,19 +6,21 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 01:28:06 by jow               #+#    #+#             */
-/*   Updated: 2025/02/02 15:12:48 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/02 18:16:16 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**convert_envp(t_envp *envp)
+char	**convert_envp(t_data *data, t_envp *envp)
 {
 	int		i;
 	t_envp	*temp;
 	char	**envp_array;
 	char	*env_var;
 
+	if (data->envp_array)
+		ft_free_2d_array(data->envp_array);
 	i = 0;
 	temp = envp;
 	while (temp)
@@ -38,10 +40,8 @@ char	**convert_envp(t_envp *envp)
 		free(env_var);
 		if (!envp_array[i])
 		{
-			while (i > 0)
-				free(envp_array[--i]);
-			free(envp_array);
-			return NULL;
+			ft_free_2d_array(envp_array);
+			return (NULL);
 		}
 		temp = temp->next;
 		i++;
