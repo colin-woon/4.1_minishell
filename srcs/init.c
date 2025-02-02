@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:52:30 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/01 18:27:36 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/02 17:36:16 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_envp(t_data *data, char **envp)
 		key_value = ft_split(envp[i], '=');
 		append_envp(&data->our_envp, \
 		create_envp_node(key_value[0], key_value[1]));
+		data->envp_array = convert_envp(data->our_envp);
 		ft_free_2d_array(key_value);
 		i++;
 	}
