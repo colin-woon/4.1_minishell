@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/02 02:22:26 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/02 18:16:58 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,7 @@ int		is_invalid_command(t_cmd *cmd);
 int		wait_cmds(t_data *data);
 
 // EXECUTION - Utils Convert Env
-char	**convert_envp(t_envp *envp);
+char	**convert_envp(t_data *data, t_envp *envp);
 
 // BUILTINS - CD
 
