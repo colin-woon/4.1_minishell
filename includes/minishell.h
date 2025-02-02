@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 00:18:02 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 02:02:49 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void	append_envp(t_envp **head, t_envp *new_node);
 void	print_error(int error_code);
 void	print_syntax_error(int syntax_error, char *value);
 void	ft_quoted_putendl_fd(char *value, int fd);
-void	print_errno_str(char *source, char *err_no_msg);
+void	print_errno_str(char *source, char *value, char *err_no_msg);
 
 // INITIALIZATION
 
