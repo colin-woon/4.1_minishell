@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_t_envp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:55:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/01 18:36:41 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 00:40:28 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ t_envp	*search_envp(t_envp *head, char *var_name)
 	temp = head;
 	while (temp)
 	{
-		if (!ft_strncmp(temp->variable_name, var_name, ft_strlen(var_name)))
+		if (!ft_strncmp(temp->variable_name, var_name, ft_strlen(var_name))
+		&& (ft_strlen(temp->variable_name) == ft_strlen(var_name)))
 			return (temp);
 		temp = temp->next;
 	}
