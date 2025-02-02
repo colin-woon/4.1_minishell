@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/02 15:12:07 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/02 17:33:31 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	int	is_not_exit;
 
 	is_not_exit = CMD_NOT_FOUND;
-	data->envp_array = convert_envp(data->our_envp);
 	if (ft_strncmp(cmd->name, "cd", ft_strlen("cd")) == 0)
 		is_not_exit = ft_cd(data, cmd->args);
 	else if (ft_strncmp(cmd->name, "echo", 5) == 0)
