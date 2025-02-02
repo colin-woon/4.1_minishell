@@ -6,27 +6,29 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 01:28:06 by jow               #+#    #+#             */
-/*   Updated: 2025/02/02 02:07:46 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/02 15:12:48 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**convert_envp(t_envp *envp) {
-	int i;
-	t_envp *temp;
-	char **envp_array;
-	char *env_var;
+char	**convert_envp(t_envp *envp)
+{
+	int		i;
+	t_envp	*temp;
+	char	**envp_array;
+	char	*env_var;
 
 	i = 0;
 	temp = envp;
-	while (temp) {
+	while (temp)
+	{
 		i++;
 		temp = temp->next;
 	}
 	envp_array = (char **)malloc(sizeof(char *) * (i + 1));
 	if (!envp_array)
-		return NULL;
+		return (NULL);
 	temp = envp;
 	i = 0;
 	while (temp)
@@ -45,5 +47,5 @@ char	**convert_envp(t_envp *envp) {
 		i++;
 	}
 	envp_array[i] = NULL;
-	return envp_array;
+	return (envp_array);
 }
