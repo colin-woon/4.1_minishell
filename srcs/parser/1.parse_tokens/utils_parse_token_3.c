@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:33:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/14 18:34:08 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/02 17:23:30 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ void	remove_all_quotes(char *value, int is_quote_old, int *i)
 			else if (is_quote_new == DOUBLE_QUOTE)
 				remove_substring(value, "\"");
 		}
+		if ((value[(*i)] == '\'' && is_quote_old == SINGLE_QUOTE) \
+		|| (value[(*i)] == '"' && is_quote_old == DOUBLE_QUOTE))
+			continue ;
 		(*i)++;
 	}
 }
