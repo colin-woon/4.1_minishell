@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/02 18:16:58 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 00:18:02 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,12 +310,6 @@ int	check_valid_env_var(char *env_var);
 int	ft_export(t_data *data, char **args);
 static char	**get_key_value_pair(char *arg);
 
-
-// BUILTINS - ENV Utils
-
-char	*get_env_var_value(t_data *data, char *key);
-int	set_env_var(t_data *data, char *key, char *tmp);
-int	get_env_var_index(t_data *data, char *key);
-
 // BUILTINS - ECHO
+
 int	ft_echo(t_data *data, char **args);
