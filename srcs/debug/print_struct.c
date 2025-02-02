@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   print_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:54:48 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/01 18:26:26 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/02 14:36:33 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	print_tokens(t_token *tokens);
-// void	print_envp_array(t_data *data);
+void	print_envp_array(t_data *data);
 void	print_value_str(char *message, char *value);
 void	print_value_int(char *message, int value);
 void	print_value_char(char *message, char value);
@@ -22,17 +22,22 @@ void	print_all_cmds(t_cmd *head);
 void	print_io_fds(t_io_fds *io_fds);
 void	print_envp_list(t_envp *head);
 
-// void	print_envp_array(t_data *data)
-// {
-// 	int	i;
+void	print_envp_array(t_data *data)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (data->envp_array[i])
-// 	{
-// 		printf("%s\n", data->envp_array[i]);
-// 		i++;
-// 	}
-// }
+	i = 0;
+	if (!data->envp_array)
+	{
+		printf("envp_array is NULL\n");
+		return;
+	}
+	while (data->envp_array[i])
+	{
+		printf("%s\n", data->envp_array[i]);
+		i++;
+	}
+}
 
 void	print_tokens(t_token *tokens)
 {
