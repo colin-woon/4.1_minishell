@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:49:02 by jow               #+#    #+#             */
-/*   Updated: 2025/02/03 00:47:25 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 02:09:12 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ int	change_dir(t_data *data, char *path)
 	status = chdir(path);
 	if (status == -1)
 	{
-		ft_putstr_fd("cd: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putendl_fd(strerror(errno), 2);
+		print_errno_str("cd", path, strerror(errno));
 		return (EXIT_FAILURE);
 	}
 	newpwd = getcwd(NULL, 0);
