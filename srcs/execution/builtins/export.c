@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:30:57 by jow               #+#    #+#             */
-/*   Updated: 2025/02/01 17:06:59 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/02 15:01:09 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ int	ft_export(t_data *data, char **args)
 		}
 		i++;
 	}
+	ft_free_2d_array(data->envp_array);
 	return (EXIT_SUCCESS);
 }
