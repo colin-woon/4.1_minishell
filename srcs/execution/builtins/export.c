@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:30:57 by jow               #+#    #+#             */
-/*   Updated: 2025/02/02 15:01:09 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 00:19:12 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_export(t_data *data, char **args)
 		else if (ft_strchr(args[i], '='))
 		{
 			tmp = get_key_value_pair(args[i]);
-			set_env_var(data, tmp[0], tmp[1]);
+			update_envp_value(data->our_envp, tmp[0], tmp[1]);
 			ft_free_2d_array(tmp);
 		}
 		i++;
