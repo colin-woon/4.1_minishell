@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:55:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 00:40:28 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 14:36:29 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,45 @@ void	update_envp_value(t_envp *head, char *var_name, char *new_value);
 t_envp	*search_envp(t_envp *head, char *var_name);
 void	delete_envp_node(t_envp **head, char *var_name);
 void	append_envp(t_envp **head, t_envp *new_node);
+char	**convert_envp(t_data *data, t_envp *envp);
+
+char	**convert_envp(t_data *data, t_envp *envp)
+{
+	int		i;
+	t_envp	*temp;
+	char	**envp_array;
+	char	*env_var;
+
+	if (data->envp_array)
+		ft_free_2d_array(data->envp_array);
+	i = 0;
+	temp = envp;
+	while (temp)
+	{
+		i++;
+		temp = temp->next;
+	}
+	envp_array = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!envp_array)
+		return (NULL);
+	temp = envp;
+	i = 0;
+	while (temp)
+	{
+		env_var = ft_strjoin(temp->variable_name, "=");
+		envp_array[i] = ft_strjoin(env_var, temp->value);
+		free(env_var);
+		if (!envp_array[i])
+		{
+			ft_free_2d_array(envp_array);
+			return (NULL);
+		}
+		temp = temp->next;
+		i++;
+	}
+	envp_array[i] = NULL;
+	return (envp_array);
+}
 
 t_envp	*create_envp_node(char *var_name, char *value)
 {
