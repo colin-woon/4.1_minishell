@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:50:34 by jow               #+#    #+#             */
-/*   Updated: 2025/01/27 20:26:56 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 16:24:49 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_env(t_data *data, char **args)
 	i = 0;
 	if (args && args[1])
 	{
-		ft_putendl_fd("env: too many arguments", 2);
+		print_errno_str("env", args[1], "No such file or directory");
 		return (EXIT_FAILURE);
 	}
 	if (!data->envp_array)

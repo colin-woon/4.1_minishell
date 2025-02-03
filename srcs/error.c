@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:24:42 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 02:18:42 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 16:26:29 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ void	print_errno_str(char *source, char *value, char *err_no_msg)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(source, STDERR_FILENO);
-	if (value)
-		ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(value, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
+	if (value)
+	{
+		ft_putstr_fd(value, STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+	}
 	ft_putendl_fd(err_no_msg, STDERR_FILENO);
 }

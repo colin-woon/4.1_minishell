@@ -320,3 +320,11 @@ int	check_valid_env_var(char *env_var);
 // BUILTINS - ECHO
 
 int	ft_echo(t_data *data, char **args);
+
+// BUILTINS - UNSET
+
+int	ft_unset(t_data *data, char **args);
+
+// BUILTINS - EXIT
+
+int	ft_exit(t_data *data, int exit_status);

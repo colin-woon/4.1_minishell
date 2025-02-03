@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:20:39 by jow               #+#    #+#             */
-/*   Updated: 2025/01/28 14:57:58 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 14:05:18 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	ft_pwd(t_data *data, char **args)
 	if (!cwd)
 		return (1);
 	ft_putendl_fd(cwd, 1);
-	free(cwd);
+	free_ptr(cwd);
 	return (0);
 }

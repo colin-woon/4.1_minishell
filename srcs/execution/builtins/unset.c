@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 02:11:12 by jow               #+#    #+#             */
-/*   Updated: 2025/02/03 14:35:25 by jow              ###   ########.fr       */
+/*   Created: 2025/02/03 13:53:59 by jow               #+#    #+#             */
+/*   Updated: 2025/02/03 14:03:44 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(t_data *data, char **args);
+int	ft_unset(t_data *data, char **args);
 
-int	ft_echo(t_data *data, char **args)
+int	ft_unset(t_data *data, char **args)
 {
-	int	i;
-	int	n_flag;
+	int		i;
+	t_envp	*tmp;
 
-	(void)data;
 	i = 1;
-	n_flag = 0;
-	while (args[i] && ft_strncmp(args[i], "-n", 2) == 0)
-	{
-		n_flag = 1;
-		i++;
-	}
 	while (args[i])
 	{
-		ft_putstr_fd(args[i], 1);
-		if (args[i + 1])
-			ft_putstr_fd(" ", 1);
+		tmp = search_envp(data->our_envp, args[i]);
+		if (tmp)
+			delete_envp_node(&data->our_envp, args[i]);
 		i++;
 	}
-	if (!n_flag)
-		ft_putstr_fd("\n", 1);
-	return (0);
+	data->envp_array = convert_envp(data, data->our_envp);
+	return (EXIT_SUCCESS);
 }

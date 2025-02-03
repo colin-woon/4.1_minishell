@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:49:02 by jow               #+#    #+#             */
-/*   Updated: 2025/02/03 13:44:34 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 16:24:17 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,17 @@ int		change_dir(t_data *data, char *path);
 
 int	change_dir(t_data *data, char *path)
 {
-	int		status;
-	char	*oldpwd;
-	char	*newpwd;
+	int	status;
 
-	oldpwd = get_our_envp(data->our_envp, "PWD");
 	status = chdir(path);
 	if (status == -1)
 	{
 		print_errno_str("cd", path, strerror(errno));
 		return (EXIT_FAILURE);
 	}
-	newpwd = getcwd(NULL, 0);
-	update_envp_value(data->our_envp, "OLDPWD", oldpwd);
-	update_envp_value(data->our_envp, "PWD", newpwd);
+	update_envp_value(data->our_envp, "OLDPWD", \
+		get_our_envp(data->our_envp, "PWD"));
+	update_envp_value(data->our_envp, "PWD", getcwd(NULL, 0));
 	data->envp_array = convert_envp(data, data->our_envp);
 	return (EXIT_SUCCESS);
 }
