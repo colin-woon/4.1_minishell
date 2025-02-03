@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation.c                                       :+:      :+:    :+:   */
+/*   prepare_commands.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:18:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 17:37:07 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 15:46:55 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	prepare_commands(t_data *data)
 	}
 	if (create_pipes(data) == FAILURE)
 		return (1);
-	return (0);
+	return (CMD_NOT_FOUND);
 }
 
 int	is_valid_files(t_io_fds *io)
@@ -54,7 +54,7 @@ int	create_pipes(t_data *data)
 		{
 			if (pipe(temp->pipe_fd) != 0)
 			{
-				print_errno_str("create_pipes", strerror(errno));
+				print_errno_str("create_pipes", NULL, strerror(errno));
 				g_last_exit_code = FAILURE;
 				garbage_collector(data, NULL, false);
 				return (FAILURE);

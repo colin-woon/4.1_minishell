@@ -1,20 +1,20 @@
 /* ************************************************************************** */
-/*	*/
-/*	:::	  ::::::::   */
-/*   export.c	   :+:	  :+:	:+:   */
-/*	+:+ +:+	 +:+	 */
-/*   By: jow <jow@student.42.fr>	+#+  +:+	   +#+	*/
-/*	+#+#+#+#+#+   +#+	   */
-/*   Created: 2025/01/28 11:30:57 by jow	   #+#	#+#	 */
-/*   Updated: 2025/02/03 02:12:22 by jow	  ###   ########.fr	   */
-/*	*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/03 13:12:41 by cwoon             #+#    #+#             */
+/*   Updated: 2025/02/03 13:13:28 by cwoon            ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int			ft_export(t_data *data, char **args);
-static char	*get_keyword(char *arg);
 int			check_valid_env_var(char *env_var);
+static char	*get_keyword(char *arg);
 static int	handle_export_var(t_data *data, char *arg);
 
 static char	*get_keyword(char *arg)

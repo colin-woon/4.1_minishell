@@ -14,8 +14,8 @@ UNAME := $(shell uname -s)
 
 # Set flags based on OS
 ifeq ($(UNAME), Darwin)  # macOS
-    READLINE_INC = -I/opt/homebrew/opt/readline/include
-    READLINE_LIB = -L/opt/homebrew/opt/readline/lib -lhistory
+	READLINE_INC = -I/opt/homebrew/opt/readline/include
+	READLINE_LIB = -L/opt/homebrew/opt/readline/lib -lhistory
 endif
 
 # Compiler and flags
@@ -42,13 +42,14 @@ LIB_FLAGS		=	-L$(LIBFT_DIR) -lft $(READLINE_LIB) -lreadline
 
 SRCS_FILES		=	srcs/main.c \
 					srcs/init.c \
+					srcs/error.c \
+					srcs/signals.c \
 					srcs/utils/utils_free.c \
 					srcs/utils/utils_t_envp.c \
 					srcs/utils/utils_t_cmd.c \
 					srcs/utils/utils_t_io_fds.c \
 					srcs/utils/utils_t_token.c\
 					srcs/debug/print_struct.c \
-					srcs/error.c \
 					srcs/parser/parse_input.c \
 					srcs/parser/0.tokenization/lexer.c \
 					srcs/parser/0.tokenization/utils_lexer.c \

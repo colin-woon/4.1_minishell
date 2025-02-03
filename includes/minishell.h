@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 16:26:06 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 14:42:12 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 # include <sys/stat.h>
-
 
 extern int	g_last_exit_code;
 
@@ -133,6 +132,14 @@ void	print_all_cmds(t_cmd *head);
 void	print_io_fds(t_io_fds *io_fds);
 void	print_envp_list(t_envp *head);
 
+// SIGNALS
+
+void	ignore_sigquit();
+static void	handle_sigint(int signum);
+void	set_signals_input();
+void	signal_print_newline(int signal);
+void	set_signals_execution();
+
 // MEMORY - Utils Free
 
 void	free_ptr(void *ptr);
@@ -141,7 +148,7 @@ void	close_pipes(t_cmd *cmd, t_cmd *cmd_to_ignore);
 void	close_fds(t_cmd *cmd, int is_restore_stdio);
 void	exit_process(t_data *data, int exit_status);
 
-// Utils t_envp
+// Utils for t_envp doubly linked list
 
 char	*get_our_envp(t_envp *envp, char *variable_name);
 t_envp	*create_envp_node(char *var_name, char *value);
@@ -150,6 +157,28 @@ void	update_envp_value(t_envp *head, char *var_name, char *new_value);
 t_envp	*search_envp(t_envp *head, char *var_name);
 void	delete_envp_node(t_envp **head, char *var_name);
 void	append_envp(t_envp **head, t_envp *new_node);
+
+// Utils for t_token doubly linked list
+
+t_token	*create_token(char *value, int type);
+void	clear_tokens(t_token **head);
+void	insert_token_node(t_token *prev_node, t_token *new_node);
+void	delete_token(t_token **head, t_token *node_to_delete);
+void	append_token(t_token **head, t_token *new_node);
+
+// Utils for t_cmd doubly linked list
+
+t_cmd	*create_cmd();
+void	prepend_cmd(t_cmd **head, t_cmd *new_cmd);
+void	append_cmd(t_cmd **head, t_cmd *new_cmd);
+void	delete_cmd(t_cmd *cmd, void (*del)(void *));
+void	clear_cmd_list(t_cmd **head);
+t_cmd	*get_last_cmd(t_cmd *cmd);
+
+// Utils for t_io_fds array struct
+
+void	init_io_fds(t_cmd *cmd);
+void	free_io_fds(t_io_fds *io_fds);
 
 // ERROR HANDLING
 
@@ -179,14 +208,6 @@ void	save_seperator(int i_current, int type, char *input, t_token **tokens);
 int		get_seperator(char *input, int i_current);
 int		check_quote(int	is_quote, char *input, int i_current);
 
-// PARSE INPUT - TOKENIZATION - Utils for t_token doubly linked list
-
-t_token	*create_token(char *value, int type);
-void	clear_tokens(t_token **head);
-void	insert_token_node(t_token *prev_node, t_token *new_node);
-void	delete_token(t_token **head, t_token *node_to_delete);
-void	append_token(t_token **head, t_token *new_node);
-
 // PARSE INPUT - Utils Parse Token 1 - Validate Syntax
 
 int		validate_syntax(t_token **token);
@@ -213,20 +234,6 @@ void	handle_quotes(t_token **token_list);
 void	remove_all_quotes(char *value, int is_quote_old, int *i);
 
 // PARSE INPUT - COMMANDS
-// PARSE INPUT - COMMANDS - utils_t_cmd
-
-t_cmd	*create_cmd();
-void	prepend_cmd(t_cmd **head, t_cmd *new_cmd);
-void	append_cmd(t_cmd **head, t_cmd *new_cmd);
-void	delete_cmd(t_cmd *cmd, void (*del)(void *));
-void	clear_cmd_list(t_cmd **head);
-t_cmd	*get_last_cmd(t_cmd *cmd);
-
-// PARSE INPUT - COMMANDS - utils_t_io_fds
-
-void	init_io_fds(t_cmd *cmd);
-void	free_io_fds(t_io_fds *io_fds);
-
 // PARSE INPUT - COMMANDS - construction
 
 void	construct_commands(t_data *data, t_token *token);
@@ -266,6 +273,9 @@ void	parse_pipe(t_cmd **cmd, t_token **current_tokens);
 
 void	execute(t_data *data);
 int		execute_builtin(t_data *data, t_cmd *cmd);
+int		execute_pipes(t_data *data);
+void	execute_commands(t_data *data, t_cmd *cmd);
+int		execute_binary(t_data *data, t_cmd *cmd);
 
 // EXECUTION - Validation
 
@@ -292,9 +302,7 @@ char	**convert_envp(t_data *data, t_envp *envp);
 // BUILTINS - CD
 
 int		ft_cd(t_data *data, char **args);
-char	*get_home_path(t_data *data);
 int		change_dir(t_data *data, char *path);
-void	ft_update_envlst(t_data *data, char *key, char *value);
 
 // BUILTINS - PWD
 
@@ -306,8 +314,8 @@ int		ft_env(t_data *data, char **args);
 
 // BUILTINS - EXPORT
 
-int	check_valid_env_var(char *env_var);
 int	ft_export(t_data *data, char **args);
+int	check_valid_env_var(char *env_var);
 
 // BUILTINS - ECHO
 

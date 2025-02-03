@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:49:02 by jow               #+#    #+#             */
 /*   Updated: 2025/02/03 16:24:17 by jow              ###   ########.fr       */
@@ -25,7 +25,7 @@ int	change_dir(t_data *data, char *path)
 		print_errno_str("cd", path, strerror(errno));
 		return (EXIT_FAILURE);
 	}
-	update_envp_value(data->our_envp, "OLDPWD",
+	update_envp_value(data->our_envp, "OLDPWD", \
 		get_our_envp(data->our_envp, "PWD"));
 	update_envp_value(data->our_envp, "PWD", getcwd(NULL, 0));
 	data->envp_array = convert_envp(data, data->our_envp);

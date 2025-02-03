@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:41:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 17:42:11 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 13:31:27 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,17 @@ int	is_invalid_command(t_cmd *cmd)
 	// }
 	if (stat(cmd->args[0], &path_stat) != 0)
 	{
-		print_errno_str(cmd->args[0], strerror(errno));
+		print_errno_str(cmd->args[0], NULL, strerror(errno));
 		return (CMD_NOT_FOUND);
 	}
 	if (S_ISDIR(path_stat.st_mode))
 	{
-		print_errno_str(cmd->args[0], "Is a directory");
+		print_errno_str(cmd->args[0], NULL, "Is a directory");
 		return (CMD_NOT_EXECUTABLE);
 	}
 	if (access(cmd->args[0], X_OK) != 0)
 	{
-		print_errno_str(cmd->args[0], strerror(errno));
+		print_errno_str(cmd->args[0], NULL, strerror(errno));
 		return (CMD_NOT_EXECUTABLE);
 	}
 	return (0);
