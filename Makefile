@@ -67,12 +67,13 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/execution/prepare_commands.c \
 					srcs/execution/handle_stdio.c \
 					srcs/execution/utils_pipe_commands.c \
-					srcs/execution/execute_utils.c \
 					srcs/execution/builtins/cd.c \
 					srcs/execution/builtins/env.c \
 					srcs/execution/builtins/export.c \
 					srcs/execution/builtins/pwd.c\
 					srcs/execution/builtins/echo.c \
+					srcs/execution/builtins/unset.c \
+					srcs/execution/builtins/exit.c \
 
 
 OBJS_FILES		=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS_FILES))
