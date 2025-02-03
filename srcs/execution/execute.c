@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 02:19:46 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 14:39:08 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,18 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		is_not_exit = ft_env(data, cmd->args);
 	else if (ft_strncmp(cmd->name, "export", ft_strlen("export")) == 0)
 		is_not_exit = ft_export(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "pwd", ft_strlen("pwd")) == 0)
+	else if (ft_strncmp(cmd->name, "pwd", 3) == 0)
 		is_not_exit = ft_pwd(data, cmd->args);
-	// else if (ft_strncmp(cmd->name, "unset", 6) == 0)
-	// 	is_not_exit = unset_builtin(data, cmd->args);
-	// else if (ft_strncmp(cmd->name, "exit", 5) == 0)
-	// 	is_not_exit = exit_builtin(data, cmd->args);
-	// is_not_exit = 0;
+	else if (ft_strncmp(cmd->name, "unset", 6) == 0)
+		is_not_exit = ft_unset(data, cmd->args);
+	else if (ft_strncmp(cmd->name, "exit", 5) == 0)
+		is_not_exit = ft_exit(data, 0);
+	is_not_exit = 0;
 
-	// if (is_not_exit == 0)
-	// 	return (1);
-	// else
-	print_envp_list(data->our_envp);
-	printf("______________________________________________\n\n\n________________________\n\n\n");
-	print_envp_array(data);
-	return (is_not_exit);
+	if (is_not_exit == 0)
+		return (1);
+	else
+		return (is_not_exit);
 }
 
 int	execute_pipes(t_data *data)
@@ -80,7 +77,7 @@ int	execute_pipes(t_data *data)
 		data->pid = fork();
 		if (data->pid == -1)
 		{
-			print_errno_str("fork", NULL, strerror(errno));
+			print_errno_str("fork", strerror(errno));
 			return (errno);
 		}
 		else if (data->pid == 0)
@@ -124,7 +121,7 @@ int	execute_binary(t_data *data, t_cmd *cmd)
 		return (exit_status);
 	if (execve(cmd->args[0], cmd->args, data->envp_array) == -1)
 	{
-		print_errno_str("execve", NULL, strerror(errno));
+		print_errno_str("execve", strerror(errno));
 		return (FAILURE);
 	}
 	return (FAILURE);
