@@ -53,7 +53,7 @@ static int	handle_export_var(t_data *data, char *arg)
 
 	if (check_valid_env_var(arg) == EXIT_FAILURE)
 	{
-		print_errno_builtin("export", get_keyword(arg),
+		print_errno_str("export", get_keyword(arg),
 			"not a valid identifier");
 		return (EXIT_FAILURE);
 	}
