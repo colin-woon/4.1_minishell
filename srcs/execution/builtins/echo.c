@@ -6,11 +6,13 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 02:11:12 by jow               #+#    #+#             */
-/*   Updated: 2025/02/02 02:22:56 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 14:35:25 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_echo(t_data *data, char **args);
 
 int	ft_echo(t_data *data, char **args)
 {
