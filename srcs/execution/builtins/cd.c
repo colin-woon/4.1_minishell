@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:49:02 by jow               #+#    #+#             */
-/*   Updated: 2025/02/03 14:34:58 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 16:24:17 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	change_dir(t_data *data, char *path)
 	status = chdir(path);
 	if (status == -1)
 	{
-		print_errno_builtin("cd", path, strerror(errno));
+		print_errno_str("cd", path, strerror(errno));
 		return (EXIT_FAILURE);
 	}
 	update_envp_value(data->our_envp, "OLDPWD",
