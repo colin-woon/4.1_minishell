@@ -1,51 +1,43 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 11:30:57 by jow               #+#    #+#             */
-/*   Updated: 2025/02/01 17:06:59 by cwoon            ###   ########.fr       */
-/*                                                                            */
+/*	*/
+/*	:::	  ::::::::   */
+/*   export.c	   :+:	  :+:	:+:   */
+/*	+:+ +:+	 +:+	 */
+/*   By: jow <jow@student.42.fr>	+#+  +:+	   +#+	*/
+/*	+#+#+#+#+#+   +#+	   */
+/*   Created: 2025/01/28 11:30:57 by jow	   #+#	#+#	 */
+/*   Updated: 2025/02/03 02:12:22 by jow	  ###   ########.fr	   */
+/*	*/
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int			ft_export(t_data *data, char **args);
+static char	*get_keyword(char *arg);
+int			check_valid_env_var(char *env_var);
+static int	handle_export_var(t_data *data, char *arg);
 
-/*
-** This function is used to get the key and value pair from the argument
-** by splitting the argument at the first '=' character.
-*/
-static char	**get_key_value_pair(char *arg)
+static char	*get_keyword(char *arg)
 {
-	char	*equal_sign_pos;
-	char	**tmp;
+	char	*keyword;
+	int		i;
 
-	equal_sign_pos = ft_strchr(arg, '=');
-	if (!equal_sign_pos)
-		return (NULL);
-	tmp = malloc(sizeof(char *) * 3);
-	if (!tmp)
-		return (NULL);
-	tmp[0] = ft_substr(arg, 0, equal_sign_pos - arg);
-	tmp[1] = ft_strdup(equal_sign_pos + 1);
-	tmp[2] = NULL;
-	if (!tmp[0] || !tmp[1])
-	{
-		ft_free_2d_array(tmp);
-		return (NULL);
-	}
-	return (tmp);
+	i = 0;
+	while (arg[i] && arg[i] != '=')
+		i++;
+	keyword = ft_substr(arg, 0, i);
+	return (keyword);
 }
 
 int	check_valid_env_var(char *env_var)
 {
 	int	i;
 
-	i = 0;
 	if (!env_var || !env_var[0])
 		return (EXIT_FAILURE);
+	if (!ft_isalpha(env_var[0]) && env_var[0] != '_')
+		return (EXIT_FAILURE);
+	i = 1;
 	while (env_var[i] && env_var[i] != '=')
 	{
 		if (!ft_isalnum(env_var[i]) && env_var[i] != '_')
@@ -55,29 +47,41 @@ int	check_valid_env_var(char *env_var)
 	return (EXIT_SUCCESS);
 }
 
+static int	handle_export_var(t_data *data, char *arg)
+{
+	t_envp	*tmp;
+
+	if (check_valid_env_var(arg) == EXIT_FAILURE)
+	{
+		print_errno_str("export", get_keyword(arg), "not a valid identifier");
+		return (EXIT_FAILURE);
+	}
+	if (ft_strchr(arg, '='))
+	{
+		tmp = search_envp(data->our_envp, get_keyword(arg));
+		if (!tmp)
+			append_envp(&data->our_envp,
+				create_envp_node(get_keyword(arg), ft_strchr(arg, '=') + 1));
+		else
+			update_envp_value(data->our_envp, get_keyword(arg),
+				ft_strchr(arg, '=') + 1);
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	ft_export(t_data *data, char **args)
 {
-	int		i;
-	int		ret;
-	char	**tmp;
+	int	i;
 
 	i = 1;
 	if (!args[i])
 		return (ft_env(data, args));
 	while (args[i])
 	{
-		if (check_valid_env_var(args[i]) == EXIT_FAILURE)
-		{
-			print_syntax_error(QUOTE_ERROR, args[i]);
+		if (handle_export_var(data, args[i]) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		}
-		else if (ft_strchr(args[i], '='))
-		{
-			tmp = get_key_value_pair(args[i]);
-			set_env_var(data, tmp[0], tmp[1]);
-			ft_free_2d_array(tmp);
-		}
 		i++;
 	}
+	data->envp_array = convert_envp(data, data->our_envp);
 	return (EXIT_SUCCESS);
 }

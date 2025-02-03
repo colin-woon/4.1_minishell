@@ -3,75 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:49:02 by jow               #+#    #+#             */
-/*   Updated: 2025/02/01 17:47:23 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 02:09:12 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int		ft_cd(t_data *data, char **args);
-char	*get_home_path(t_data *data);
 int		change_dir(t_data *data, char *path);
-void	ft_update_envlst(t_data *data, char *key, char *value);
-
-void	ft_update_envlst(t_data *data, char *key, char *value)
-{
-	set_env_var(data, "OLDPWD", getenv("PWD"));
-	set_env_var(data, "PWD", value);
-	free(value);
-}
 
 int	change_dir(t_data *data, char *path)
 {
-	int	status;
+	int		status;
+	char	*oldpwd;
+	char	*newpwd;
 
+	oldpwd = get_our_envp(data->our_envp, "PWD");
+	printf("Debug - Attempting to cd to: %s\n", path);
+    printf("Debug - Current directory: %s\n", oldpwd);
 	status = chdir(path);
 	if (status == -1)
 	{
-		ft_putstr_fd("cd: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putendl_fd(strerror(errno), 2);
+		print_errno_str("cd", path, strerror(errno));
 		return (EXIT_FAILURE);
 	}
-	ft_update_envlst(data, "OLDPWD", getcwd(NULL, 0));
+	newpwd = getcwd(NULL, 0);
+	printf("Debug - New directory: %s\n", newpwd);
+	update_envp_value(data->our_envp, "OLDPWD", oldpwd);
+	update_envp_value(data->our_envp, "PWD", newpwd);
+	data->envp_array = convert_envp(data, data->our_envp);
 	return (EXIT_SUCCESS);
-}
-
-char	*get_home_path(t_data *data)
-{
-	int		i;
-	char	*home;
-
-	i = 0;
-	while (data->envp_array[i])
-	{
-		if (!ft_strncmp(data->envp_array[i], "HOME=", 5))
-		{
-			home = ft_strdup(data->envp_array[i] + 5);
-			return (home);
-		}
-		i++;
-	}
-	return (NULL);
 }
 
 int	ft_cd(t_data *data, char **args)
 {
-	char	*path;
+	t_envp	*tmp;
+	int		return_value;
 
+	printf("im in cd\n");
 	if (!args || !args[1] || args[1][0] == '\0')
 	{
-		path = get_home_path(data);
-		if (!path)
+		tmp = search_envp(data->our_envp, "HOME");
+		printf("Debug - args[1]: %s\n", args[1] ? args[1] : "NULL");
+		if (tmp)
+			printf("Debug - HOME value: %s\n", tmp->value);
+		if (!tmp)
 		{
 			ft_putendl_fd("cd: HOME not set", 2);
 			return (EXIT_FAILURE);
 		}
-		return (change_dir(data, path));
+		return_value = change_dir(data, tmp->value);
+		return (return_value);
 	}
-	return (change_dir(data, args[1]));
+	return_value = change_dir(data, args[1]);
+	return (return_value);
 }

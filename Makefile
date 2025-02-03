@@ -9,11 +9,20 @@
 #                                VARIABLES                                     #
 #------------------------------------------------------------------------------#
 
+# Detect OS
+UNAME := $(shell uname -s)
+
+# Set flags based on OS
+ifeq ($(UNAME), Darwin)  # macOS
+    READLINE_INC = -I/opt/homebrew/opt/readline/include
+    READLINE_LIB = -L/opt/homebrew/opt/readline/lib -lhistory
+endif
+
 # Compiler and flags
 CC			=	gcc
 CFLAGS		=	$(INCLUDES) $(DEBUG)
 TEMP		=	-Wall -Werror -Wextra
-INCLUDES	=	-I$(INC_LIBFT) -I$(INC_DIR)
+INCLUDES	=	-I$(INC_LIBFT) -I$(INC_DIR) $(READLINE_INC)
 DEBUG		=	-g3
 FSAN_ADD	=	-fsanitize=address
 FSAN_MEM	=	-fsanitize=memory
@@ -29,7 +38,7 @@ INC_DIR			=	includes/
 SRCS_DIR		=	srcs/
 OBJS_DIR		=	bin/
 
-LIB_FLAGS		=	-L$(LIBFT_DIR) -lft -lreadline
+LIB_FLAGS		=	-L$(LIBFT_DIR) -lft $(READLINE_LIB) -lreadline
 
 SRCS_FILES		=	srcs/main.c \
 					srcs/init.c \
@@ -58,11 +67,12 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/execution/prepare_commands.c \
 					srcs/execution/handle_stdio.c \
 					srcs/execution/utils_pipe_commands.c \
+					srcs/execution/execute_utils.c \
 					srcs/execution/builtins/cd.c \
-					srcs/execution/builtins/env_utils.c \
 					srcs/execution/builtins/env.c \
 					srcs/execution/builtins/export.c \
 					srcs/execution/builtins/pwd.c\
+					srcs/execution/builtins/echo.c \
 
 
 OBJS_FILES		=	$(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS_FILES))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/01 18:36:54 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 02:02:49 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_envp
 typedef struct s_data
 {
 	t_envp	*our_envp;
+	char	**envp_array;
 	t_token	*tokens;
 	t_cmd	*cmd;
 	pid_t	pid;
@@ -155,7 +156,7 @@ void	append_envp(t_envp **head, t_envp *new_node);
 void	print_error(int error_code);
 void	print_syntax_error(int syntax_error, char *value);
 void	ft_quoted_putendl_fd(char *value, int fd);
-void	print_errno_str(char *source, char *err_no_msg);
+void	print_errno_str(char *source, char *value, char *err_no_msg);
 
 // INITIALIZATION
 
@@ -285,6 +286,9 @@ void	setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore);
 int		is_invalid_command(t_cmd *cmd);
 int		wait_cmds(t_data *data);
 
+// EXECUTION - Utils Convert Env
+char	**convert_envp(t_data *data, t_envp *envp);
+
 // BUILTINS - CD
 
 int		ft_cd(t_data *data, char **args);
@@ -306,10 +310,6 @@ int	check_valid_env_var(char *env_var);
 int	ft_export(t_data *data, char **args);
 static char	**get_key_value_pair(char *arg);
 
+// BUILTINS - ECHO
 
-// BUILTINS - ENV Utils
-
-char	*get_env_var_value(t_data *data, char *key);
-int	set_env_var(t_data *data, char *key, char *tmp);
-int	get_env_var_index(t_data *data, char *key);
-
+int	ft_echo(t_data *data, char **args);
