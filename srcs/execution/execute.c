@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 13:56:05 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 15:47:44 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	execute(t_data *data)
 	int	is_exit;
 
 	is_exit = prepare_commands(data);
-	if (is_exit)
+	if (is_exit != CMD_NOT_FOUND)
 		return ;
 	if (!data->cmd->has_pipe && !data->cmd->prev \
 	&& is_valid_files(data->cmd->io_fds))
@@ -32,9 +32,7 @@ void	execute(t_data *data)
 		is_exit = execute_builtin(data, data->cmd);
 		restore_stdio(data->cmd->io_fds);
 	}
-	if (is_exit == EXIT_SUCCESS \
-	|| is_exit == EXIT_FAILURE \
-	|| is_exit != CMD_NOT_FOUND)
+	if (is_exit != CMD_NOT_FOUND)
 		return ;
 	g_last_exit_code = execute_pipes(data);
 	return ;
