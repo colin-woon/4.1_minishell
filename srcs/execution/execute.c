@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 13:51:33 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 13:56:05 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ void	execute(t_data *data)
 		is_exit = execute_builtin(data, data->cmd);
 		restore_stdio(data->cmd->io_fds);
 	}
-	if (is_exit == EXIT_SUCCESS || is_exit == EXIT_FAILURE)
+	if (is_exit == EXIT_SUCCESS \
+	|| is_exit == EXIT_FAILURE \
+	|| is_exit != CMD_NOT_FOUND)
 		return ;
 	g_last_exit_code = execute_pipes(data);
 	return ;
