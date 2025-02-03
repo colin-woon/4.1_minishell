@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 13:50:23 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 14:42:12 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 # include <sys/stat.h>
-
 
 extern int	g_last_exit_code;
 
@@ -132,6 +131,14 @@ void	print_cmd(t_cmd *cmd);
 void	print_all_cmds(t_cmd *head);
 void	print_io_fds(t_io_fds *io_fds);
 void	print_envp_list(t_envp *head);
+
+// SIGNALS
+
+void	ignore_sigquit();
+static void	handle_sigint(int signum);
+void	set_signals_input();
+void	signal_print_newline(int signal);
+void	set_signals_execution();
 
 // MEMORY - Utils Free
 
