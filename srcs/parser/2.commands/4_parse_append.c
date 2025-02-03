@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:46:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/24 17:48:33 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 13:29:38 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	open_outfile_append(t_io_fds *io, char *filename)
 	io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_APPEND, 0664);
 	if (io->fd_out == -1)
 	{
-		print_errno_str(io->outfile, strerror(errno));
+		print_errno_str(io->outfile, NULL, strerror(errno));
 		g_last_exit_code = errno;
 	}
 }

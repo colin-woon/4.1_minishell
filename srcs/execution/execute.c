@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 02:19:46 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 13:51:33 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	execute(t_data *data)
 		is_exit = execute_builtin(data, data->cmd);
 		restore_stdio(data->cmd->io_fds);
 	}
-	if (is_exit)
+	if (is_exit == EXIT_SUCCESS || is_exit == EXIT_FAILURE)
 		return ;
 	g_last_exit_code = execute_pipes(data);
 	return ;
@@ -40,32 +40,25 @@ void	execute(t_data *data)
 
 int	execute_builtin(t_data *data, t_cmd *cmd)
 {
-	int	is_not_exit;
+	int	is_exit;
 
-	is_not_exit = CMD_NOT_FOUND;
+	is_exit = CMD_NOT_FOUND;
 	if (ft_strncmp(cmd->name, "cd", ft_strlen("cd")) == 0)
-		is_not_exit = ft_cd(data, cmd->args);
+		is_exit = ft_cd(data, cmd->args);
 	else if (ft_strncmp(cmd->name, "echo", 5) == 0)
-		is_not_exit = ft_echo(data, cmd->args);
+		is_exit = ft_echo(data, cmd->args);
 	else if (ft_strncmp(cmd->name, "env", ft_strlen("env")) == 0)
-		is_not_exit = ft_env(data, cmd->args);
+		is_exit = ft_env(data, cmd->args);
 	else if (ft_strncmp(cmd->name, "export", ft_strlen("export")) == 0)
-		is_not_exit = ft_export(data, cmd->args);
+		is_exit = ft_export(data, cmd->args);
 	else if (ft_strncmp(cmd->name, "pwd", ft_strlen("pwd")) == 0)
-		is_not_exit = ft_pwd(data, cmd->args);
+		is_exit = ft_pwd(data, cmd->args);
 	// else if (ft_strncmp(cmd->name, "unset", 6) == 0)
-	// 	is_not_exit = unset_builtin(data, cmd->args);
+	// 	is_exit = unset_builtin(data, cmd->args);
 	// else if (ft_strncmp(cmd->name, "exit", 5) == 0)
-	// 	is_not_exit = exit_builtin(data, cmd->args);
-	// is_not_exit = 0;
-
-	// if (is_not_exit == 0)
-	// 	return (1);
-	// else
-	print_envp_list(data->our_envp);
-	printf("______________________________________________\n\n\n________________________\n\n\n");
-	print_envp_array(data);
-	return (is_not_exit);
+	// 	is_exit = exit_builtin(data, cmd->args);
+	// is_exit = 0;
+	return (is_exit);
 }
 
 int	execute_pipes(t_data *data)

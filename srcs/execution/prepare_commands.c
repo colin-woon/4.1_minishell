@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation.c                                       :+:      :+:    :+:   */
+/*   prepare_commands.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:18:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 17:37:07 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 13:29:49 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	create_pipes(t_data *data)
 		{
 			if (pipe(temp->pipe_fd) != 0)
 			{
-				print_errno_str("create_pipes", strerror(errno));
+				print_errno_str("create_pipes", NULL, strerror(errno));
 				g_last_exit_code = FAILURE;
 				garbage_collector(data, NULL, false);
 				return (FAILURE);
