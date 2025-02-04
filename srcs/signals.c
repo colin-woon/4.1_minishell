@@ -6,23 +6,22 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:05:48 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 15:12:52 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/04 15:46:24 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-# include <signal.h>
 /*
 SIGINT	(ctrl + c)
 SIGQUIT	(ctrl + \)
 EOF		(ctrl + d)
  */
 
-void	ignore_sigquit();
+void		ignore_sigquit(void);
 static void	handle_sigint(int signum);
-void	set_signals_input();
-void	signal_print_newline(int signal);
-void	set_signals_execution();
+void		set_signals_input(void);
+void		signal_print_newline(int signal);
+void		set_signals_execution(void);
 
 /**
  * @file signals.c
@@ -34,11 +33,11 @@ void	set_signals_execution();
  * Configures SIGINT (Ctrl+C) to display a new prompt
  * and ignores SIGQUIT (Ctrl+\)
  */
-void	set_signals_input()
+void	set_signals_input(void)
 {
 	struct sigaction	act;
 
-	ignore_sigquit();
+	ignore_sigquit(void);
 	ft_memset(&act, 0, sizeof(act));
 	act.sa_handler = &handle_sigint;
 	sigaction(SIGINT, &act, NULL);
@@ -50,7 +49,7 @@ void	set_signals_input()
  * Sets up signal handler to ignore SIGQUIT (Ctrl+\)
  * using SIG_IGN handler
  */
-void	ignore_sigquit()
+void	ignore_sigquit(void)
 {
 	struct sigaction	act;
 
@@ -74,12 +73,12 @@ static void	handle_sigint(int signum)
 {
 	(void)signum;
 	ft_putchar_fd('\n', STDOUT_FILENO);
-	rl_on_new_line();
+	rl_on_new_line(void);
 	rl_replace_line("", 0);
-	rl_redisplay();
+	rl_redisplay(void);
 }
 
-void	set_signals_execution()
+void	set_signals_execution(void)
 {
 	struct sigaction	act;
 
@@ -95,5 +94,5 @@ void	signal_print_newline(int signal)
 		ft_putendl_fd("Quit (core dumped)", STDERR_FILENO);
 	else if (signal == SIGINT)
 		ft_putchar_fd('\n', STDOUT_FILENO);
-	rl_on_new_line();
+	rl_on_new_line(void);
 }

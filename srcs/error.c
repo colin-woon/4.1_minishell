@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:24:42 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 16:26:29 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/04 15:44:27 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	print_error(int error_code)
 
 void	print_syntax_error(int syntax_error, char *value)
 {
-	ft_putstr_fd(MSG_SYNTAX_ERROR ,2);
+	ft_putstr_fd(MSG_SYNTAX_ERROR, 2);
 	if (syntax_error == PIPE_ERR_SYNTAX)
-		ft_putendl_fd("`|'" ,2);
+		ft_putendl_fd("`|'", 2);
 	else if (syntax_error == NEWLINE_ERR_SYNTAX)
-		ft_putendl_fd("`newline'" ,2);
+		ft_putendl_fd("`newline'", 2);
 	else
 		ft_quoted_putendl_fd(value, 2);
 }

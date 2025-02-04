@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:52:30 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/02 18:17:26 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/04 15:44:47 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_envp(t_data *data, char **envp)
 	char	**key_value;
 
 	i = 0;
-	while(envp[i])
+	while (envp[i])
 	{
 		key_value = ft_split(envp[i], '=');
 		append_envp(&data->our_envp, \
@@ -38,4 +38,3 @@ void	init_envp(t_data *data, char **envp)
 	}
 	data->envp_array = convert_envp(data, data->our_envp);
 }
-
