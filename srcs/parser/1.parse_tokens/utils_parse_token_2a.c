@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/01 18:38:12 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/04 15:37:06 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	substitute_variable(t_data *data, t_token **token_list)
 			{
 				is_quote = check_quote(is_quote, temp->value, i);
 				if (is_valid_variable(temp->value, i, is_quote))
-					replace_variable(temp, extract_var_without_symbol\
+					replace_variable(temp, extract_var_without_symbol \
 	(temp->value + i, &i_var), get_variable(temp, temp->value + i + 1, data));
 				else
 					i++;
@@ -91,16 +91,13 @@ char	*get_variable(t_token *token, char *var_str, t_data *data)
 
 	var_name_len = 0;
 	extracted_var = extract_var_without_symbol(var_str, &var_name_len);
-
 	if (extracted_var[0] == '?')
 	{
 		free_ptr(extracted_var);
 		return (ft_itoa(g_last_exit_code));
 	}
-
 	value = get_our_envp(data->our_envp, extracted_var);
 	free_ptr(extracted_var);
-
 	if (value)
 		return (ft_strdup(value));
 	else

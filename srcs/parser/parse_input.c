@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:16:11 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 15:43:45 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/04 15:09:48 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		parse_input(t_data *data, char *input);
 int		parse_tokens(t_token **token, t_data *data);
-int	is_input_spaces(char *input);
+int		is_input_spaces(char *input);
 
 int	parse_input(t_data *data, char *input)
 {

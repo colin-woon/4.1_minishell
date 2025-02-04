@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:45:06 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/14 18:08:51 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/04 15:38:28 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ void	detect_expandable_variable(t_token *token_node)
 	int	i;
 
 	i = 0;
-	while(token_node->value[i])
+	while (token_node->value[i])
 	{
 		if (token_node->value[i] == '$')
-			{
-				if (token_node->prev && token_node->prev->type == HEREDOC)
-					break;
-				token_node->type = VARIABLE;
-				return ;
-			}
+		{
+			if (token_node->prev && token_node->prev->type == HEREDOC)
+				break ;
+			token_node->type = VARIABLE;
+			return ;
+		}
 		i++;
 	}
 }
@@ -72,7 +72,9 @@ int	is_consecutive_operator(t_token *token_node)
 	}
 	if (is_true)
 	{
-		if (token_node->type == END_OF_FILE && token_node->prev && token_node->prev->type > PIPE)
+		if (token_node->type == END_OF_FILE \
+		&& token_node->prev \
+		&& token_node->prev->type > PIPE)
 			print_syntax_error(NEWLINE_ERR_SYNTAX, NULL);
 		else if (token_node->type == END_OF_FILE && token_node->prev)
 			print_syntax_error(UNDEFINED, token_node->prev->value);

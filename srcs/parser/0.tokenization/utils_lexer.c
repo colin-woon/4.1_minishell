@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_tokenization.c                               :+:      :+:    :+:   */
+/*   utils_lexer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:17:46 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/07 17:07:20 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/04 15:41:01 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	get_seperator(char *input, int i_current);
-int	check_quote(int	is_quote, char *input, int i_current);
+int	check_quote(int is_quote, char *input, int i_current);
 
-int	check_quote(int	is_quote, char *input, int i_current)
+int	check_quote(int is_quote, char *input, int i_current)
 {
 	if (input[i_current] == '\'' && is_quote == NO_QUOTE)
 		is_quote = SINGLE_QUOTE;

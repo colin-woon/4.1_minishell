@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:56:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/14 17:49:52 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/04 15:39:33 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ char	*replace_substring(char *str, char *substr, char *replacement)
 	size_t	len_replacement;
 
 	pos = ft_strnstr(str, substr, ft_strlen(str));
-	if (pos) {
+	if (pos)
+	{
 		len_before = pos - str;
 		len_substr = ft_strlen(substr);
 		len_replacement = ft_strlen(replacement);
@@ -100,10 +101,10 @@ char	*extract_var_without_symbol(char *var_str, int *var_name_len)
 	{
 		if (is_next_invalid(var_str[(*var_name_len)]) \
 		|| var_str[(*var_name_len)] == '\'')
-			break;
+			break ;
 		(*var_name_len)++;
 	}
 	if (var_str[(*var_name_len) - 1] == '"')
 		(*var_name_len)--;
-	return(ft_substr(var_str, 0, (size_t)(*var_name_len)));
+	return (ft_substr(var_str, 0, (size_t)(*var_name_len)));
 }
