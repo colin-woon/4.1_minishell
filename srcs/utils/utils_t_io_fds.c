@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_t_io_fds.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:52:17 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 18:36:06 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/04 09:26:58 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ void	init_io_fds(t_cmd *cmd)
 void	free_io_fds(t_io_fds *io_fds)
 {
 	if (!io_fds)
-		return;
+		return ;
 	if (io_fds->infile)
 	{
-		if (!ft_strncmp(io_fds->infile, HEREDOC_FILE, ft_strlen(io_fds->infile)))
+		if (!ft_strncmp(io_fds->infile, HEREDOC_FILE,
+				ft_strlen(io_fds->infile)))
 			io_fds->infile = NULL;
 		else
 			free_ptr(io_fds->infile);
@@ -50,4 +51,3 @@ void	free_io_fds(t_io_fds *io_fds)
 		free_ptr(io_fds->heredoc_limiter);
 	free_ptr(io_fds);
 }
-
