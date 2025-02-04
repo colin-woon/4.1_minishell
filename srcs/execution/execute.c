@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 14:39:08 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/03 22:53:41 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,20 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	int	is_exit;
 
 	is_exit = CMD_NOT_FOUND;
-	if (ft_strncmp(cmd->name, "cd", ft_strlen("cd")) == 0)
+	if (!ft_strncmp(cmd->name, "cd", 2) && ft_strlen(cmd->name) == 2)
 		is_exit = ft_cd(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "echo", 5) == 0)
+	else if (!ft_strncmp(cmd->name, "echo", 4) && ft_strlen(cmd->name) == 4)
 		is_exit = ft_echo(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "env", ft_strlen("env")) == 0)
+	else if (!ft_strncmp(cmd->name, "env", 3) && ft_strlen(cmd->name) == 3)
 		is_exit = ft_env(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "export", ft_strlen("export")) == 0)
+	else if (!ft_strncmp(cmd->name, "export", 6) && ft_strlen(cmd->name) == 6)
 		is_exit = ft_export(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "pwd", ft_strlen("pwd")) == 0)
+	else if (!ft_strncmp(cmd->name, "pwd", 3) && ft_strlen(cmd->name) == 3)
 		is_exit = ft_pwd(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "unset", 6) == 0)
-		is_exit = unset_builtin(data, cmd->args);
-	else if (ft_strncmp(cmd->name, "exit", 5) == 0)
-		is_exit = exit_builtin(data, cmd->args);
+	else if (!ft_strncmp(cmd->name, "unset", 5) && ft_strlen(cmd->name) == 5)
+		is_exit = ft_unset(data, cmd->args);
+	else if (!ft_strncmp(cmd->name, "exit", 4) && ft_strlen(cmd->name) == 4)
+		is_exit = ft_exit(data, cmd->args);
 	return (is_exit);
 }
 
@@ -72,7 +72,7 @@ int	execute_pipes(t_data *data)
 		data->pid = fork();
 		if (data->pid == -1)
 		{
-			print_errno_str("fork", strerror(errno));
+			print_errno_str("fork", NULL, strerror(errno));
 			return (errno);
 		}
 		else if (data->pid == 0)
@@ -92,7 +92,7 @@ void	execute_commands(t_data *data, t_cmd *cmd)
 	setup_pipefds(data->cmd, cmd);
 	redirect_stdio(cmd->io_fds);
 	close_fds(cmd, false);
-	if (ft_strchr(cmd->args[0], '/') )
+	if (ft_strchr(cmd->args[0], '/'))
 	{
 		exit_status = is_invalid_command(cmd);
 		if (exit_status)
@@ -116,7 +116,7 @@ int	execute_binary(t_data *data, t_cmd *cmd)
 		return (exit_status);
 	if (execve(cmd->args[0], cmd->args, data->envp_array) == -1)
 	{
-		print_errno_str("execve", strerror(errno));
+		print_errno_str("execve", NULL, strerror(errno));
 		return (FAILURE);
 	}
 	return (FAILURE);

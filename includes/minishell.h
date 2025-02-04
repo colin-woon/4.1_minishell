@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 14:42:12 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 21:17:31 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,4 +327,4 @@ int	ft_unset(t_data *data, char **args);
 
 // BUILTINS - EXIT
 
-int	ft_exit(t_data *data, int exit_status);
+int	ft_exit(t_data *data, char **args);

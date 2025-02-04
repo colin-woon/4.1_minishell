@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_stdio.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:41:10 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 13:31:04 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 23:50:43 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	restore_stdio(t_io_fds *io)
 	{
 		if (dup2(io->std_fds[STDOUT_FILENO], STDOUT_FILENO) == -1)
 		{
-			print_errno_str("restore io.std_fds[stdout]", NULL, strerror(errno));
+			print_errno_str("restore io.std_fds[stdout]", NULL,
+				strerror(errno));
 			g_last_exit_code = errno;
 		}
 		close(io->std_fds[STDOUT_FILENO]);

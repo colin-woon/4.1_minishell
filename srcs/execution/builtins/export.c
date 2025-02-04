@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:12:41 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 13:13:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/03 23:47:07 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,27 @@ int	check_valid_env_var(char *env_var)
 static int	handle_export_var(t_data *data, char *arg)
 {
 	t_envp	*tmp;
+	char	*keyword;
 
+	keyword = get_keyword(arg);
 	if (check_valid_env_var(arg) == EXIT_FAILURE)
 	{
-		print_errno_str("export", get_keyword(arg),
+		print_errno_str("export", keyword,
 			"not a valid identifier");
+		free_ptr(keyword);
 		return (EXIT_FAILURE);
 	}
 	if (ft_strchr(arg, '='))
 	{
-		tmp = search_envp(data->our_envp, get_keyword(arg));
+		tmp = search_envp(data->our_envp, keyword);
 		if (!tmp)
 			append_envp(&data->our_envp,
-				create_envp_node(get_keyword(arg), ft_strchr(arg, '=') + 1));
+				create_envp_node(keyword, ft_strchr(arg, '=') + 1));
 		else
-			update_envp_value(data->our_envp, get_keyword(arg),
+			update_envp_value(data->our_envp, keyword,
 				ft_strchr(arg, '=') + 1);
 	}
+	free_ptr(keyword);
 	return (EXIT_SUCCESS);
 }
 
