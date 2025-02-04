@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_t_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 00:04:41 by cwoon             #+#    #+#             */
-/*   Updated: 2024/12/30 18:59:08 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/04 09:26:17 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ t_token	*create_token(char *value, int type)
 
 void	append_token(t_token **head, t_token *new_node)
 {
-	t_token *temp = *head;
+	t_token	*temp;
+
+	temp = *head;
 	if (!*head)
 	{
 		*head = new_node;
