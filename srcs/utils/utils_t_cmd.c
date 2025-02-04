@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils_t_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:42:32 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 16:23:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/04 09:25:04 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	*create_cmd();
+t_cmd	*create_cmd(void);
 void	prepend_cmd(t_cmd **head, t_cmd *new_cmd);
 void	append_cmd(t_cmd **head, t_cmd *new_cmd);
-void	delete_cmd(t_cmd *cmd, void (*del)(void *));
-void	clear_cmd_list(t_cmd **head);
-t_cmd	*get_last_cmd(t_cmd *cmd);
 
-t_cmd	*create_cmd()
+t_cmd	*create_cmd(void)
 {
 	t_cmd	*new_cmd;
 
@@ -35,11 +32,11 @@ void	append_cmd(t_cmd **head, t_cmd *new_cmd)
 	t_cmd	*temp;
 
 	if (!head || !new_cmd)
-		return;
+		return ;
 	if (!*head)
 	{
 		*head = new_cmd;
-		return;
+		return ;
 	}
 	temp = *head;
 	while (temp->next)
@@ -51,46 +48,11 @@ void	append_cmd(t_cmd **head, t_cmd *new_cmd)
 void	prepend_cmd(t_cmd **head, t_cmd *new_cmd)
 {
 	if (!head || !new_cmd)
-		return;
+		return ;
 	if (*head)
 	{
 		new_cmd->next = *head;
 		(*head)->prev = new_cmd;
 	}
 	*head = new_cmd;
-}
-
-void	clear_cmd_list(t_cmd **head)
-{
-	t_cmd	*temp;
-	t_cmd	*next;
-
-	if (!head)
-		return;
-	temp = *head;
-	while (temp)
-	{
-		next = temp->next;
-		delete_cmd(temp, &free_ptr);
-		temp = next;
-	}
-	*head = NULL;
-}
-
-void	delete_cmd(t_cmd *cmd, void (*del)(void *))
-{
-	if (cmd->name)
-		(*del)(cmd->name);
-	if (cmd->args)
-		ft_free_2d_array(cmd->args);
-	if (cmd->io_fds)
-		free_io_fds(cmd->io_fds);
-	(*del)(cmd);
-}
-
-t_cmd	*get_last_cmd(t_cmd *cmd)
-{
-	while (cmd->next != NULL)
-		cmd = cmd->next;
-	return (cmd);
 }
