@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:05:49 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/31 18:20:57 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/04 15:28:07 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,13 @@ void	run_heredoc(t_io_fds *io)
 		return ;
 	while (1)
 	{
-		// set_signals();
+		set_signals_input();
 		input = readline("> ");
+		set_signals_execution();
 		if (input == NULL)
-			return (free_ptr(input), free_ptr(buffer));
+			return (print_errno_str("warning", io->heredoc_limiter, \
+			"here-document delimited by end-of-file"), \
+			free_ptr(input), free_ptr(buffer));
 		if (is_matching_heredoc_limiter(input, io->heredoc_limiter))
 			break ;
 		input = ft_strjoin(input, "\n");
