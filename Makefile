@@ -46,7 +46,10 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/signals.c \
 					srcs/utils/utils_free.c \
 					srcs/utils/utils_t_envp.c \
+					srcs/utils/utils_t_envp_2.c \
+					srcs/utils/utils_t_envp_3.c \
 					srcs/utils/utils_t_cmd.c \
+					srcs/utils/utils_t_cmd_2.c \
 					srcs/utils/utils_t_io_fds.c \
 					srcs/utils/utils_t_token.c\
 					srcs/debug/print_struct.c \
