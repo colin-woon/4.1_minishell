@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_t_envp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 17:55:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/04 09:16:13 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/05 17:39:57 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,8 @@ char	*get_our_envp(t_envp *envp, char *variable_name)
 
 	temp = envp;
 	temp = search_envp(temp, variable_name);
-	return (temp->value);
+	if (temp)
+		return (temp->value);
+	else
+		return (NULL);
 }
