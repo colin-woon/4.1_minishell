@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:05:48 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/04 15:46:24 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 12:35:57 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	set_signals_input(void)
 {
 	struct sigaction	act;
 
-	ignore_sigquit(void);
+	ignore_sigquit();
 	ft_memset(&act, 0, sizeof(act));
 	act.sa_handler = &handle_sigint;
 	sigaction(SIGINT, &act, NULL);
@@ -73,9 +73,9 @@ static void	handle_sigint(int signum)
 {
 	(void)signum;
 	ft_putchar_fd('\n', STDOUT_FILENO);
-	rl_on_new_line(void);
+	rl_on_new_line();
 	rl_replace_line("", 0);
-	rl_redisplay(void);
+	rl_redisplay();
 }
 
 void	set_signals_execution(void)
@@ -94,5 +94,5 @@ void	signal_print_newline(int signal)
 		ft_putendl_fd("Quit (core dumped)", STDERR_FILENO);
 	else if (signal == SIGINT)
 		ft_putchar_fd('\n', STDOUT_FILENO);
-	rl_on_new_line(void);
+	rl_on_new_line();
 }
