@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 13:56:38 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 16:19:59 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	execute_commands(t_data *data, t_cmd *cmd)
 			exit_process(data, exit_status);
 	}
 	else
-		get_cmd_path(cmd);
+		get_cmd_path(data->our_envp, cmd);
 	exit_status = execute_builtin(data, cmd);
 	if (exit_status != CMD_NOT_FOUND)
 		exit_process(data, exit_status);

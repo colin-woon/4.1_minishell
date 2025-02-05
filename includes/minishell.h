@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 13:21:08 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 17:30:21 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,7 +297,7 @@ void		redirect_stdio(t_io_fds *io);
 
 // EXECUTION - Utils Pipe Commands
 
-int			get_cmd_path(t_cmd *cmd);
+int			get_cmd_path(t_envp *envp, t_cmd *cmd);
 void		setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore);
 int			is_invalid_command(t_cmd *cmd);
 int			wait_cmds(t_data *data);
