@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:54:48 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/02 14:36:33 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/05 13:11:07 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,6 @@ void	print_cmd(t_cmd *cmd)
 		}
 	}
 	print_value_int("has_pipe:", cmd->has_pipe);
-
-	if (cmd->pipe_fd)
-	{
-		printf("pipe_fd[0]: %d\n", cmd->pipe_fd[0]);
-		printf("pipe_fd[1]: %d\n", cmd->pipe_fd[1]);
-	}
 }
 
 void	print_all_cmds(t_cmd *head)

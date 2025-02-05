@@ -6,13 +6,13 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:41:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/04 15:43:30 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 13:16:10 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		get_cmd_path(t_data *data, t_cmd *cmd);
+int		get_cmd_path(t_cmd *cmd);
 void	setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore);
 int		is_invalid_command(t_cmd *cmd);
 int		wait_cmds(t_data *data);
@@ -50,7 +50,7 @@ void	setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore)
 	close_pipes(cmds_list, cmd_to_ignore);
 }
 
-int	get_cmd_path(t_data *data, t_cmd *cmd)
+int	get_cmd_path(t_cmd *cmd)
 {
 	char	**all_paths;
 	char	*cmd_path;

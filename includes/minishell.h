@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/04 15:52:59 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 13:21:08 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,9 +138,8 @@ void		print_envp_list(t_envp *head);
 // SIGNALS
 
 void		ignore_sigquit(void);
-static void	handle_sigint(int signum);
 void		set_signals_input(void);
-void		signal_print_newline(int signal);
+void		handle_execution_signals(int signal);
 void		set_signals_execution(void);
 
 // MEMORY - Utils Free
@@ -223,7 +222,7 @@ int			is_consecutive_operator(t_token *token_node);
 // PARSE INPUT - Utils Parse Token 2a - Substitute Variable
 
 void		substitute_variable(t_data *data, t_token **token_list);
-char		*get_variable(t_token *token, char *var_str, t_data *data);
+char		*get_variable(char *var_str, t_data *data);
 void		replace_variable(t_token *token_node, \
 			char *variable_name, char *variable_result);
 
@@ -298,7 +297,7 @@ void		redirect_stdio(t_io_fds *io);
 
 // EXECUTION - Utils Pipe Commands
 
-int			get_cmd_path(t_data *data, t_cmd *cmd);
+int			get_cmd_path(t_cmd *cmd);
 void		setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore);
 int			is_invalid_command(t_cmd *cmd);
 int			wait_cmds(t_data *data);
@@ -313,7 +312,7 @@ int			change_dir(t_data *data, char *path);
 
 // BUILTINS - PWD
 
-int			ft_pwd(t_data *data, char **args);
+int			ft_pwd(char **args);
 
 // BUILTINS - ENV
 

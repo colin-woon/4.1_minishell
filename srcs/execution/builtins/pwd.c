@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:20:39 by jow               #+#    #+#             */
-/*   Updated: 2025/02/03 14:05:18 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/05 13:16:45 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_pwd(t_data *data, char **args);
+int	ft_pwd(char **args);
 
-int	ft_pwd(t_data *data, char **args)
+int	ft_pwd(char **args)
 {
 	char	*cwd;
 

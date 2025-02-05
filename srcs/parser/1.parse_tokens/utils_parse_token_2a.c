@@ -6,14 +6,14 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/04 15:37:06 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 13:12:53 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void		substitute_variable(t_data *data, t_token **token_list);
-char		*get_variable(t_token *token, char *var_str, t_data *data);
+char		*get_variable(char *var_str, t_data *data);
 void		replace_variable(t_token *token_node, char *variable_name, \
 char *variable_result);
 int			is_valid_variable(char *value, int i, int is_quote);
@@ -46,7 +46,7 @@ void	substitute_variable(t_data *data, t_token **token_list)
 				is_quote = check_quote(is_quote, temp->value, i);
 				if (is_valid_variable(temp->value, i, is_quote))
 					replace_variable(temp, extract_var_without_symbol \
-	(temp->value + i, &i_var), get_variable(temp, temp->value + i + 1, data));
+	(temp->value + i, &i_var), get_variable(temp->value + i + 1, data));
 				else
 					i++;
 			}
@@ -83,7 +83,7 @@ NULL - variable doesnt exist
 any str - variable exists
 status codes - ? detected
  */
-char	*get_variable(t_token *token, char *var_str, t_data *data)
+char	*get_variable(char *var_str, t_data *data)
 {
 	char	*value;
 	char	*extracted_var;

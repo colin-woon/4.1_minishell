@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 22:53:41 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/05 13:19:50 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	else if (!ft_strncmp(cmd->name, "export", 6) && ft_strlen(cmd->name) == 6)
 		is_exit = ft_export(data, cmd->args);
 	else if (!ft_strncmp(cmd->name, "pwd", 3) && ft_strlen(cmd->name) == 3)
-		is_exit = ft_pwd(data, cmd->args);
+		is_exit = ft_pwd(cmd->args);
 	else if (!ft_strncmp(cmd->name, "unset", 5) && ft_strlen(cmd->name) == 5)
 		is_exit = ft_unset(data, cmd->args);
 	else if (!ft_strncmp(cmd->name, "exit", 4) && ft_strlen(cmd->name) == 4)
@@ -99,7 +99,7 @@ void	execute_commands(t_data *data, t_cmd *cmd)
 			exit_process(data, exit_status);
 	}
 	else
-		get_cmd_path(data, cmd);
+		get_cmd_path(cmd);
 	exit_status = execute_builtin(data, cmd);
 	if (exit_status != CMD_NOT_FOUND)
 		exit_process(data, exit_status);
