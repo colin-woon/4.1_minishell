@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:56:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 13:15:26 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*replace_substring(char *str, char *substr, char *replacement)
 		ft_strlcpy(buffer, str, len_before + 1);
 		ft_strlcat(buffer, replacement, sizeof(buffer));
 		ft_strlcat(buffer, pos + len_substr, sizeof(buffer));
-		free_ptr(str);
+		free_ptr((void **)&str);
 		return (ft_strdup(buffer));
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 13:12:53 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ char *variable_result)
 			variable_name, variable_result);
 	else
 		remove_substring(token_node->value, variable_name);
-	free_ptr(variable_name);
-	free_ptr(variable_result);
+	free_ptr((void **)&variable_name);
+	free_ptr((void **)&variable_result);
 }
 
 /*
@@ -93,11 +93,11 @@ char	*get_variable(char *var_str, t_data *data)
 	extracted_var = extract_var_without_symbol(var_str, &var_name_len);
 	if (extracted_var[0] == '?')
 	{
-		free_ptr(extracted_var);
+		free_ptr((void **)&extracted_var);
 		return (ft_itoa(g_last_exit_code));
 	}
 	value = get_our_envp(data->our_envp, extracted_var);
-	free_ptr(extracted_var);
+	free_ptr((void **)&extracted_var);
 	if (value)
 		return (ft_strdup(value));
 	else

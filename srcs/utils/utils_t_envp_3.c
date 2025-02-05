@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_t_envp_2.c                                   :+:      :+:    :+:   */
+/*   utils_t_envp_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:32:57 by jow               #+#    #+#             */
-/*   Updated: 2025/02/04 09:00:03 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	**join_env_var(char **envp_array, t_envp *envp)
 	{
 		env_var = ft_strjoin(temp->variable_name, "=");
 		envp_array[i] = ft_strjoin(env_var, temp->value);
-		free_ptr(env_var);
+		free_ptr((void **)&env_var);
 		if (!envp_array[i])
 		{
 			ft_free_2d_array(envp_array);

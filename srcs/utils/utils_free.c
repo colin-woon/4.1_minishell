@@ -6,25 +6,25 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 00:17:52 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 14:35:07 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_ptr(void *ptr);
+void	free_ptr(void **ptr);
 void	garbage_collector(t_data *data, char *input, int is_clear_env_cache);
 void	close_pipes(t_cmd *cmd, t_cmd *cmd_to_ignore);
 void	close_fds(t_cmd *cmd, int is_restore_stdio);
 void	exit_process(t_data *data, int exit_status);
 
 // Helps to avoid double frees
-void	free_ptr(void *ptr)
+void	free_ptr(void **ptr)
 {
-	if (ptr != NULL)
+	if (ptr && *ptr)
 	{
-		free(ptr);
-		ptr = NULL;
+		free(*ptr);
+		*ptr = NULL;
 	}
 }
 
@@ -41,7 +41,7 @@ void	garbage_collector(t_data *data, char *input, int is_clear_env_cache)
 		clear_tokens(&data->tokens);
 	if (data->cmd)
 		clear_cmd_list(&data->cmd);
-	free_ptr(input);
+	free_ptr((void **)&input);
 }
 
 void	close_fds(t_cmd *cmd, int is_restore_stdio)

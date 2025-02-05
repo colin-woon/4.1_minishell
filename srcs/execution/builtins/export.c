@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:12:41 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/03 23:47:07 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	handle_export_var(t_data *data, char *arg)
 	{
 		print_errno_str("export", keyword,
 			"not a valid identifier");
-		free_ptr(keyword);
+		free_ptr((void **)&keyword);
 		return (EXIT_FAILURE);
 	}
 	if (ft_strchr(arg, '='))
@@ -70,7 +70,7 @@ static int	handle_export_var(t_data *data, char *arg)
 			update_envp_value(data->our_envp, keyword,
 				ft_strchr(arg, '=') + 1);
 	}
-	free_ptr(keyword);
+	free_ptr((void **)&keyword);
 	return (EXIT_SUCCESS);
 }
 

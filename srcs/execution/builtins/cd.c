@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:49:02 by jow               #+#    #+#             */
-/*   Updated: 2025/02/03 23:50:11 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	change_dir(t_data *data, char *path)
 	new_pwd = getcwd(NULL, 0);
 	update_envp_value(data->our_envp, "PWD", new_pwd);
 	data->envp_array = convert_envp(data, data->our_envp);
-	free_ptr(new_pwd);
+	free_ptr((void **)&new_pwd);
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 17:30:21 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 20:09:21 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void		set_signals_execution(void);
 
 // MEMORY - Utils Free
 
-void		free_ptr(void *ptr);
+void		free_ptr(void **ptr);
 void		garbage_collector(t_data *data, char *input, \
 			int is_clear_env_cache);
 void		close_pipes(t_cmd *cmd, t_cmd *cmd_to_ignore);
@@ -174,7 +174,7 @@ void		append_token(t_token **head, t_token *new_node);
 t_cmd		*create_cmd(void);
 void		prepend_cmd(t_cmd **head, t_cmd *new_cmd);
 void		append_cmd(t_cmd **head, t_cmd *new_cmd);
-void		delete_cmd(t_cmd *cmd, void (*del)(void *));
+void		delete_cmd(t_cmd *cmd, void (*del)(void **));
 void		clear_cmd_list(t_cmd **head);
 t_cmd		*get_last_cmd(t_cmd *cmd);
 

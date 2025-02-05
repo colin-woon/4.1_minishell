@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:52:17 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/04 15:18:56 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	free_io_fds(t_io_fds *io_fds)
 				io_fds->infile = NULL;
 			}
 		else
-			free_ptr(io_fds->infile);
+			free_ptr((void **)&io_fds->infile);
 	}
 	if (io_fds->outfile)
-		free_ptr(io_fds->outfile);
+		free_ptr((void **)&io_fds->outfile);
 	if (io_fds->heredoc_limiter)
-		free_ptr(io_fds->heredoc_limiter);
-	free_ptr(io_fds);
+		free_ptr((void **)&io_fds->heredoc_limiter);
+	free_ptr((void **)&io_fds);
 }

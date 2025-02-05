@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:20:39 by jow               #+#    #+#             */
-/*   Updated: 2025/02/05 13:16:45 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	ft_pwd(char **args)
 	if (!cwd)
 		return (1);
 	ft_putendl_fd(cwd, 1);
-	free_ptr(cwd);
+	free_ptr((void **)&cwd);
 	return (0);
 }

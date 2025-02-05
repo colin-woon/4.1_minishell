@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_t_token.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 00:04:41 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/04 09:26:17 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	delete_token(t_token **head, t_token *node_to_delete)
 		node_to_delete->next->prev = node_to_delete->prev;
 	if (node_to_delete->prev)
 		node_to_delete->prev->next = node_to_delete->next;
-	free_ptr(node_to_delete->value);
-	free_ptr(node_to_delete);
+	free_ptr((void **)&node_to_delete->value);
+	free_ptr((void **)&node_to_delete);
 }
 
 void	clear_tokens(t_token **head)
