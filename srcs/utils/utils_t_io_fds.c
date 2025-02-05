@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:52:17 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 20:47:49 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	free_io_fds(t_io_fds *io_fds)
 		return ;
 	if (io_fds->infile)
 	{
-		if (!ft_strncmp(io_fds->infile, HEREDOC_FILE,
-				ft_strlen(io_fds->infile)))
-			{
-				unlink(io_fds->infile);
-				io_fds->infile = NULL;
-			}
+		if (!ft_strncmp(io_fds->infile, HEREDOC_FILE, \
+			ft_strlen(io_fds->infile)))
+		{
+			unlink(io_fds->infile);
+			io_fds->infile = NULL;
+		}
 		else
 			free_ptr((void **)&io_fds->infile);
 	}

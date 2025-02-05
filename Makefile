@@ -20,7 +20,7 @@ endif
 
 # Compiler and flags
 CC			=	gcc
-CFLAGS		=	$(INCLUDES) $(TEMP) $(DEBUG)
+CFLAGS		=	$(INCLUDES) $(TEMP) $(DEBUG) $(FSAN_ADD)
 TEMP		=	-Wall -Werror -Wextra
 INCLUDES	=	-I$(INC_LIBFT) -I$(INC_DIR) $(READLINE_INC)
 DEBUG		=	-g3

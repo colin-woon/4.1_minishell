@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:41:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 20:47:01 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	get_cmd_path(t_envp *envp, t_cmd *cmd)
 			free_ptr((void **)&cmd->args[0]);
 			cmd->args[0] = ft_strdup(absolute_path);
 			ft_free_2d_array(all_paths);
-			return (free_ptr((void **)&cmd_path), free_ptr((void **)&absolute_path), 1);
+			return (free_ptr((void **)&cmd_path), \
+			free_ptr((void **)&absolute_path), 1);
 		}
 		free_ptr((void **)&absolute_path);
 	}

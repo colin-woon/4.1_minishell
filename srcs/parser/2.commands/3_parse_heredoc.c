@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:05:49 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 20:44:55 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 20:47:15 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void		parse_heredoc(t_cmd **last_cmd, t_token **tokens);
 void		run_heredoc(t_io_fds *io);
 int			is_matching_heredoc_limiter(char *input, char *limiter);
 static void	clean_up(char **input, char **temp);
-
 
 void	parse_heredoc(t_cmd **last_cmd, t_token **tokens)
 {
@@ -74,6 +73,6 @@ int	is_matching_heredoc_limiter(char *input, char *limiter)
 
 static void	clean_up(char **input, char **temp)
 {
-		free_ptr((void **)input);
-		free_ptr((void **)temp);
+	free_ptr((void **)input);
+	free_ptr((void **)temp);
 }
