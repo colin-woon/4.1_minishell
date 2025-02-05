@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 13:19:50 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/05 13:56:38 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		is_exit = ft_unset(data, cmd->args);
 	else if (!ft_strncmp(cmd->name, "exit", 4) && ft_strlen(cmd->name) == 4)
 		is_exit = ft_exit(data, cmd->args);
+	if (is_exit != CMD_NOT_FOUND)
+		g_last_exit_code = is_exit;
 	return (is_exit);
 }
 
