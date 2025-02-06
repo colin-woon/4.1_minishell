@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:49:02 by jow               #+#    #+#             */
-/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/06 17:22:08 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int	ft_cd(t_data *data, char **args)
 	t_envp	*tmp;
 	int		return_value;
 
-	if (!args || !args[1] || args[1][0] == '\0')
+	if (!args || !args[1] || args[1][0] == '\0' || !ft_strncmp(args[1], "~", 2))
 	{
 		tmp = search_envp(data->our_envp, "HOME");
 		if (!tmp)
 		{
-			ft_putendl_fd("cd: HOME not set", 2);
+			print_errno_str("cd", NULL, "HOME not set");
 			return (EXIT_FAILURE);
 		}
 		return_value = change_dir(data, tmp->value);
