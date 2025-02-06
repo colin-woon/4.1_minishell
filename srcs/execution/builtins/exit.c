@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:06:14 by jow               #+#    #+#             */
-/*   Updated: 2025/02/03 22:22:14 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/06 14:35:00 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_exit(t_data *data, char **args)
 	if (argc == 2)
 		exit_code = get_exit_code(data, args[1]);
 	else
-		exit_code = g_last_exit_code;
+		exit_code = data->last_exit_code;
 	exit_process(data, exit_code);
 	return (0);
 }

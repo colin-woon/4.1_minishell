@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:52:30 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/04 15:44:47 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/06 14:35:00 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_shell_data(t_data *data, char **envp)
 {
 	init_envp(data, envp);
 	data->pid = -1;
-	g_last_exit_code = 0;
+	data->last_exit_code = 0;
 }
 
 void	init_envp(t_data *data, char **envp)

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 16:19:59 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/06 14:49:47 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	execute(t_data *data)
 	if (!data->cmd->has_pipe && !data->cmd->prev \
 	&& is_valid_files(data->cmd->io_fds))
 	{
-		redirect_stdio(data->cmd->io_fds);
+		redirect_stdio(data->cmd->io_fds, data);
 		is_exit = execute_builtin(data, data->cmd);
-		restore_stdio(data->cmd->io_fds);
+		restore_stdio(data->cmd->io_fds, data);
 	}
 	if (is_exit != CMD_NOT_FOUND)
 		return ;
-	g_last_exit_code = execute_pipes(data);
+	data->last_exit_code = execute_pipes(data);
 	return ;
 }
 
@@ -58,7 +58,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	else if (!ft_strncmp(cmd->name, "exit", 4) && ft_strlen(cmd->name) == 4)
 		is_exit = ft_exit(data, cmd->args);
 	if (is_exit != CMD_NOT_FOUND)
-		g_last_exit_code = is_exit;
+		data->last_exit_code = is_exit;
 	return (is_exit);
 }
 
@@ -92,8 +92,8 @@ void	execute_commands(t_data *data, t_cmd *cmd)
 	if (!cmd || !cmd->name || !is_valid_files(cmd->io_fds))
 		exit_process(data, EXIT_FAILURE);
 	setup_pipefds(data->cmd, cmd);
-	redirect_stdio(cmd->io_fds);
-	close_fds(cmd, false);
+	redirect_stdio(cmd->io_fds, data);
+	close_fds(cmd, false, data);
 	if (ft_strchr(cmd->args[0], '/'))
 	{
 		exit_status = is_invalid_command(cmd);

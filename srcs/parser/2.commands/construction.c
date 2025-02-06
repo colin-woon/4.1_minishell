@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:58:27 by cwoon             #+#    #+#             */
-/*   Updated: 2025/01/27 13:53:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/06 14:42:48 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	construct_commands(t_data *data, t_token *token)
 		else if (temp->type == PIPE)
 			parse_pipe(&data->cmd, &temp);
 		else if (temp->type == REDIRECT_IN)
-			parse_redirect_in(&data->cmd, &temp);
+			parse_redirect_in(&data->cmd, &temp, data);
 		else if (temp->type == REDIRECT_OUT)
-			parse_redirect_out(&data->cmd, &temp);
+			parse_redirect_out(&data->cmd, &temp, data);
 		else if (temp->type == HEREDOC)
 			parse_heredoc(&data->cmd, &temp);
 		else if (temp->type == APPEND)
-			parse_append(&data->cmd, &temp);
+			parse_append(&data->cmd, &temp, data);
 		else if (temp->type == END_OF_FILE)
 			break ;
 	}

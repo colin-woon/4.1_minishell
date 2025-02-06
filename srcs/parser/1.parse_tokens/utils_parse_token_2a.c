@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/06 14:35:00 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*get_variable(char *var_str, t_data *data)
 	if (extracted_var[0] == '?')
 	{
 		free_ptr((void **)&extracted_var);
-		return (ft_itoa(g_last_exit_code));
+		return (ft_itoa(data->last_exit_code));
 	}
 	value = get_our_envp(data->our_envp, extracted_var);
 	free_ptr((void **)&extracted_var);

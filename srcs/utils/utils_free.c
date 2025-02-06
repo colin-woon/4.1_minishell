@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 00:17:52 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/06 14:48:28 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	free_ptr(void **ptr);
 void	garbage_collector(t_data *data, char *input, int is_clear_env_cache);
 void	close_pipes(t_cmd *cmd, t_cmd *cmd_to_ignore);
-void	close_fds(t_cmd *cmd, int is_restore_stdio);
+void	close_fds(t_cmd *cmd, int is_restore_stdio, t_data *data);
 void	exit_process(t_data *data, int exit_status);
 
 // Helps to avoid double frees
@@ -44,7 +44,7 @@ void	garbage_collector(t_data *data, char *input, int is_clear_env_cache)
 	free_ptr((void **)&input);
 }
 
-void	close_fds(t_cmd *cmd, int is_restore_stdio)
+void	close_fds(t_cmd *cmd, int is_restore_stdio, t_data *data)
 {
 	if (cmd->io_fds)
 	{
@@ -53,7 +53,7 @@ void	close_fds(t_cmd *cmd, int is_restore_stdio)
 		if (cmd->io_fds->fd_out != -1)
 			close(cmd->io_fds->fd_out);
 		if (is_restore_stdio)
-			restore_stdio(cmd->io_fds);
+			restore_stdio(cmd->io_fds, data);
 	}
 	close_pipes(cmd, NULL);
 }
@@ -76,7 +76,7 @@ void	exit_process(t_data *data, int exit_status)
 	if (data)
 	{
 		if (data->cmd && data->cmd->io_fds)
-			close_fds(data->cmd, true);
+			close_fds(data->cmd, true, data);
 		garbage_collector(data, NULL, true);
 	}
 	exit(exit_status);

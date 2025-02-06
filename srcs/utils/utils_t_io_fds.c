@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:52:17 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 20:47:49 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/06 14:36:13 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	init_io_fds(t_cmd *cmd)
 		return ;
 	cmd->io_fds = malloc(sizeof(t_io_fds));
 	if (!cmd->io_fds)
-	{
-		g_last_exit_code = MALLOC_ERROR;
 		return ;
-	}
 	cmd->io_fds->infile = NULL;
 	cmd->io_fds->outfile = NULL;
 	cmd->io_fds->heredoc_limiter = NULL;

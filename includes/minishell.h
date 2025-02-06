@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 20:09:21 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/06 14:49:00 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <sys/stat.h>
 #include <signal.h>
 
-extern int	g_last_exit_code;
+extern int	is_heredoc_sigint;
 
 enum e_token_type
 {
@@ -121,6 +121,7 @@ typedef struct s_data
 	t_token	*tokens;
 	t_cmd	*cmd;
 	pid_t	pid;
+	int		last_exit_code;
 }	t_data;
 
 // DEBUG - Printing
@@ -148,7 +149,7 @@ void		free_ptr(void **ptr);
 void		garbage_collector(t_data *data, char *input, \
 			int is_clear_env_cache);
 void		close_pipes(t_cmd *cmd, t_cmd *cmd_to_ignore);
-void		close_fds(t_cmd *cmd, int is_restore_stdio);
+void		close_fds(t_cmd *cmd, int is_restore_stdio, t_data *data);
 void		exit_process(t_data *data, int exit_status);
 
 // Utils for t_envp doubly linked list
@@ -252,13 +253,16 @@ int			count_args_in_tokens(t_token *token);
 
 // PARSE INPUT - COMMANDS - 1_parse_redirect_in
 
-void		parse_redirect_in(t_cmd **last_cmd, t_token **tokens);
-void		open_infile(t_io_fds *io, char *filename);
+void		parse_redirect_in(t_cmd **last_cmd, t_token **tokens, \
+			t_data *data);
+void		open_infile(t_io_fds *io, char *filename, t_data *data);
 
 // PARSE INPUT - COMMANDS - 2_parse_redirect_out
 
-void		open_outfile_truncate(t_io_fds *io, char *filename);
-void		parse_redirect_out(t_cmd **last_cmd, t_token **tokens);
+void		open_outfile_truncate(t_io_fds *io, char *filename, \
+			t_data *data);
+void		parse_redirect_out(t_cmd **last_cmd, t_token **tokens, \
+			t_data *data);
 
 // PARSE INPUT - COMMANDS - 3_parse_heredoc
 
@@ -268,8 +272,8 @@ int			is_matching_heredoc_limiter(char *input, char *limiter);
 
 // PARSE INPUT - COMMANDS - 4_parse_append
 
-void		parse_append(t_cmd **last_cmd, t_token **tokens);
-void		open_outfile_append(t_io_fds *io, char *filename);
+void		parse_append(t_cmd **last_cmd, t_token **tokens, t_data *data);
+void		open_outfile_append(t_io_fds *io, char *filename, t_data *data);
 
 // PARSE INPUT - COMMANDS - 5_parse_pipe
 
@@ -291,9 +295,9 @@ int			prepare_commands(t_data *data);
 
 // EXECUTION - Handle_stdios
 
-void		init_stdfds(t_io_fds *io);
-void		restore_stdio(t_io_fds *io);
-void		redirect_stdio(t_io_fds *io);
+void		init_stdfds(t_io_fds *io, t_data *data);
+void		restore_stdio(t_io_fds *io, t_data *data);
+void		redirect_stdio(t_io_fds *io, t_data *data);
 
 // EXECUTION - Utils Pipe Commands
 
