@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:20:39 by jow               #+#    #+#             */
-/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/06 17:07:21 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ int	ft_pwd(char **args)
 {
 	char	*cwd;
 
-	(void)args;
+	if (args[1])
+	{
+		print_errno_str("pwd", args[1], "invalid option");
+		ft_print_string("pwd: usage: pwd [-LP]\n");
+		return (1);
+	}
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return (1);
