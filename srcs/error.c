@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:24:42 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/04 15:44:27 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/06 14:22:36 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	print_error(int error_code)
 		ft_putendl_fd(MSG_UNCLOSED_SINGLE_QUOTE, 2);
 	else if (error_code == UNCLOSED_DOUBLE_QUOTE)
 		ft_putendl_fd(MSG_UNCLOSED_DOUBLE_QUOTE, 2);
-	else if (error_code == QUOTE_ERROR)
-		ft_putendl_fd(MSG_EOF_ERROR, 2);
 	else if (error_code == MALLOC_ERROR)
 		ft_putendl_fd(MSG_MALLOC_ERROR, 2);
 	else
