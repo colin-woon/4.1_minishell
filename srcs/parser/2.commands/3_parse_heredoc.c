@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:05:49 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 20:47:15 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/09 15:07:40 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void		parse_heredoc(t_cmd **last_cmd, t_token **tokens);
 void		run_heredoc(t_io_fds *io);
 int			is_matching_heredoc_limiter(char *input, char *limiter);
 static void	clean_up(char **input, char **temp);
+static void	handle_heredoc_sigint(int sig);
 
 void	parse_heredoc(t_cmd **last_cmd, t_token **tokens)
 {
@@ -45,11 +46,14 @@ void	run_heredoc(t_io_fds *io)
 	char	*temp;
 
 	temp = NULL;
+	g_is_heredoc_sigint = 0;
+	set_signals_input();
+	signal(SIGINT, handle_heredoc_sigint);
 	while (1)
 	{
-		set_signals_input();
+		if (g_is_heredoc_sigint)
+			return (unlink(io->infile), clean_up(&input, &temp));
 		input = readline("> ");
-		set_signals_execution();
 		if (input == NULL)
 			return (print_errno_str("warning", io->heredoc_limiter, \
 			"here-document delimited by end-of-file"), \
@@ -60,6 +64,7 @@ void	run_heredoc(t_io_fds *io)
 		write(io->fd_in, temp, ft_strlen(temp));
 		clean_up(&input, &temp);
 	}
+	set_signals_execution();
 	return (clean_up(&input, &temp));
 }
 
@@ -75,4 +80,13 @@ static void	clean_up(char **input, char **temp)
 {
 	free_ptr((void **)input);
 	free_ptr((void **)temp);
+}
+
+void	handle_heredoc_sigint(int sig)
+{
+	(void)sig;
+	g_is_heredoc_sigint = 1;
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }

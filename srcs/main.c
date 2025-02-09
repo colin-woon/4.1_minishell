@@ -6,13 +6,13 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:30:18 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/06 14:35:30 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/09 14:40:31 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_heredoc_sigint;
+int	g_is_heredoc_sigint;
 
 int	main(int ac, char **av, char **envp)
 {

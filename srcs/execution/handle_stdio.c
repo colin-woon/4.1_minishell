@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:41:10 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/06 14:47:16 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/09 14:49:24 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,14 @@ void	restore_stdio(t_io_fds *io, t_data *data)
 	if (io->std_fds[STDIN_FILENO] != -1)
 	{
 		if (dup2(io->std_fds[STDIN_FILENO], STDIN_FILENO) == -1)
-		{
-			print_errno_str("restore io.std_fds[stdin]", NULL, strerror(errno));
 			data->last_exit_code = errno;
-		}
 		close(io->std_fds[STDIN_FILENO]);
 		io->std_fds[STDIN_FILENO] = -1;
 	}
 	if (io->std_fds[STDOUT_FILENO] != -1)
 	{
 		if (dup2(io->std_fds[STDOUT_FILENO], STDOUT_FILENO) == -1)
-		{
-			print_errno_str("restore io.std_fds[stdout]", NULL,
-				strerror(errno));
 			data->last_exit_code = errno;
-		}
 		close(io->std_fds[STDOUT_FILENO]);
 		io->std_fds[STDOUT_FILENO] = -1;
 	}

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/06 14:49:00 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/09 15:04:08 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <sys/stat.h>
 #include <signal.h>
 
-extern int	is_heredoc_sigint;
+extern int	g_is_heredoc_sigint;
 
 enum e_token_type
 {
