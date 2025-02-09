@@ -52,7 +52,7 @@ SRCS_FILES		=	srcs/main.c \
 					srcs/utils/utils_t_cmd_2.c \
 					srcs/utils/utils_t_io_fds.c \
 					srcs/utils/utils_t_token.c\
-					srcs/debug/print_struct.c \
+					srcs/debug/debug.c \
 					srcs/parser/parse_input.c \
 					srcs/parser/0.tokenization/lexer.c \
 					srcs/parser/0.tokenization/utils_lexer.c \
