@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:06:14 by jow               #+#    #+#             */
-/*   Updated: 2025/02/06 14:35:00 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/09 14:57:42 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ int	ft_exit(t_data *data, char **args)
 	int	exit_code;
 	int	argc;
 
-	argc = ft_get_argc(args);
+	if (args == NULL)
+		argc = 0;
+	else
+		argc = ft_get_argc(args);
 	if (argc > 2)
 	{
 		print_errno_str("exit", NULL, "too many arguments");

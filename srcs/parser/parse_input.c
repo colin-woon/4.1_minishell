@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:16:11 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/06 14:35:00 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/09 14:56:28 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		is_input_spaces(char *input);
 int	parse_input(t_data *data, char *input)
 {
 	if (input == NULL)
-		exit_process(data, data->last_exit_code);
+		ft_exit(data, NULL);
 	else if (is_input_spaces(input))
 		return (FAILURE);
 	add_history(input);
