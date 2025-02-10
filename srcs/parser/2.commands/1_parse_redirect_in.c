@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:28:10 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/06 14:39:44 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/10 18:36:04 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	parse_redirect_in(t_cmd **last_cmd, t_token **tokens, t_data *data)
 
 void	open_infile(t_io_fds *io, char *filename, t_data *data)
 {
+	if(io->infile)
+		free_ptr((void **)&io->infile);
 	io->infile = ft_strdup(filename);
 	io->fd_in = open(io->infile, O_RDONLY);
 	if (io->fd_in == -1)
