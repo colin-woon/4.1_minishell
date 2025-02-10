@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:16:11 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/09 14:56:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/10 23:02:28 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ int		parse_input(t_data *data, char *input);
 int		parse_tokens(t_token **token, t_data *data);
 int		is_input_spaces(char *input);
 
+/*
+- handles ctrl D with exit builtin
+- add_history is placed here to only record non-space inputs
+- tokenization handles labeling, quotes will remain in tokens
+- parse tokens will validate syntax, variable substitution and removes quotes
+- construct commands uses the tokens to make a pseudo AST for execution
+ */
 int	parse_input(t_data *data, char *input)
 {
 	if (input == NULL)

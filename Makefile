@@ -20,12 +20,11 @@ endif
 
 # Compiler and flags
 CC			=	gcc
-CFLAGS		=	$(INCLUDES) $(TEMP) $(DEBUG) $(FSAN_ADD)
-TEMP		=	-Wall -Werror -Wextra
+CFLAGS		=	$(INCLUDES) $(WFLAGS) $(DEBUG) $(FSAN)
+WFLAGS		=	-Wall -Werror -Wextra
 INCLUDES	=	-I$(INC_LIBFT) -I$(INC_DIR) $(READLINE_INC)
 DEBUG		=	-g3
-FSAN_ADD	=	-fsanitize=address
-FSAN_MEM	=	-fsanitize=memory
+FSAN		=	-fsanitize=address,leak
 RM			=	rm -rf
 
 # Output file name

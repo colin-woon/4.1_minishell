@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:05:49 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/10 16:56:56 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/10 23:08:57 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ If the compiler optimizes aggressively,
 it might store an INT TYPE in a register instead of updating memory immediately
 On some processors, updating an int might take multiple instructions,
 so the signal handler could interrupt the update, causing corrupted data.
+
+(registers are faster than RAM, they are high speed storages in the CPU itself)
+volatile tells the compiler to not optimize the variable,
+so it wont be stored in the register,
+so the variable is accessed directy to its memory location
  */
 volatile sig_atomic_t	g_is_heredoc_sigint;
 

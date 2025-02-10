@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:41:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/10 19:11:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 00:37:30 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,10 @@ int	is_invalid_command(t_cmd *cmd)
 
 	if (stat(cmd->path, &path_stat) != 0)
 	{
-		print_errno_str(cmd->name, NULL, strerror(errno));
+		if (!ft_strchr(cmd->path, '/'))
+			print_errno_str(cmd->name, NULL, "command not found");
+		else
+			print_errno_str(cmd->name, NULL, strerror(errno));
 		return (CMD_NOT_FOUND);
 	}
 	if (S_ISDIR(path_stat.st_mode))
