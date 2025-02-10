@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:41:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/06 14:49:59 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/10 14:55:54 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ void	setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore);
 int		is_invalid_command(t_cmd *cmd);
 int		wait_cmds(t_data *data);
 
+/*
+when wait returns -1, it indicates error, and errno is set accordingly
+ECHILD - no more child processes to wait
+EINT - interrupted by signal
+
+need to make sure all child processes are
+ */
 int	wait_cmds(t_data *data)
 {
 	int		exit_status;
@@ -26,7 +33,7 @@ int	wait_cmds(t_data *data)
 	close_fds(data->cmd, false, data);
 	temp = -1;
 	killed_child_pid = 0;
-	while (killed_child_pid != -1)
+	while (killed_child_pid != -1 || errno != ECHILD)
 	{
 		if (killed_child_pid == data->pid)
 			temp = exit_status;
