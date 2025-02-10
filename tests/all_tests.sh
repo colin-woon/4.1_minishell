@@ -65,8 +65,8 @@ run_test '-----NORMAL-----' 'cat < test_redir_in'
 echo "redirect with spaces in works" > "test redir in"
 run_test '------FILENAME WITH SPACES-------' 'cat < "test redir in"'
 
+echo 'SHOULD SHOW redirect in works'
 run_test '------MULTIPLE REDIR IN-------' 'cat < "test redir in" < test_redir_in'
-run_test 'SHOULD SHOW redirect in works' ''
 rm -rf "test redir in"
 
 run_test '------EMPTY-------' 'cat < /dev/null'
@@ -96,11 +96,21 @@ run_test '------EMPTY-------' 'echo "i should not print" > /dev/null'
 chmod +r test_redir_out
 run_test '------ERROR COMMAND-------' 'fakeecho "redirect is trying to work again" > test_redir_out'
 
-
+cat test_redir_out
+run_test '------MULTIPLE REDIR OUT-------' 'echo "only me" > test_redir_out > test_redir_out2'
+run_test 'SHOULD BE EMPTY' 'cat test_redir_out'
+run_test 'SHOULD SHOW only me' 'cat test_redir_out2'
 
 run_test '-----------APPEND------------' 'echo "append works" >> test_redir_out | cat test_redir_out'
+
+cat test_redir_out
+run_test '------MULTIPLE APPEND-------' 'echo "only me" >> test_redir_out2 >> test_redir_out'
+run_test 'SHOULD BE only me from last test' 'cat test_redir_out2'
+run_test 'SHOULD SHOW only me and old contents' 'cat test_redir_out'
+
 chmod -r test_redir_out
 run_test '------FILE READ-ONLY-------' 'echo "append is trying to work again" >> test_redir_out | cat test_redir_out'
+
 mkdir a_directory
 run_test '------ERROR DIRECTORY-------' 'echo "append is trying to work again" >> a_directory | cat a_directory'
 rm -rf a_directory
@@ -112,7 +122,20 @@ run_test '-----------COMBINATION IN & OUT------------' 'cat < test_redir_in > te
 run_test '-----------COMBINATION IN & APPEND------------' 'cat < test_redir_in >> test_redir_out | cat test_redir_out'
 run_test '-----------COMBINATION IN & OUT W PIPE------------' 'cat < test_redir_out | grep "works" > filtered_output'
 run_test '' 'cat filtered_output'
+
+cat test_redir_out
+run_test '------COMBINATION OUT(R) & APPEND(L)-------' 'echo "finally only me" >> test_redir_out2 > test_redir_out'
+run_test 'SHOULD BE only me from last test' 'cat test_redir_out2'
+run_test 'SHOULD SHOW finally only me' 'cat test_redir_out'
+
+cat test_redir_out
+run_test '------COMBINATION OUT(L) & APPEND(R)-------' 'echo "nothing is forever" > test_redir_out2 >> test_redir_out'
+run_test 'SHOULD BE EMPTY' 'cat test_redir_out2'
+run_test 'SHOULD SHOW finally only me & nothing is forever' 'cat test_redir_out'
+
+
 rm -rf test_redir_out
+rm -rf test_redir_out2
 rm -rf test_redir_in
 rm -rf filtered_output
 
