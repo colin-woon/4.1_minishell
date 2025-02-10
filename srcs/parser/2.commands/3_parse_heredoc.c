@@ -6,11 +6,28 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:05:49 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/09 15:07:40 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/10 16:56:56 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+When handling signals in C, there's a problem:
+signals can interrupt your code at any moment.
+If your program is in the middle of updating a variable and
+a signal handler changes that same variable,
+your program might read half-updated or corrupted data.
+
+To avoid this, C provides sig_atomic_t,
+a special type meant to be safe when used inside signal handlers.
+
+If the compiler optimizes aggressively,
+it might store an INT TYPE in a register instead of updating memory immediately
+On some processors, updating an int might take multiple instructions,
+so the signal handler could interrupt the update, causing corrupted data.
+ */
+volatile sig_atomic_t	g_is_heredoc_sigint;
 
 void		parse_heredoc(t_cmd **last_cmd, t_token **tokens);
 void		run_heredoc(t_io_fds *io);
@@ -82,7 +99,7 @@ static void	clean_up(char **input, char **temp)
 	free_ptr((void **)temp);
 }
 
-void	handle_heredoc_sigint(int sig)
+static void	handle_heredoc_sigint(int sig)
 {
 	(void)sig;
 	g_is_heredoc_sigint = 1;

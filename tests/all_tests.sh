@@ -17,170 +17,40 @@ make -C "$MAKEFILE_DIR"
 run_test() {
     DESCRIPTION="$1"
     TEST="$2"
-    echo "${BLUE}${DESCRIPTION}${END} ${GREEN}${TEST}${END}"
+    echo "${BLUE}${DESCRIPTION}${END}"
+	echo "${GREEN}${TEST}${END}"
     ../minishell -debug "${TEST}"
     echo
 }
 
-run_test '-----------ECHO-------------' 'echo "hello world '\''im'\'' a sigma"'
-# echo "${BLUE}BUILTINS${END}"
-# DESCRIPTION='---------PWD----------'
-# TEST='pwd'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug ${TEST}
-# echo
+run_test '---------PWD----------' 'pwd'
+run_test 'PWD with a flag' 'pwd -asdsd'
+run_test 'PWD with random values' 'pwd asd -asdsd'
 
-# DESCRIPTION='PWD with a flag'
-# TEST='pwd -asdsd'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
+run_test '-----------ECHO-------------' 'echo "hello world im a sigma"'
+run_test 'WITH VALID VAR IN DOUBLE QUOTES' 'echo hello world "\$USER" is a sigma'
+run_test 'WITH INVALID VAR IN DOUBLE QUOTES' 'echo hello world "$SNOOP_DOG" is a sigma'
+run_test 'WITH JUST VAR SYMBOL IN DOUBLE QUOTES' 'echo hello world "$" is a sigma'
+run_test 'WITH VALID VAR IN DOUBLE QUOTES BUT SURROUNDED WITH SINGLE QUOTES' "echo 'hello world \"\$USER\" is a sigma'"
+run_test 'WITH INVALID VAR IN DOUBLE QUOTES BUT SURROUNDED WITH SINGLE QUOTES' "echo 'hello world \"\$OBAMA\" is a sigma'"
+run_test 'WITH JUST VAR SYMBOL IN DOUBLE QUOTES BUT SURROUNDED WITH SINGLE QUOTES' "echo 'hello world \"\$\" is a sigma'"
+run_test 'WITH VALID VAR IN SINGLE QUOTES BUT SURROUNDED WITH DOUBLE QUOTES' 'echo "hello world '\''$USER'\'' is a sigma"'
+run_test 'WITH INVALID VAR IN SINGLE QUOTES BUT SURROUNDED WITH DOUBLE QUOTES' 'echo "hello world '\''$TRUMP'\'' is a sigma"'
+run_test 'WITH JUST VAR SYMBOL IN SINGLE QUOTES BUT SURROUNDED WITH DOUBLE QUOTES' 'echo "hello world '\''$'\'' is a sigma"'
+run_test 'JUST VAR SYMBOL' 'echo hello world $ is a sigma'
+run_test 'VALID VAR' 'echo hello world $USER is a sigma'
+run_test 'INVALID VAR' 'echo hello world $ASHKETCHUM is a sigma'
+run_test 'WEIRD VAR' 'echo hello world $= is a sigma'
+run_test 'UNCLOSED DOUBLE QUOTE' '"echo hello""'
+run_test 'UNCLOSED SINGLE QUOTE' "'echo hello''"
 
-# DESCRIPTION='PWD with random values'
-# TEST="pwd asd -asdsd"
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='-----------ECHO-------------'
-# TEST="'echo "hello world im a sigma"'"
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='WITH VALID VAR IN DOUBLE QUOTES'
-# TEST='echo hello world "\$USER" is a sigma'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='WITH INVALID VAR IN DOUBLE QUOTES'
-# TEST='echo hello world "$SNOOP_DOG" is a sigma'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='WITH JUST VAR SYMBOL IN DOUBLE QUOTES'
-# TEST='echo hello world "$" is a sigma'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='WITH VALID VAR IN DOUBLE QUOTES BUT SURROUNDED WITH SINGLE QUOTES'
-# TEST="echo 'hello world "\$USER" is a sigma'"
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='WITH INVALID VAR IN DOUBLE QUOTES BUT SURROUNDED WITH SINGLE QUOTES'
-# TEST="echo 'hello world "\$OBAMA" is a sigma'"
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='WITH JUST VAR SYMBOL IN DOUBLE QUOTES BUT SURROUNDED WITH SINGLE QUOTES'
-# TEST="echo 'hello world "\$" is a sigma'"
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='WITH VALID VAR IN SINGLE QUOTES BUT SURROUNDED WITH DOUBLE QUOTES'
-# TEST='echo "hello world '\$USER' is a sigma"'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='WITH INVALID VAR IN SINGLE QUOTES BUT SURROUNDED WITH DOUBLE QUOTES'
-# TEST='echo "hello world '\$TRUMP' is a sigma"'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='WITH JUST VAR SYMBOL IN SINGLE QUOTES BUT SURROUNDED WITH DOUBLE QUOTES'
-# TEST='echo "hello world '\$' is a sigma"'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='JUST VAR SYMBOL'
-# TEST='echo hello world $ is a sigma'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='VALID VAR'
-# TEST='echo hello world $USER is a sigma'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='INVALID VAR'
-# TEST='echo hello world $ASHKETCHUM is a sigma'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='WEIRD VAR'
-# TEST='echo hello world $= is a sigma'
-# echo "${GREEN}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# # ERROR
-# echo "${RED}ERRORS${END}"
-# DESCRIPTION='UNCLOSED DOUBLE QUOTE'
-# TEST='"echo hello""'
-# echo "${ORANGE}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='UNCLOSED SINGLE QUOTE'
-# TEST="'echo hello''"
-# echo "${ORANGE}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# ESCRIPTION='fake_command'
-# TEST='fake_command'
-# echo "${RED}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='bin/fake_command'
-# TEST='bin/fake_command'
-# echo "${RED}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='PIPED command with error'
-# TEST='ls | ls | imposter | ls'
-# echo "${RED}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='ABSOLUTE path'
-# TEST='/bin/ls -l -a'
-# echo "${ORANGE}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='RELATIVE path'
-# TEST='ls -la'
-# echo "${ORANGE}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='PIPED command'
-# TEST='ls | ls | ls | ls'
-# echo "${ORANGE}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
-
-# DESCRIPTION='PIPED command'
-# TEST='ls | ls | ls | ls'
-# echo "${ORANGE}${DESCRIPTION} ${TEST}${END}"
-# ../minishell -debug "${TEST}"
-# echo
+run_test '-----------COMMANDS------------' 'ls'
+run_test 'fake_command' 'fake_command'
+run_test 'bin/fake_command' 'bin/fake_command'
+run_test 'PIPED command with error' 'ls | ls | imposter | ls'
+run_test 'ABSOLUTE path' '/bin/ls -l -a'
+run_test 'RELATIVE path' 'ls -la'
+run_test 'PIPED command' 'ls | ls | ls | ls'
 
 # silences the command
 make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1

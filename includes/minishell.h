@@ -6,19 +6,33 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/09 15:28:59 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/10 17:10:38 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <signal.h>
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-extern int	g_is_heredoc_sigint;
+# include "libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <signal.h>
+
+# define TOKEN_BUFFER 4096
+# define HEREDOC_FILE "/tmp/.heredoc.txt"
+# define READ_END 0
+# define WRITE_END 1
+# define MSG_FAILURE "error"
+# define MSG_UNCLOSED_SINGLE_QUOTE "minishell: unexpected \
+EOF while looking for matching '"
+# define MSG_UNCLOSED_DOUBLE_QUOTE "minishell: unexpected \
+EOF while looking for matching \""
+# define MSG_EOF_ERROR "minishell: unexpected end of file"
+# define MSG_SYNTAX_ERROR "minishell: syntax error near unexpected token "
+# define MSG_MALLOC_ERROR "malloc error"
 
 enum e_token_type
 {
@@ -53,20 +67,6 @@ enum e_syntax_errors
 	PIPE_ERR_SYNTAX,
 	NEWLINE_ERR_SYNTAX
 };
-
-#define TOKEN_BUFFER 4096
-#define HEREDOC_FILE "/tmp/.heredoc.txt"
-#define READ_END 0
-#define WRITE_END 1
-
-#define MSG_FAILURE "error"
-#define MSG_UNCLOSED_SINGLE_QUOTE "minishell: unexpected \
-EOF while looking for matching '"
-#define MSG_UNCLOSED_DOUBLE_QUOTE "minishell: unexpected \
-EOF while looking for matching \""
-#define MSG_EOF_ERROR "minishell: unexpected end of file"
-#define MSG_SYNTAX_ERROR "minishell: syntax error near unexpected token "
-#define MSG_MALLOC_ERROR "malloc error"
 
 enum e_quote_status
 {
@@ -338,3 +338,5 @@ int			ft_unset(t_data *data, char **args);
 // BUILTINS - EXIT
 
 int			ft_exit(t_data *data, char **args);
+
+#endif
