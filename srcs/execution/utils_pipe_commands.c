@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:41:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/10 14:55:54 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/10 14:57:23 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ int		wait_cmds(t_data *data);
 when wait returns -1, it indicates error, and errno is set accordingly
 ECHILD - no more child processes to wait
 EINT - interrupted by signal
+(can try to prinf errno after the loop and see the
+difference in errno when interrupting a process with a signal)
 
-need to make sure all child processes are
+need to make sure all child processes are reaped,
+hence we used errno != ECHILD,
+since EINT can also cause wait to return -1
  */
 int	wait_cmds(t_data *data)
 {
