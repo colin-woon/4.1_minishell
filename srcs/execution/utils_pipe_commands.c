@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:41:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/10 14:57:23 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/10 19:11:28 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int	get_cmd_path(t_envp *envp, t_cmd *cmd)
 		absolute_path = ft_strjoin(all_paths[i], cmd_path);
 		if (access(absolute_path, F_OK | X_OK) == 0)
 		{
-			free_ptr((void **)&cmd->args[0]);
-			cmd->args[0] = ft_strdup(absolute_path);
+			free_ptr((void **)&cmd->path);
+			cmd->path = ft_strdup(absolute_path);
 			ft_free_2d_array(all_paths);
 			return (free_ptr((void **)&cmd_path), \
 			free_ptr((void **)&absolute_path), 1);
@@ -100,19 +100,19 @@ int	is_invalid_command(t_cmd *cmd)
 {
 	struct stat	path_stat;
 
-	if (stat(cmd->args[0], &path_stat) != 0)
+	if (stat(cmd->path, &path_stat) != 0)
 	{
-		print_errno_str(cmd->args[0], NULL, strerror(errno));
+		print_errno_str(cmd->name, NULL, strerror(errno));
 		return (CMD_NOT_FOUND);
 	}
 	if (S_ISDIR(path_stat.st_mode))
 	{
-		print_errno_str(cmd->args[0], NULL, "Is a directory");
+		print_errno_str(cmd->name, NULL, "Is a directory");
 		return (CMD_NOT_EXECUTABLE);
 	}
-	if (access(cmd->args[0], X_OK) != 0)
+	if (access(cmd->path, X_OK) != 0)
 	{
-		print_errno_str(cmd->args[0], NULL, strerror(errno));
+		print_errno_str(cmd->name, NULL, strerror(errno));
 		return (CMD_NOT_EXECUTABLE);
 	}
 	return (0);

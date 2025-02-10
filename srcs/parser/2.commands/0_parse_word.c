@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:38:15 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/06 14:36:38 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/10 19:12:35 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	parse_word(t_cmd **cmd, t_token **current_tokens)
 		|| last_cmd->name == NULL)
 		{
 			last_cmd->name = ft_strdup(temp->value);
+			last_cmd->path = ft_strdup(temp->value);
 			temp = temp->next;
 		}
 		else

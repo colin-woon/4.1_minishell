@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 09:17:36 by jow               #+#    #+#             */
-/*   Updated: 2025/02/05 20:09:50 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/10 18:56:56 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	delete_cmd(t_cmd *cmd, void (*del)(void **))
 {
 	if (cmd->name)
 		(*del)((void **)&cmd->name);
+	if (cmd->path)
+		(*del)((void **)&cmd->path);
 	if (cmd->args)
 		ft_free_2d_array(cmd->args);
 	if (cmd->io_fds)

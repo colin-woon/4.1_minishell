@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/06 14:49:47 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/10 19:13:31 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	execute_commands(t_data *data, t_cmd *cmd)
 	setup_pipefds(data->cmd, cmd);
 	redirect_stdio(cmd->io_fds, data);
 	close_fds(cmd, false, data);
-	if (ft_strchr(cmd->args[0], '/'))
+	if (ft_strchr(cmd->name, '/'))
 	{
 		exit_status = is_invalid_command(cmd);
 		if (exit_status)
@@ -116,7 +116,7 @@ int	execute_binary(t_data *data, t_cmd *cmd)
 	exit_status = is_invalid_command(cmd);
 	if (exit_status == CMD_NOT_FOUND || exit_status == CMD_NOT_EXECUTABLE)
 		return (exit_status);
-	if (execve(cmd->args[0], cmd->args, data->envp_array) == -1)
+	if (execve(cmd->path, cmd->args, data->envp_array) == -1)
 	{
 		print_errno_str("execve", NULL, strerror(errno));
 		return (FAILURE);
