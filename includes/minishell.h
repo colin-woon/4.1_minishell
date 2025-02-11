@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 18:32:38 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 21:39:03 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ void		replace_variable(t_token *token_node, \
 // PARSE INPUT - Utils Parse Token 2b - Helper Functions
 
 int			is_next_invalid(char next_token_char);
-int			is_symbol_only_in_single_quotes(char *token_value, int i_current);
+int			is_symbol_only_in_quotes(char *token_value, int i_current);
 void		remove_substring(char *str, char *substr);
 char		*replace_substring(char *str, char *substr, char *replacement);
 char		*extract_var_without_symbol(char *var_str, int *var_name_len);

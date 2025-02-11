@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/06 14:35:00 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 21:41:24 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,14 @@ void	substitute_variable(t_data *data, t_token **token_list)
 	}
 }
 
+/*
+No quote or double quote will substitute variable
+ */
 int	is_valid_variable(char *value, int i, int is_quote)
 {
 	if (value[i] == '$'
 		&& !is_next_invalid(value[i + 1])
-		&& !is_symbol_only_in_single_quotes(value, i)
+		&& !is_symbol_only_in_quotes(value, i)
 		&& (!is_quote || is_quote == DOUBLE_QUOTE))
 		return (1);
 	return (0);

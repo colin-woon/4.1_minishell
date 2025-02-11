@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:45:06 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 18:34:17 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 18:44:27 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,16 @@ void	detect_expandable_variable(t_token *token_node)
 }
 
 /*
-Invalid Operators:
+INVALID OPERATORS:
 ||,
+>|, <|, <<|, >>| (ANY REDIR before PIPE)
+|(NULL), >(NULL), <(NULL), <<(NULL), >>(NULL) (ANY SEPERATORS before NULL)
 
+ERROR MESSAGES:
+cwoon@u82z10s02:~/submissions/minishell$ |
+bash: syntax error near unexpected token `|'
+cwoon@u82z10s02:~/submissions/minishell$ cat >>
+bash: syntax error near unexpected token `newline'
  */
 int	is_consecutive_operator(t_token *token_node)
 {

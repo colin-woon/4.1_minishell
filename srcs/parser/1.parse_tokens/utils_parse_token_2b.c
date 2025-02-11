@@ -6,18 +6,26 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:56:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 21:41:28 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int		is_next_invalid(char next_token_char);
-int		is_symbol_only_in_single_quotes(char *token_value, int i_current);
+int		is_symbol_only_in_quotes(char *token_value, int i_current);
 void	remove_substring(char *str, char *substr);
 char	*replace_substring(char *str, char *substr, char *replacement);
 char	*extract_var_without_symbol(char *var_str, int *var_name_len);
 
+/*
+$$ (supposed to expand to PID of current shell in bash)
+not supposed to substitute:
+- $<NULL>
+- $<SPACE>
+- $=
+- $$
+ */
 int	is_next_invalid(char next_token_char)
 {
 	if (next_token_char == '$' \
@@ -29,12 +37,17 @@ int	is_next_invalid(char next_token_char)
 		return (0);
 }
 
-int	is_symbol_only_in_single_quotes(char *token_value, int i_current)
+/*
+refers to '$' || "$"
+ */
+int	is_symbol_only_in_quotes(char *token_value, int i_current)
 {
 	if (i_current > 0)
 	{
-		if (token_value[i_current - 1] == '\'' \
-		&& token_value[i_current + 1] == '\'')
+		if ((token_value[i_current - 1] == '\'' && \
+		token_value[i_current + 1] == '\'') \
+		|| (token_value[i_current - 1] == '\"' && \
+		token_value[i_current + 1] == '\"'))
 			return (1);
 		else
 			return (0);
@@ -95,6 +108,11 @@ char	*replace_substring(char *str, char *substr, char *replacement)
 		return (str);
 }
 
+/*
+eg: $USER
+
+returns USER without the $
+ */
 char	*extract_var_without_symbol(char *var_str, int *var_name_len)
 {
 	while (var_str[(*var_name_len)])
