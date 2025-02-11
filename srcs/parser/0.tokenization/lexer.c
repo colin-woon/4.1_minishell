@@ -6,17 +6,18 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 23:59:17 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 17:14:07 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 18:35:28 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		tokenization(t_data *data, char *input);
-int		save_word_or_seperator(int *i_current, \
+int			tokenization(t_data *data, char *input);
+static int	save_word_or_seperator(int *i_current, \
 		char *input, int from, t_data *data);
-void	save_word(int from, char *input, int i_current, t_token **tokens);
-void	save_seperator(int i_current, int type, char *input, t_token **tokens);
+static void	save_word(int from, char *input, int i_current, t_token **tokens);
+static void	save_seperator(int i_current, int type, \
+		char *input, t_token **tokens);
 
 /*
 As long as no quotes, a word or seperator will be detected,
@@ -78,8 +79,8 @@ Includes the quotes when saving a word
 --	Dont have to worry about spaces between quotes as i_current will iterate
 	over them due to the check_quote logic from the parent function
 
-- For type > WORD, its referring to all seperators, can refer to e_token_type
-in header file,
+- For type > WORD, its referring to all seperators,
+can refer to e_token_type in header file,
 
 - from = (*i_current) + 1; , +1 helps to move on to the next char
 	since the current one is processed
@@ -107,7 +108,7 @@ int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data)
 /*
 i_current - from + 1 = ft_strlen(word)
  */
-void	save_word(int from, char *input, int i_current, t_token **tokens)
+static void	save_word(int from, char *input, int i_current, t_token **tokens)
 {
 	int		i;
 	char	*word;
@@ -122,7 +123,8 @@ void	save_word(int from, char *input, int i_current, t_token **tokens)
 	append_token(tokens, create_token(word, WORD));
 }
 
-void	save_seperator(int i_current, int type, char *input, t_token **tokens)
+static void	save_seperator(int i_current, int type, \
+	char *input, t_token **tokens)
 {
 	int		i;
 	char	*sep;

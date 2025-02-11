@@ -6,15 +6,15 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 18:16:11 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/10 23:02:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 18:33:06 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		parse_input(t_data *data, char *input);
-int		parse_tokens(t_token **token, t_data *data);
-int		is_input_spaces(char *input);
+int			parse_input(t_data *data, char *input);
+static int	parse_tokens(t_token **token, t_data *data);
+static int	is_input_spaces(char *input);
 
 /*
 - handles ctrl D with exit builtin
@@ -45,7 +45,7 @@ int	parse_input(t_data *data, char *input)
 	return (SUCCESS);
 }
 
-int	parse_tokens(t_token **token, t_data *data)
+static int	parse_tokens(t_token **token, t_data *data)
 {
 	if (validate_syntax(token) == FAILURE)
 		return (FAILURE);
@@ -54,7 +54,7 @@ int	parse_tokens(t_token **token, t_data *data)
 	return (SUCCESS);
 }
 
-int	is_input_spaces(char *input)
+static int	is_input_spaces(char *input)
 {
 	int	i;
 

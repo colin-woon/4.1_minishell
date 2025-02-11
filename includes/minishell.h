@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 16:53:40 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 18:32:38 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,11 +203,6 @@ int			parse_input(t_data *data, char *input);
 // PARSE INPUT - TOKENIZATION
 
 int			tokenization(t_data *data, char *input);
-int			save_word_or_seperator(int *i_current, char *input, \
-			int from, t_data *data);
-void		save_word(int from, char *input, int i_current, t_token **tokens);
-void		save_seperator(int i_current, int type, char *input, \
-			t_token **tokens);
 
 // PARSE INPUT - TOKENIZATION - Utils Tokenization
 

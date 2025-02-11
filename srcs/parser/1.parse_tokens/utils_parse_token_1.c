@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:45:06 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 18:21:26 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 18:34:17 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	detect_expandable_variable(t_token *token_node)
 		i++;
 	}
 }
+
 /*
 Invalid Operators:
 ||,

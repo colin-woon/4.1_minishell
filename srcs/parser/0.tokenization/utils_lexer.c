@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:17:46 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 15:51:08 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 18:33:44 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	check_quote(int is_quote, char *input, int i_current)
 		is_quote = NO_QUOTE;
 	return (is_quote);
 }
+
 /*
 ELIF Order matters for << and >>
  */
