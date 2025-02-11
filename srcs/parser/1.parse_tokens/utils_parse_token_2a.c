@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 21:41:24 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 21:49:27 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ int	is_valid_variable(char *value, int i, int is_quote)
 	return (0);
 }
 
+/*
+IF get_variable is NULL, remove the variable_name
+eg: "$FAKE" > "" (reduced to atoms)
+ELSE
+	substitute dat thang
+ */
 void	replace_variable(t_token *token_node, char *variable_name, \
 char *variable_result)
 {
