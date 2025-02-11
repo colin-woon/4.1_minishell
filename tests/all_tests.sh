@@ -133,6 +133,16 @@ run_test '------COMBINATION OUT(L) & APPEND(R)-------' 'echo "nothing is forever
 run_test 'SHOULD BE EMPTY' 'cat test_redir_out2'
 run_test 'SHOULD SHOW finally only me & nothing is forever' 'cat test_redir_out'
 
+echo "ADDITONAL TESTS"
+run_test 'WEIRD ASS SEPERATORS' 'cat < | wc -l'
+run_test 'WEIRD ASS SEPERATORS' 'cat << |'
+run_test 'WEIRD ASS SEPERATORS' 'cat > | wc -l'
+run_test 'WEIRD ASS SEPERATORS' 'cat >> |'
+run_test 'WEIRD ASS SEPERATORS' 'pwd | >'
+run_test 'WEIRD ASS SEPERATORS' 'pwd | <'
+run_test 'WEIRD ASS SEPERATORS' 'pwd | >>'
+run_test 'WEIRD ASS SEPERATORS' 'pwd | <<'
+
 
 rm -rf test_redir_out
 rm -rf test_redir_out2

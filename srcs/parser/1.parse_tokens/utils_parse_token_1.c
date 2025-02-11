@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 15:45:06 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/04 15:38:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 18:21:26 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int		is_consecutive_operator(t_token *token_node);
 
 /*
 Detects any syntax errors with operators such as < << > >> |
-Also checks for any expandable variables ($)
+Also checks for any expandable variables ($) except right after heredoc
+
+- If first token is |, WRONG
+- Any consecutive seperators, ALSO WRONG
  */
 int	validate_syntax(t_token **token)
 {
@@ -40,6 +43,10 @@ int	validate_syntax(t_token **token)
 	return (SUCCESS);
 }
 
+/*
+Checks for any expandable variables ($) except right after heredoc
+eg: cat << $USER ---- heredoc limiter is $USER itself
+ */
 void	detect_expandable_variable(t_token *token_node)
 {
 	int	i;
@@ -57,7 +64,11 @@ void	detect_expandable_variable(t_token *token_node)
 		i++;
 	}
 }
+/*
+Invalid Operators:
+||,
 
+ */
 int	is_consecutive_operator(t_token *token_node)
 {
 	int	is_true;
@@ -66,6 +77,7 @@ int	is_consecutive_operator(t_token *token_node)
 	if (token_node->prev)
 	{
 		if ((token_node->type == PIPE && token_node->prev->type == PIPE) \
+		|| (token_node->type == PIPE && token_node->prev->type > PIPE) \
 		|| (token_node->type > PIPE && token_node->prev->type > PIPE) \
 		|| (token_node->type == EOF && token_node->prev->type >= PIPE))
 			is_true = 1;
