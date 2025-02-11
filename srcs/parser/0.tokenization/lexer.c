@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 23:59:17 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/06 14:22:06 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 17:14:07 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@ int		save_word_or_seperator(int *i_current, \
 void	save_word(int from, char *input, int i_current, t_token **tokens);
 void	save_seperator(int i_current, int type, char *input, t_token **tokens);
 
+/*
+As long as no quotes, a word or seperator will be detected,
+meaning if number of quotes are EVEN, the index will increment accordingly with
+from & i_current
+
+After saving word/seperator, from will increment accordingly,
+i_current is also incremented in the function
+
+!= NO_QUOTE handles unclosed quotes
+
+QUOTES ARE SAVED TOGETHER AT THIS POINT
+ */
 int	tokenization(t_data *data, char *input)
 {
 	int	i_current;
@@ -46,9 +58,32 @@ int	tokenization(t_data *data, char *input)
 	return (SUCCESS);
 }
 
-// includes the quotes when saving a word
-// for type > WORD, its referring to all seperators, can refer to e_token_type
-// in header file,
+/*
+Includes the quotes when saving a word
+
+- Detects seperator first, since this function relies on from and i_current:
+--	NORMAL WORDS: seperator is the NULL terminator (-1 in our case),
+	from is the first char b4 any seperator
+	and i_current will be at the last char,
+	so the function will keep exiting
+	until it detects the NULL terminator as a seperator,
+	then it saves both the word and the seperator as two different tokens
+
+--	NORMAL SEPERATORS: the word and seperator is saved seperately
+	eg: cat < Makefile
+
+--	CONSECUTIVE WORDS AND SEPERATORS: same as NORMAL WORDS scenario
+	eg: cat<Makefile
+
+--	Dont have to worry about spaces between quotes as i_current will iterate
+	over them due to the check_quote logic from the parent function
+
+- For type > WORD, its referring to all seperators, can refer to e_token_type
+in header file,
+
+- from = (*i_current) + 1; , +1 helps to move on to the next char
+	since the current one is processed
+ */
 int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data)
 {
 	int	type;
@@ -69,6 +104,9 @@ int	save_word_or_seperator(int *i_current, char *input, int from, t_data *data)
 	return (from);
 }
 
+/*
+i_current - from + 1 = ft_strlen(word)
+ */
 void	save_word(int from, char *input, int i_current, t_token **tokens)
 {
 	int		i;
