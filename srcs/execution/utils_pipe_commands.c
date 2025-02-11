@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:41:03 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 00:37:30 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 16:46:03 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		get_cmd_path(t_envp *envp, t_cmd *cmd);
 void	setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore);
-int		is_invalid_command(t_cmd *cmd);
+int		is_invalid_binary_command(t_cmd *cmd);
 int		wait_cmds(t_data *data);
 
 /*
@@ -64,7 +64,7 @@ void	setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore)
 int	get_cmd_path(t_envp *envp, t_cmd *cmd)
 {
 	char	**all_paths;
-	char	*cmd_path;
+	char	*cmd_as_path;
 	char	*absolute_path;
 	int		i;
 
@@ -72,31 +72,24 @@ int	get_cmd_path(t_envp *envp, t_cmd *cmd)
 	all_paths = ft_split(get_our_envp(envp, "PATH"), ':');
 	if (all_paths == NULL)
 		return (0);
-	cmd_path = ft_strjoin("/", cmd->name);
+	cmd_as_path = ft_strjoin("/", cmd->name);
 	while (all_paths[++i])
 	{
-		absolute_path = ft_strjoin(all_paths[i], cmd_path);
+		absolute_path = ft_strjoin(all_paths[i], cmd_as_path);
 		if (access(absolute_path, F_OK | X_OK) == 0)
 		{
 			free_ptr((void **)&cmd->path);
 			cmd->path = ft_strdup(absolute_path);
 			ft_free_2d_array(all_paths);
-			return (free_ptr((void **)&cmd_path), \
+			return (free_ptr((void **)&cmd_as_path), \
 			free_ptr((void **)&absolute_path), 1);
 		}
 		free_ptr((void **)&absolute_path);
 	}
-	return (ft_free_2d_array(all_paths), free_ptr((void **)&cmd_path), 0);
+	return (ft_free_2d_array(all_paths), free_ptr((void **)&cmd_as_path), 0);
 }
 
-/*
-if (!get_cmd_path(data, cmd))
-{
-	print_errno_str(cmd->args[0], strerror(errno));
-	return (CMD_NOT_FOUND);
-}
-*/
-int	is_invalid_command(t_cmd *cmd)
+int	is_invalid_binary_command(t_cmd *cmd)
 {
 	struct stat	path_stat;
 

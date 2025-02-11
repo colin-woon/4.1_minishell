@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/10 17:10:38 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 16:53:40 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,7 @@ void		parse_pipe(t_cmd **cmd, t_token **current_tokens);
 
 void		execute(t_data *data);
 int			execute_builtin(t_data *data, t_cmd *cmd);
-int			execute_pipes(t_data *data);
+int			execute_processes(t_data *data);
 void		execute_commands(t_data *data, t_cmd *cmd);
 int			execute_binary(t_data *data, t_cmd *cmd);
 
@@ -303,7 +303,7 @@ void		redirect_stdio(t_io_fds *io, t_data *data);
 
 int			get_cmd_path(t_envp *envp, t_cmd *cmd);
 void		setup_pipefds(t_cmd *cmds_list, t_cmd *cmd_to_ignore);
-int			is_invalid_command(t_cmd *cmd);
+int			is_invalid_binary_command(t_cmd *cmd);
 int			wait_cmds(t_data *data);
 
 // EXECUTION - Utils Convert Env

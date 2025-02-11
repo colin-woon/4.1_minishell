@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/10 19:13:31 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/11 16:53:40 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	execute(t_data *data);
 int		execute_builtin(t_data *data, t_cmd *cmd);
-int		execute_pipes(t_data *data);
+int		execute_processes(t_data *data);
 void	execute_commands(t_data *data, t_cmd *cmd);
 int		execute_binary(t_data *data, t_cmd *cmd);
 
@@ -25,16 +25,7 @@ void	execute(t_data *data)
 	is_exit = prepare_commands(data);
 	if (is_exit != CMD_NOT_FOUND)
 		return ;
-	if (!data->cmd->has_pipe && !data->cmd->prev \
-	&& is_valid_files(data->cmd->io_fds))
-	{
-		redirect_stdio(data->cmd->io_fds, data);
-		is_exit = execute_builtin(data, data->cmd);
-		restore_stdio(data->cmd->io_fds, data);
-	}
-	if (is_exit != CMD_NOT_FOUND)
-		return ;
-	data->last_exit_code = execute_pipes(data);
+	data->last_exit_code = execute_processes(data);
 	return ;
 }
 
@@ -62,7 +53,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	return (is_exit);
 }
 
-int	execute_pipes(t_data *data)
+int	execute_processes(t_data *data)
 {
 	t_cmd	*cmd;
 	int		process_exit_code;
@@ -96,7 +87,7 @@ void	execute_commands(t_data *data, t_cmd *cmd)
 	close_fds(cmd, false, data);
 	if (ft_strchr(cmd->name, '/'))
 	{
-		exit_status = is_invalid_command(cmd);
+		exit_status = is_invalid_binary_command(cmd);
 		if (exit_status)
 			exit_process(data, exit_status);
 	}
@@ -113,7 +104,7 @@ int	execute_binary(t_data *data, t_cmd *cmd)
 {
 	int		exit_status;
 
-	exit_status = is_invalid_command(cmd);
+	exit_status = is_invalid_binary_command(cmd);
 	if (exit_status == CMD_NOT_FOUND || exit_status == CMD_NOT_EXECUTABLE)
 		return (exit_status);
 	if (execve(cmd->path, cmd->args, data->envp_array) == -1)
