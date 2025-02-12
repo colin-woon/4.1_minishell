@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:43:52 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 00:39:37 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/12 19:36:25 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ void	parse_redirect_out(t_cmd **last_cmd, t_token **tokens, t_data *data)
 void	open_outfile_truncate(t_io_fds *io, char *filename, t_data *data)
 {
 	if (io->outfile)
+	{
+		if (io->fd_out == -1)
+			return ;
 		free_ptr((void **)&io->outfile);
+	}
 	io->outfile = ft_strdup(filename);
 	io->fd_out = open(io->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (io->fd_out == -1)

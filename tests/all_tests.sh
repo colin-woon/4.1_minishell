@@ -147,6 +147,12 @@ run_test 'WEIRD ASS SEPERATORS' 'pwd | <'
 run_test 'WEIRD ASS SEPERATORS' 'pwd | >>'
 run_test 'WEIRD ASS SEPERATORS' 'pwd | <<'
 
+run_test 'empty files' 'cat /dev/urandom | head -1 > outs/test-$num.txt 2> outs/test-$num-tty.txt'
+run_test 'consecutive redir out' 'cat Makefile > abc/file1 > abc/file2 > abc/file3'
+run_test 'consecutive redir in' 'cat Makefile < abc/file1 < abc/file2 < abc/file3'
+run_test 'consecutive append out' 'cat Makefile >> abc/file1 >> abc/file2 >> abc/file3'
+
+
 
 rm -rf test_redir_out
 rm -rf test_redir_out2
