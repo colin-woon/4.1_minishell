@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:38:15 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/10 19:12:35 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/12 17:29:49 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@ void	parse_word(t_cmd **cmd, t_token **tokens);
 int		fill_cmd_args(t_token **current_tokens, t_cmd *last_cmd);
 int		count_args_in_tokens(t_token *token);
 
+/*
+TBH at this point the VARIABLE type is useless after variable substitution,
+couldve changed it back to WORD
+
+As long as its the first command, the name and path is recorded down first,
+otherwise, we can proceed to fill in the cmd args
+
+tokens are also iterated in the fill_cmd_args function,
+all WORD and VARIABLE type is considered as args
+ */
 void	parse_word(t_cmd **cmd, t_token **current_tokens)
 {
 	t_token	*temp;
@@ -38,6 +48,10 @@ void	parse_word(t_cmd **cmd, t_token **current_tokens)
 	*current_tokens = temp;
 }
 
+/*
+in execve(), args[0] will always be the command name itself,
+then only followed by its flags
+ */
 int	fill_cmd_args(t_token **current_tokens, t_cmd *last_cmd)
 {
 	int		i;

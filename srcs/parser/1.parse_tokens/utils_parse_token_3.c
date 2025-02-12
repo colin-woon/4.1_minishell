@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 18:33:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/02 17:23:30 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/12 17:00:24 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void	handle_quotes(t_token **token_list)
 	}
 }
 
+/*
+The last if statement ensures that consecutive quotes
+are also ignored to be removed on the next loop iteration
+ */
 void	remove_all_quotes(char *value, int is_quote_old, int *i)
 {
 	int	is_quote_new;
