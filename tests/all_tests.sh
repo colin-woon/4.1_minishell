@@ -152,7 +152,8 @@ run_test 'consecutive redir out' 'cat Makefile > abc/file1 > abc/file2 > abc/fil
 run_test 'consecutive redir in' 'cat Makefile < abc/file1 < abc/file2 < abc/file3'
 run_test 'consecutive append out' 'cat Makefile >> abc/file1 >> abc/file2 >> abc/file3'
 
-
+run_test 'empty single quotes' ''\'''\'''
+run_test 'empty double quotes' '""'
 
 rm -rf test_redir_out
 rm -rf test_redir_out2
