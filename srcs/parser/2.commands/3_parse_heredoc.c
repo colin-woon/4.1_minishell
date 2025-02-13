@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:05:49 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/10 23:08:57 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/13 15:01:04 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ void	parse_heredoc(t_cmd **last_cmd, t_token **tokens)
 	temp = *tokens;
 	cmd = get_last_cmd(*last_cmd);
 	init_io_fds(cmd);
+	if (cmd->io_fds->heredoc_limiter)
+	{
+		free_ptr((void **)&cmd->io_fds->heredoc_limiter);
+		unlink(cmd->io_fds->infile);
+	}
 	cmd->io_fds->infile = HEREDOC_FILE;
 	cmd->io_fds->heredoc_limiter = ft_strdup(temp->next->value);
 	cmd->io_fds->fd_in = open(cmd->io_fds->infile, \
