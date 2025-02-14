@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/13 16:06:09 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/14 11:30:23 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ int		execute_processes(t_data *data);
 void	execute_commands(t_data *data, t_cmd *cmd);
 int		execute_binary(t_data *data, t_cmd *cmd);
 
+/*
+Built-in is executed here also as commands such as
+- exit
+- export
+- unset
+only works as expected in the parent process
+ */
 void	execute(t_data *data)
 {
 	int	is_exit;

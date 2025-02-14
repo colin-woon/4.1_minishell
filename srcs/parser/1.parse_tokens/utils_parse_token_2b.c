@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:56:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 21:41:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/14 11:59:15 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,17 @@ not supposed to substitute:
 - $<SPACE>
 - $=
 - $$
+- $USER.txt (only substitute the USER part)
+
+$_ is accepted
  */
 int	is_next_invalid(char next_token_char)
 {
 	if (next_token_char == '$' \
 	|| next_token_char == ' ' \
 	|| next_token_char == '=' \
-	|| next_token_char == '\0')
+	|| next_token_char == '\0'\
+	|| (next_token_char != '_' && !ft_isalnum(next_token_char)))
 		return (1);
 	else
 		return (0);
