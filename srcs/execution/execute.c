@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/14 11:30:23 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 00:10:54 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,10 @@ void	execute_commands(t_data *data, t_cmd *cmd)
 	exit_process(data, exit_status);
 }
 
+/*
+Runs command checking again to detect non recognized commands that missed out
+from execute builtin function
+*/
 int	execute_binary(t_data *data, t_cmd *cmd)
 {
 	int		exit_status;
