@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:18:29 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/12 18:27:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 00:12:25 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	prepare_commands(t_data *data)
 		return (1);
 	return (CMD_NOT_FOUND);
 }
+
 /*
 if both infile and outfile is NULL, means no files, which is fine
 

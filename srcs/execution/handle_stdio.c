@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:41:10 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/14 11:50:53 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 00:12:45 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	redirect_stdio(t_io_fds *io, t_data *data)
 		}
 	}
 }
+
 /*
 duplicates the stdin and stdout to be restored later since dup2 will close it
 */
