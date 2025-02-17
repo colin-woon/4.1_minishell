@@ -163,6 +163,17 @@ rm -rf test_redir_out2
 rm -rf test_redir_in
 rm -rf filtered_output
 
+run_test 'Should SUB' 'echo $?'
+run_test 'Should SUB' 'echo "$?"'
+run_test 'Dont SUB' 'echo '\''$?'\'''
+
+run_test 'Should SUB' 'echo $?abcd'
+run_test 'Should SUB' 'echo "$?abcd"'
+run_test 'Dont SUB' 'echo '\''$?abcd'\'''
+
+run_test 'Correct: ?efgh' 'echo $abcd?efgh'
+run_test 'Correct: ?efgh' 'echo "$abcd?efgh"'
+run_test 'Correct: $abcd?efgh' 'echo '\''$abcd?efgh'\'''
 
 # silences the command
 make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1
