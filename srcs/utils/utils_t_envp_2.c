@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 09:07:49 by jow               #+#    #+#             */
-/*   Updated: 2025/02/04 09:15:50 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/17 18:22:13 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ t_envp	*search_envp(t_envp *head, char *var_name);
 void	delete_envp_node(t_envp **head, char *var_name);
 void	append_envp(t_envp **head, t_envp *new_node);
 
+/*
+** APPENDS a new node for the envp list at the end
+*/
 void	append_envp(t_envp **head, t_envp *new_node)
 {
 	t_envp	*temp;
@@ -60,6 +63,10 @@ void	delete_envp_node(t_envp **head, char *var_name)
 	}
 }
 
+/*
+** Search for a variable(var_name) in the envp list
+** Return the node if found, else return NULL
+*/
 t_envp	*search_envp(t_envp *head, char *var_name)
 {
 	t_envp	*temp;

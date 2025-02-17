@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:50:34 by jow               #+#    #+#             */
-/*   Updated: 2025/02/03 16:24:49 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/17 18:15:55 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int	ft_env(t_data *data, char **args);
 
+/*
+Prints the environment variables from envp array
+*/
 int	ft_env(t_data *data, char **args)
 {
 	int	i;
