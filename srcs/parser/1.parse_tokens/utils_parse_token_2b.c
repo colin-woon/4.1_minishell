@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:56:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 18:50:43 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 18:52:03 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		is_next_invalid\
 int		is_symbol_only_in_quotes(char *token_value, int i_current);
 void	remove_substring(char *str, char *substr);
 char	*replace_substring(char *str, char *substr, char *replacement);
-char	*extract_var(char *var_str, int with_symbol);
+char	*extract_var(char *var_str);
 
 /*
 $$ (supposed to expand to PID of current shell in bash)
@@ -126,13 +126,11 @@ eg: $USER
 
 returns USER without the $ or with $
  */
-char	*extract_var(char *var_str, int with_symbol)
+char	*extract_var(char *var_str)
 {
 	int	i;
 
 	i = 0;
-	if (with_symbol)
-		i = 0;
 	if (!ft_strncmp(var_str, "$?", 2))
 		return (ft_substr(var_str, 0, (size_t)i + 2));
 	while (var_str[i])

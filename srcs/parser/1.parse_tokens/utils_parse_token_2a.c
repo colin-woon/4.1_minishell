@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 18:46:28 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 18:52:31 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	substitute_variable(t_data *data, t_token **token_list)
 			{
 				is_quote = check_quote(is_quote, temp->value, i);
 				if (is_valid_variable(temp->value, i, is_quote))
-					i += replace_variable(temp, extract_var(temp->value + i, true), get_variable(temp->value + i, data));
+					i += replace_variable(temp, extract_var(temp->value + i), get_variable(temp->value + i, data));
 				else
 					i++;
 			}
@@ -102,7 +102,7 @@ char	*get_variable(char *var_str, t_data *data)
 	char	*value;
 	char	*extracted_var;
 
-	extracted_var = extract_var(var_str, false);
+	extracted_var = extract_var(var_str);
 	if (!ft_strncmp(extracted_var, "$?", 2))
 	{
 		free_ptr((void **)&extracted_var);

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 18:49:43 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 18:52:20 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ int			is_next_invalid(char next_token_char, \
 int			is_symbol_only_in_quotes(char *token_value, int i_current);
 void		remove_substring(char *str, char *substr);
 char		*replace_substring(char *str, char *substr, char *replacement);
-char		*extract_var(char *var_str, int with_symbol);
+char		*extract_var(char *var_str);
 
 // PARSE INPUT - Utils Parse Token 3 - Handle Quotes
 
