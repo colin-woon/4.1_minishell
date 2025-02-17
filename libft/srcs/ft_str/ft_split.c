@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 15:39:05 by cwoon             #+#    #+#             */
-/*   Updated: 2024/09/18 17:04:03 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 20:24:06 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ char	**ft_split(const char *s, char c)
 	char	**strings;
 	int		nth_string;
 
+	if (!s)
+		return (NULL);
 	nth_string = 0;
 	strings = (char **)malloc(sizeof(char *) \
 			* (count_strings((char *)s, c) + 1));
