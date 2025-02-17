@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_t_envp_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:32:57 by jow               #+#    #+#             */
-/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 18:08:54 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ static int	count_envp(t_envp *envp)
 	return (i);
 }
 
+/*
+** Convert envp linked list to envp array
+*/
 char	**convert_envp(t_data *data, t_envp *envp)
 {
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 02:11:12 by jow               #+#    #+#             */
-/*   Updated: 2025/02/10 15:25:21 by jow              ###   ########.fr       */
+/*   Updated: 2025/02/17 18:16:41 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 int	ft_echo(t_data *data, char **args);
 
+/*
+** The echo builtin writes any specified operands, separated by a single space
+	=> if (args[i + 1] && args[i + 1][0])
+	- to check if the next argument is not NULL
+	- Handles cases like:
+		- echo Hello $BIGBIG123 world
+		- will output "Hello world" instead of "Hello  world"
+*/
 int	ft_echo(t_data *data, char **args)
 {
 	int	i;

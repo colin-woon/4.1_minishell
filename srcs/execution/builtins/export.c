@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: jow <jow@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:12:41 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/05 20:10:46 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 18:19:22 by jow              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static char	*get_keyword(char *arg)
 	return (keyword);
 }
 
+/*
+** Check if the argument is a valid environment variable
+** - Must start with an alphabetic character or an underscore
+** - Subsequent characters can be alphanumeric or an underscore
+*/
 int	check_valid_env_var(char *env_var)
 {
 	int	i;
