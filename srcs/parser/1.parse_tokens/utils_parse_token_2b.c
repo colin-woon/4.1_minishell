@@ -6,14 +6,13 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:56:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 19:01:23 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 19:19:31 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		is_next_invalid\
-		(char next_token_char, int comparing_with_symbol_before);
+int		is_next_invalid(char next_token_char, int comparing_with_symbol_before);
 int		is_symbol_only_in_quotes(char *token_value, int i_current);
 void	remove_substring(char *str, char *substr);
 char	*replace_substring(char *str, char *substr, char *replacement);
@@ -32,13 +31,13 @@ $_ is accepted
  */
 int	is_next_invalid(char next_token_char, int comparing_with_symbol_before)
 {
-	int is_invalid;
+	int	is_invalid;
 
 	is_invalid = 0;
 	if (next_token_char == '$' \
 	|| next_token_char == ' ' \
 	|| next_token_char == '=' \
-	|| next_token_char == '\0'
+	|| next_token_char == '\0' \
 	|| (next_token_char != '_' \
 	&& !ft_isalnum(next_token_char)))
 		is_invalid = 1;
@@ -136,7 +135,7 @@ char	*extract_var(char *var_str)
 	i++;
 	while (var_str[i])
 	{
-		if (is_next_invalid(var_str[i], false)
+		if (is_next_invalid(var_str[i], false) \
 		|| var_str[i] == '\'')
 			break ;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 18:52:20 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 19:17:56 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,15 @@ typedef struct s_data
 
 // DEBUG - Printing UNCOMMENT ALL TO USE INCLUDING THE FILE ITSELF
 
-void		print_tokens(t_token *tokens);
-void		print_envp_array(t_data *data);
-void		print_value_str(char *message, char *value);
-void		print_value_int(char *message, int value);
-void		print_value_char(char *message, char value);
-void		print_cmd(t_cmd *cmd);
-void		print_all_cmds(t_cmd *head);
-void		print_io_fds(t_io_fds *io_fds);
-void		print_envp_list(t_envp *head);
+// void		print_tokens(t_token *tokens);
+// void		print_envp_array(t_data *data);
+// void		print_value_str(char *message, char *value);
+// void		print_value_int(char *message, int value);
+// void		print_value_char(char *message, char value);
+// void		print_cmd(t_cmd *cmd);
+// void		print_all_cmds(t_cmd *head);
+// void		print_io_fds(t_io_fds *io_fds);
+// void		print_envp_list(t_envp *head);
 
 // SIGNALS
 
