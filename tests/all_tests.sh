@@ -174,5 +174,13 @@ run_test 'Correct: ?efgh' 'echo $abcd?efgh'
 run_test 'Correct: ?efgh' 'echo "$abcd?efgh"'
 run_test 'Correct: $abcd?efgh' 'echo '\''$abcd?efgh'\'''
 
+run_test 'Should SUB' 'echo $PWD $HOME $SHELL'
+run_test 'Should SUB' 'echo "$PWD $HOME $SHELL"'
+run_test 'Dont SUB' 'echo '\''$PWD $HOME $SHELL'\'''
+
+run_test 'Should SUB' 'echo $PWD$HOME$SHELL'
+run_test 'Should SUB' 'echo "$PWD$HOME$SHELL"'
+run_test 'Dont SUB' 'echo '\''$PWD$HOME$SHELL'\'''
+
 # silences the command
 make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1

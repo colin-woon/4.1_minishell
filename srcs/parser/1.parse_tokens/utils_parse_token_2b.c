@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:56:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 18:52:03 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 19:01:23 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ char	*replace_substring(char *str, char *substr, char *replacement)
 /*
 eg: $USER
 
-returns USER without the $ or with $
+always returns $USER unless its $?, then return $?
  */
 char	*extract_var(char *var_str)
 {
@@ -133,6 +133,7 @@ char	*extract_var(char *var_str)
 	i = 0;
 	if (!ft_strncmp(var_str, "$?", 2))
 		return (ft_substr(var_str, 0, (size_t)i + 2));
+	i++;
 	while (var_str[i])
 	{
 		if (is_next_invalid(var_str[i], false)

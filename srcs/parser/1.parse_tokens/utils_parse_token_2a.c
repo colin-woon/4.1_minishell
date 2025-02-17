@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 18:52:31 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 19:16:44 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	substitute_variable(t_data *data, t_token **token_list)
 			{
 				is_quote = check_quote(is_quote, temp->value, i);
 				if (is_valid_variable(temp->value, i, is_quote))
-					i += replace_variable(temp, extract_var(temp->value + i), get_variable(temp->value + i, data));
+					i += replace_variable(temp, extract_var(temp->value + i), \
+					get_variable(temp->value + i, data));
 				else
 					i++;
 			}
@@ -74,21 +75,14 @@ ELSE
 int	replace_variable(t_token *token_node, char *variable_name, \
 char *variable_result)
 {
-	int to_increment;
-
-	to_increment = 1;
-	// printf("HELLO\n");
 	if (variable_result)
-	// {
 		token_node->value = replace_substring(token_node->value, \
 			variable_name, variable_result);
-	// to_increment = ft_strlen(variable_result);
-	// }
 	else
 		remove_substring(token_node->value, variable_name);
 	free_ptr((void **)&variable_name);
 	free_ptr((void **)&variable_result);
-	return (to_increment);
+	return (1);
 }
 
 /*
@@ -108,6 +102,7 @@ char	*get_variable(char *var_str, t_data *data)
 		free_ptr((void **)&extracted_var);
 		return (ft_itoa(data->last_exit_code));
 	}
+	remove_substring(extracted_var, "$");
 	value = get_our_envp(data->our_envp, extracted_var);
 	free_ptr((void **)&extracted_var);
 	if (value)
