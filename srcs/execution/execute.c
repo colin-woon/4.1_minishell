@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 17:13:37 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 20:00:37 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	execute_commands(t_data *data, t_cmd *cmd)
 	else if (ft_strlen(cmd->name) != 0)
 		get_cmd_path(data->our_envp, cmd);
 	exit_status = execute_builtin(data, cmd);
-	if (exit_status != CMD_NOT_FOUND)
+	if (exit_status != CMD_NOT_EXECUTABLE)
 		exit_process(data, exit_status);
 	exit_status = execute_binary(data, cmd);
 	exit_process(data, exit_status);
