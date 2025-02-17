@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:56:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 17:22:39 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 17:35:38 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		is_next_invalid(char next_token_char);
 int		is_symbol_only_in_quotes(char *token_value, int i_current);
 void	remove_substring(char *str, char *substr);
 char	*replace_substring(char *str, char *substr, char *replacement);
-char	*extract_var_without_symbol(char *var_str, int *var_name_len);
+char	*extract_var(char *var_str, int *var_name_len, int with_symbol);
 
 /*
 $$ (supposed to expand to PID of current shell in bash)
@@ -119,12 +119,17 @@ eg: $USER
 
 returns USER without the $
  */
-char	*extract_var_without_symbol(char *var_str, int *var_name_len)
+char	*extract_var(char *var_str, int *var_name_len, int with_symbol)
 {
+	print_value_int("var_name_len is", (*var_name_len));
+	print_value_char("char is", var_str[(*var_name_len)]);
+	if (with_symbol)
+		(*var_name_len)++;
 	while (var_str[(*var_name_len)])
 	{
 		if (is_next_invalid(var_str[(*var_name_len)]) \
 		|| var_str[(*var_name_len)] == '\'')
+		// || var_str[(*var_name_len) + 1] == '?')
 			break ;
 		(*var_name_len)++;
 	}

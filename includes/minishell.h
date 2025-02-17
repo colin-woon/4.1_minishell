@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 21:39:03 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 17:36:07 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,15 @@ typedef struct s_data
 
 // DEBUG - Printing UNCOMMENT ALL TO USE INCLUDING THE FILE ITSELF
 
-// void		print_tokens(t_token *tokens);
-// void		print_envp_array(t_data *data);
-// void		print_value_str(char *message, char *value);
-// void		print_value_int(char *message, int value);
-// void		print_value_char(char *message, char value);
-// void		print_cmd(t_cmd *cmd);
-// void		print_all_cmds(t_cmd *head);
-// void		print_io_fds(t_io_fds *io_fds);
-// void		print_envp_list(t_envp *head);
+void		print_tokens(t_token *tokens);
+void		print_envp_array(t_data *data);
+void		print_value_str(char *message, char *value);
+void		print_value_int(char *message, int value);
+void		print_value_char(char *message, char value);
+void		print_cmd(t_cmd *cmd);
+void		print_all_cmds(t_cmd *head);
+void		print_io_fds(t_io_fds *io_fds);
+void		print_envp_list(t_envp *head);
 
 // SIGNALS
 
@@ -228,7 +228,7 @@ int			is_next_invalid(char next_token_char);
 int			is_symbol_only_in_quotes(char *token_value, int i_current);
 void		remove_substring(char *str, char *substr);
 char		*replace_substring(char *str, char *substr, char *replacement);
-char		*extract_var_without_symbol(char *var_str, int *var_name_len);
+char		*extract_var(char *var_str, int *var_name_len, int with_symbol);
 
 // PARSE INPUT - Utils Parse Token 3 - Handle Quotes
 

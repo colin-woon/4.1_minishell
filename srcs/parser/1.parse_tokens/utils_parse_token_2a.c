@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/11 21:49:27 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 17:37:05 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	substitute_variable(t_data *data, t_token **token_list)
 	temp = *token_list;
 	while (temp)
 	{
-		i_var = 1;
+		i_var = 0;
 		is_quote = NO_QUOTE;
 		if (temp->type == VARIABLE)
 		{
@@ -45,8 +45,8 @@ void	substitute_variable(t_data *data, t_token **token_list)
 			{
 				is_quote = check_quote(is_quote, temp->value, i);
 				if (is_valid_variable(temp->value, i, is_quote))
-					replace_variable(temp, extract_var_without_symbol \
-	(temp->value + i, &i_var), get_variable(temp->value + i + 1, data));
+					replace_variable(temp, extract_var\
+	(temp->value + i, &i_var, true), get_variable(temp->value + i + 1, data));
 				else
 					i++;
 			}
@@ -77,6 +77,8 @@ ELSE
 void	replace_variable(t_token *token_node, char *variable_name, \
 char *variable_result)
 {
+	// printf("HELLO\n");
+	print_value_str("extracted var in REPLACE", variable_name);
 	if (variable_result)
 		token_node->value = replace_substring(token_node->value, \
 			variable_name, variable_result);
@@ -99,7 +101,8 @@ char	*get_variable(char *var_str, t_data *data)
 	int		var_name_len;
 
 	var_name_len = 0;
-	extracted_var = extract_var_without_symbol(var_str, &var_name_len);
+	extracted_var = extract_var(var_str, &var_name_len, false);
+	print_value_str("extracted var in GET", extracted_var);
 	if (extracted_var[0] == '?')
 	{
 		free_ptr((void **)&extracted_var);
