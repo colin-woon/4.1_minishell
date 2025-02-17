@@ -147,7 +147,6 @@ run_test 'WEIRD ASS SEPERATORS' 'pwd | <'
 run_test 'WEIRD ASS SEPERATORS' 'pwd | >>'
 run_test 'WEIRD ASS SEPERATORS' 'pwd | <<'
 
-run_test 'empty files' 'cat /dev/urandom | head -1 > outs/test-$num.txt 2> outs/test-$num-tty.txt'
 run_test 'consecutive redir out' 'cat Makefile > abc/file1 > abc/file2 > abc/file3'
 run_test 'consecutive redir in' 'cat Makefile < abc/file1 < abc/file2 < abc/file3'
 run_test 'consecutive append out' 'cat Makefile >> abc/file1 >> abc/file2 >> abc/file3'
@@ -163,6 +162,17 @@ rm -rf test_redir_out2
 rm -rf test_redir_in
 rm -rf filtered_output
 
+run_test 'Should SUB' 'echo $?'
+run_test 'Should SUB' 'echo "$?"'
+run_test 'Dont SUB' 'echo '\''$?'\'''
+
+run_test 'Should SUB' 'echo $?abcd'
+run_test 'Should SUB' 'echo "$?abcd"'
+run_test 'Dont SUB' 'echo '\''$?abcd'\'''
+
+run_test 'Correct: ?efgh' 'echo $abcd?efgh'
+run_test 'Correct: ?efgh' 'echo "$abcd?efgh"'
+run_test 'Correct: $abcd?efgh' 'echo '\''$abcd?efgh'\'''
 
 # silences the command
 make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1

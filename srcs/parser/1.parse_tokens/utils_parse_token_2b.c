@@ -6,17 +6,18 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 18:56:26 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 17:35:38 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 18:50:43 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		is_next_invalid(char next_token_char);
+int		is_next_invalid\
+		(char next_token_char, int comparing_with_symbol_before);
 int		is_symbol_only_in_quotes(char *token_value, int i_current);
 void	remove_substring(char *str, char *substr);
 char	*replace_substring(char *str, char *substr, char *replacement);
-char	*extract_var(char *var_str, int *var_name_len, int with_symbol);
+char	*extract_var(char *var_str, int with_symbol);
 
 /*
 $$ (supposed to expand to PID of current shell in bash)
@@ -29,18 +30,24 @@ not supposed to substitute:
 
 $_ is accepted
  */
-int	is_next_invalid(char next_token_char)
+int	is_next_invalid(char next_token_char, int comparing_with_symbol_before)
 {
+	int is_invalid;
+
+	is_invalid = 0;
 	if (next_token_char == '$' \
 	|| next_token_char == ' ' \
 	|| next_token_char == '=' \
-	|| next_token_char == '\0'\
+	|| next_token_char == '\0'
 	|| (next_token_char != '_' \
-	&& next_token_char != '?' \
 	&& !ft_isalnum(next_token_char)))
-		return (1);
-	else
-		return (0);
+		is_invalid = 1;
+	if (comparing_with_symbol_before)
+	{
+		if (next_token_char == '?')
+			is_invalid = 0;
+	}
+	return (is_invalid);
 }
 
 /*
@@ -117,23 +124,28 @@ char	*replace_substring(char *str, char *substr, char *replacement)
 /*
 eg: $USER
 
-returns USER without the $
+returns USER without the $ or with $
  */
-char	*extract_var(char *var_str, int *var_name_len, int with_symbol)
+char	*extract_var(char *var_str, int with_symbol)
 {
-	print_value_int("var_name_len is", (*var_name_len));
-	print_value_char("char is", var_str[(*var_name_len)]);
+	int	i;
+
+	i = 0;
 	if (with_symbol)
-		(*var_name_len)++;
-	while (var_str[(*var_name_len)])
+		i = 0;
+	if (!ft_strncmp(var_str, "$?", 2))
+		return (ft_substr(var_str, 0, (size_t)i + 2));
+	while (var_str[i])
 	{
-		if (is_next_invalid(var_str[(*var_name_len)]) \
-		|| var_str[(*var_name_len)] == '\'')
-		// || var_str[(*var_name_len) + 1] == '?')
+		if (is_next_invalid(var_str[i], false)
+		|| var_str[i] == '\'')
 			break ;
-		(*var_name_len)++;
+		i++;
 	}
-	if (var_str[(*var_name_len) - 1] == '"')
-		(*var_name_len)--;
-	return (ft_substr(var_str, 0, (size_t)(*var_name_len)));
+	if (i != 0)
+	{
+		if (var_str[i - 1] == '"')
+			i--;
+	}
+	return (ft_substr(var_str, 0, (size_t)i));
 }

@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:29:55 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 17:36:07 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 18:49:43 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,16 +219,17 @@ int			is_consecutive_operator(t_token *token_node);
 
 void		substitute_variable(t_data *data, t_token **token_list);
 char		*get_variable(char *var_str, t_data *data);
-void		replace_variable(t_token *token_node, \
+int			replace_variable(t_token *token_node, \
 			char *variable_name, char *variable_result);
 
 // PARSE INPUT - Utils Parse Token 2b - Helper Functions
 
-int			is_next_invalid(char next_token_char);
+int			is_next_invalid(char next_token_char, \
+			int comparing_with_symbol_before);
 int			is_symbol_only_in_quotes(char *token_value, int i_current);
 void		remove_substring(char *str, char *substr);
 char		*replace_substring(char *str, char *substr, char *replacement);
-char		*extract_var(char *var_str, int *var_name_len, int with_symbol);
+char		*extract_var(char *var_str, int with_symbol);
 
 // PARSE INPUT - Utils Parse Token 3 - Handle Quotes
 

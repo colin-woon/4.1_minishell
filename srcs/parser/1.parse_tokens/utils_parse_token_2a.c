@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:01:09 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 17:37:05 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 18:46:28 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		substitute_variable(t_data *data, t_token **token_list);
 char		*get_variable(char *var_str, t_data *data);
-void		replace_variable(t_token *token_node, char *variable_name, \
+int			replace_variable(t_token *token_node, char *variable_name, \
 char *variable_result);
 int			is_valid_variable(char *value, int i, int is_quote);
 
@@ -31,12 +31,10 @@ void	substitute_variable(t_data *data, t_token **token_list)
 	t_token	*temp;
 	int		i;
 	int		is_quote;
-	int		i_var;
 
 	temp = *token_list;
 	while (temp)
 	{
-		i_var = 0;
 		is_quote = NO_QUOTE;
 		if (temp->type == VARIABLE)
 		{
@@ -45,8 +43,7 @@ void	substitute_variable(t_data *data, t_token **token_list)
 			{
 				is_quote = check_quote(is_quote, temp->value, i);
 				if (is_valid_variable(temp->value, i, is_quote))
-					replace_variable(temp, extract_var\
-	(temp->value + i, &i_var, true), get_variable(temp->value + i + 1, data));
+					i += replace_variable(temp, extract_var(temp->value + i, true), get_variable(temp->value + i, data));
 				else
 					i++;
 			}
@@ -61,7 +58,7 @@ No quote or double quote will substitute variable
 int	is_valid_variable(char *value, int i, int is_quote)
 {
 	if (value[i] == '$'
-		&& !is_next_invalid(value[i + 1])
+		&& !is_next_invalid(value[i + 1], true)
 		&& !is_symbol_only_in_quotes(value, i)
 		&& (!is_quote || is_quote == DOUBLE_QUOTE))
 		return (1);
@@ -74,18 +71,24 @@ eg: "$FAKE" > "" (reduced to atoms)
 ELSE
 	substitute dat thang
  */
-void	replace_variable(t_token *token_node, char *variable_name, \
+int	replace_variable(t_token *token_node, char *variable_name, \
 char *variable_result)
 {
+	int to_increment;
+
+	to_increment = 1;
 	// printf("HELLO\n");
-	print_value_str("extracted var in REPLACE", variable_name);
 	if (variable_result)
+	// {
 		token_node->value = replace_substring(token_node->value, \
 			variable_name, variable_result);
+	// to_increment = ft_strlen(variable_result);
+	// }
 	else
 		remove_substring(token_node->value, variable_name);
 	free_ptr((void **)&variable_name);
 	free_ptr((void **)&variable_result);
+	return (to_increment);
 }
 
 /*
@@ -98,12 +101,9 @@ char	*get_variable(char *var_str, t_data *data)
 {
 	char	*value;
 	char	*extracted_var;
-	int		var_name_len;
 
-	var_name_len = 0;
-	extracted_var = extract_var(var_str, &var_name_len, false);
-	print_value_str("extracted var in GET", extracted_var);
-	if (extracted_var[0] == '?')
+	extracted_var = extract_var(var_str, false);
+	if (!ft_strncmp(extracted_var, "$?", 2))
 	{
 		free_ptr((void **)&extracted_var);
 		return (ft_itoa(data->last_exit_code));
