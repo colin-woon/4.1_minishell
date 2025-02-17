@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:21 by cwoon             #+#    #+#             */
-/*   Updated: 2025/02/17 00:10:54 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 17:13:37 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	execute(t_data *data)
 	int	is_exit;
 
 	is_exit = prepare_commands(data);
-	if (is_exit != CMD_NOT_FOUND)
+	if (is_exit != CMD_NOT_EXECUTABLE)
 		return ;
 	if (!data->cmd->has_pipe && !data->cmd->prev \
 	&& is_valid_files(data->cmd->io_fds))
@@ -39,7 +39,7 @@ void	execute(t_data *data)
 		is_exit = execute_builtin(data, data->cmd);
 		restore_stdio(data->cmd->io_fds, data);
 	}
-	if (is_exit != CMD_NOT_FOUND)
+	if (is_exit != CMD_NOT_EXECUTABLE)
 		return ;
 	data->last_exit_code = execute_processes(data);
 	return ;
@@ -49,7 +49,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 {
 	int	is_exit;
 
-	is_exit = CMD_NOT_FOUND;
+	is_exit = CMD_NOT_EXECUTABLE;
 	if (!ft_strncmp(cmd->name, "cd", 2) && ft_strlen(cmd->name) == 2)
 		is_exit = ft_cd(data, cmd->args);
 	else if (!ft_strncmp(cmd->name, "echo", 4) && ft_strlen(cmd->name) == 4)
@@ -64,7 +64,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		is_exit = ft_unset(data, cmd->args);
 	else if (!ft_strncmp(cmd->name, "exit", 4) && ft_strlen(cmd->name) == 4)
 		is_exit = ft_exit(data, cmd->args);
-	if (is_exit != CMD_NOT_FOUND)
+	if (is_exit != CMD_NOT_EXECUTABLE)
 		data->last_exit_code = is_exit;
 	return (is_exit);
 }

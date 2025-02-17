@@ -6,7 +6,7 @@
 /*   By: cwoon <cwoon@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:06:14 by jow               #+#    #+#             */
-/*   Updated: 2025/02/09 14:57:42 by cwoon            ###   ########.fr       */
+/*   Updated: 2025/02/17 16:42:49 by cwoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	ft_exit(t_data *data, char **args)
 	if (argc > 2)
 	{
 		print_errno_str("exit", NULL, "too many arguments");
-		return (1);
+		return (CMD_NOT_FOUND);
 	}
 	ft_putendl_fd("exit", 1);
 	if (argc == 2)
