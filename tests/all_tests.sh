@@ -184,3 +184,11 @@ run_test 'Dont SUB' 'echo '\''$PWD$HOME$SHELL'\'''
 
 # silences the command
 make fclean -C "$MAKEFILE_DIR" > /dev/null 2>&1
+
+#unset
+#export
+#cd
+#exit
+#pipe with builtins
+#signals (yes, cat)
+#heredoc
