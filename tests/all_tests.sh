@@ -155,6 +155,9 @@ run_test 'consecutive append out' 'cat Makefile >> abc/file1 >> abc/file2 >> abc
 run_test 'empty single quotes' ''\'''\'''
 run_test 'empty double quotes' '""'
 
+run_test 'substitute var with weird symbols' '"$USER.txt"'
+run_test 'substitue var with underscore' '$_'
+
 rm -rf test_redir_out
 rm -rf test_redir_out2
 rm -rf test_redir_in
